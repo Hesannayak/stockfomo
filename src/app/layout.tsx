@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/nav";
+import { TopNav } from "@/components/top-nav";
+import { TickerTape } from "@/components/ticker-tape";
 import { AuthProvider } from "@/lib/auth-context";
 
 const geistSans = Geist({
@@ -23,12 +25,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen pb-20">
+      <body className="min-h-screen pb-16 lg:pb-7">
         <AuthProvider>
-          <div className="max-w-lg mx-auto">{children}</div>
+          <Suspense>
+            <TopNav />
+          </Suspense>
+          <div className="max-w-lg mx-auto lg:max-w-none">{children}</div>
           <Suspense>
             <BottomNav />
           </Suspense>
+          <TickerTape />
         </AuthProvider>
       </body>
     </html>

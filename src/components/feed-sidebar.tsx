@@ -1,0 +1,57 @@
+"use client";
+
+import Link from "next/link";
+import { mockFeed } from "@/lib/mock-data";
+import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
+
+export function FeedSidebar() {
+  return (
+    <div className="h-full overflow-y-auto" style={{ borderRight: "1px solid var(--border)" }}>
+      <div className="px-3 py-3 sticky top-0" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
+        <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
+          Live Feed
+        </h2>
+      </div>
+      {mockFeed.map((item) => {
+        const { trade, user, timestamp } = item;
+        const isBuy = trade.direction === "BUY";
+        return (
+          <Link
+            key={item.id}
+            href={`/stock/${trade.ticker}`}
+            className="flex items-start gap-2 px-3 py-2.5 no-underline transition-colors"
+            style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
+          >
+            <div
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
+              style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+            >
+              {getInitials(user.displayName)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-semibold truncate">{user.displayName}</span>
+                <span
+                  className="text-[9px] font-bold px-1 py-0.5 rounded"
+                  style={{
+                    background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
+                    color: isBuy ? "var(--accent)" : "var(--red)",
+                  }}
+                >
+                  {trade.direction}
+                </span>
+                <span className="text-[10px] ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
+                  {timeAgo(timestamp)}
+                </span>
+              </div>
+              <div className="text-[11px] mt-0.5" style={{ color: "var(--fg-dim)" }}>
+                <span className="font-semibold" style={{ color: "var(--fg-muted)" }}>{trade.ticker}</span>
+                {" "}{formatCurrency(trade.entryPrice)} × {trade.quantity}
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}

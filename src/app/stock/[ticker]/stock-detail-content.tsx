@@ -2,20 +2,20 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   ArrowLeft,
-  ArrowUp,
-  ArrowDown,
   Star,
-  Share2,
   Bell,
   TrendingUp,
   TrendingDown,
+  Shield,
 } from "lucide-react";
 import { StockChart } from "@/components/stock-chart";
+import { FeedSidebar } from "@/components/feed-sidebar";
 import { getStockDetail, getStockCandles } from "@/lib/stock-data";
 import { mockTrades, mockUsers } from "@/lib/mock-data";
-import { formatCurrency, formatCompact, timeAgo, getInitials } from "@/lib/utils";
+import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 const TIME_RANGES = ["1W", "1M", "3M", "1Y", "5Y"] as const;
 
@@ -37,16 +37,8 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
     return (
       <div className="p-8 text-center">
         <p className="text-lg font-bold mb-2">Ticker not found</p>
-        <p className="text-sm" style={{ color: "var(--fg-dim)" }}>
-          &quot;{ticker}&quot; is not available
-        </p>
-        <button
-          onClick={() => router.back()}
-          className="mt-4 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer"
-          style={{ background: "var(--bg-input)", color: "var(--fg)" }}
-        >
-          Go Back
-        </button>
+        <p className="text-sm" style={{ color: "var(--fg-dim)" }}>&quot;{ticker}&quot; is not available</p>
+        <button onClick={() => router.back()} className="mt-4 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer" style={{ background: "var(--bg-input)" }}>Go Back</button>
       </div>
     );
   }
@@ -58,227 +50,243 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
   function handleOrder() {
     if (qty <= 0) return;
     setOrderPlaced(true);
-    setTimeout(() => {
-      setOrderPlaced(false);
-      setQuantity("");
-    }, 2500);
+    setTimeout(() => { setOrderPlaced(false); setQuantity(""); }, 2500);
   }
 
+  const presets = [10, 25, 50, 100];
+
   return (
-    <div className="pb-4">
-      {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
-        <button onClick={() => router.back()} className="cursor-pointer p-1" style={{ color: "var(--fg)" }}>
-          <ArrowLeft size={20} />
-        </button>
-        <div className="flex-1">
-          <div className="flex items-center gap-2">
+    <div className="lg:grid lg:grid-cols-[260px_1fr_300px]">
+      {/* Left Sidebar — Feed (desktop) */}
+      <div className="desktop-sidebar">
+        <FeedSidebar />
+      </div>
+
+      {/* Center — Chart + Stats */}
+      <div style={{ borderRight: "1px solid var(--border)" }}>
+        {/* Top bar with stock info */}
+        <div className="flex items-center gap-3 px-4 py-2.5" style={{ borderBottom: "1px solid var(--border)" }}>
+          <button onClick={() => router.back()} className="cursor-pointer p-1 lg:hidden" style={{ color: "var(--fg)" }}>
+            <ArrowLeft size={20} />
+          </button>
+          <div className="flex items-center gap-3 flex-1">
             <h1 className="text-lg font-bold">{stock.ticker}</h1>
             <span className="text-xs px-2 py-0.5 rounded-md font-medium" style={{ background: "var(--bg-input)", color: "var(--fg-dim)" }}>
-              {stock.name.split(" ").slice(0, 2).join(" ")}
+              {stock.name}
             </span>
           </div>
-        </div>
-        <button
-          onClick={() => setWatchlisted(!watchlisted)}
-          className="p-2 cursor-pointer"
-          style={{ color: watchlisted ? "var(--yellow)" : "var(--fg-dim)" }}
-        >
-          <Star size={20} fill={watchlisted ? "var(--yellow)" : "none"} />
-        </button>
-        <button className="p-2 cursor-pointer" style={{ color: "var(--fg-dim)" }}>
-          <Bell size={20} />
-        </button>
-      </div>
 
-      {/* Price */}
-      <div className="px-4 pt-4 pb-2">
-        <div className="text-3xl font-black font-mono">{formatCurrency(stock.price)}</div>
-        <div className="flex items-center gap-1.5 mt-1">
-          {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
-          <span
-            className="text-sm font-semibold font-mono"
-            style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
-          >
-            {isUp ? "+" : ""}{formatCurrency(stock.change)} ({isUp ? "+" : ""}{stock.changePercent.toFixed(2)}%)
-          </span>
-          <span className="text-xs" style={{ color: "var(--fg-dim)" }}>Today</span>
-        </div>
-      </div>
-
-      {/* Chart */}
-      <StockChart data={candles} isPositive={isUp} />
-
-      {/* Time Range */}
-      <div className="flex gap-1 px-4 py-3">
-        {TIME_RANGES.map((r) => (
-          <button
-            key={r}
-            onClick={() => setRange(r)}
-            className="flex-1 py-1.5 text-xs font-bold rounded-lg cursor-pointer"
-            style={{
-              background: range === r ? "var(--bg-input)" : "transparent",
-              color: range === r ? "var(--fg)" : "var(--fg-dim)",
-            }}
-          >
-            {r}
-          </button>
-        ))}
-      </div>
-
-      {/* Key Stats */}
-      <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
-        <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
-          Key Statistics
-        </h2>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-          {[
-            { label: "Open", value: formatCurrency(stock.open) },
-            { label: "Previous Close", value: formatCurrency(stock.previousClose) },
-            { label: "Day High", value: formatCurrency(stock.high) },
-            { label: "Day Low", value: formatCurrency(stock.low) },
-            { label: "52W High", value: formatCurrency(stock.high52w) },
-            { label: "52W Low", value: formatCurrency(stock.low52w) },
-            { label: "Market Cap", value: stock.marketCap },
-            { label: "P/E Ratio", value: stock.peRatio.toFixed(1) },
-            { label: "EPS", value: `$${stock.eps.toFixed(2)}` },
-            { label: "Dividend", value: stock.dividend },
-            { label: "Volume", value: stock.volume },
-            { label: "Avg Volume", value: stock.avgVolume },
-          ].map((s) => (
-            <div key={s.label} className="flex justify-between items-center py-1">
-              <span className="text-xs" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
-              <span className="text-xs font-semibold font-mono">{s.value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* About */}
-      <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
-        <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>
-          About
-        </h2>
-        <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
-      </div>
-
-      {/* Community Trades */}
-      {recentTrades.length > 0 && (
-        <div style={{ borderTop: "1px solid var(--border)" }}>
-          <div className="px-4 pt-3 pb-2">
-            <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-              Community Trades
-            </h2>
-          </div>
-          {recentTrades.map((trade) => {
-            const isBuy = trade.direction === "BUY";
-            return (
-              <div
-                key={trade.id}
-                className="flex items-center gap-3 px-4 py-2.5"
-                style={{ borderBottom: "1px solid var(--border)" }}
-              >
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold"
-                  style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
-                >
-                  {trade.user ? getInitials(trade.user.displayName) : "?"}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold">{trade.user?.displayName}</span>
-                    <span
-                      className="text-[10px] font-bold px-1.5 py-0.5 rounded"
-                      style={{
-                        background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
-                        color: isBuy ? "var(--accent)" : "var(--red)",
-                      }}
-                    >
-                      {trade.direction}
-                    </span>
-                  </div>
-                  <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
-                    {trade.quantity} shares @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
-                  </div>
-                </div>
+          {/* Desktop inline stats */}
+          <div className="hidden lg:flex items-center gap-4 text-xs">
+            {[
+              { label: "Mkt Cap", value: stock.marketCap },
+              { label: "P/E", value: stock.peRatio.toFixed(1) },
+              { label: "Vol", value: stock.volume },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <div style={{ color: "var(--fg-dim)" }}>{s.label}</div>
+                <div className="font-mono font-semibold">{s.value}</div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          <button onClick={() => setWatchlisted(!watchlisted)} className="p-2 cursor-pointer" style={{ color: watchlisted ? "var(--yellow)" : "var(--fg-dim)" }}>
+            <Star size={18} fill={watchlisted ? "var(--yellow)" : "none"} />
+          </button>
+          <button className="p-2 cursor-pointer" style={{ color: "var(--fg-dim)" }}>
+            <Bell size={18} />
+          </button>
         </div>
-      )}
 
-      {/* Trade Panel */}
-      <div
-        className="px-4 py-4 mt-2"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
-          Paper Trade
-        </h2>
+        {/* Price */}
+        <div className="px-4 pt-3 pb-2">
+          <div className="text-3xl font-black font-mono">{formatCurrency(stock.price)}</div>
+          <div className="flex items-center gap-1.5 mt-1">
+            {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+            <span className="text-sm font-semibold font-mono" style={{ color: isUp ? "var(--accent)" : "var(--red)" }}>
+              {isUp ? "+" : ""}{formatCurrency(stock.change)} ({isUp ? "+" : ""}{stock.changePercent.toFixed(2)}%)
+            </span>
+            <span className="text-xs" style={{ color: "var(--fg-dim)" }}>Today</span>
+          </div>
+        </div>
 
-        <div className="flex rounded-xl overflow-hidden mb-3" style={{ background: "var(--bg-input)" }}>
-          {(["BUY", "SELL"] as const).map((side) => (
-            <button
-              key={side}
-              onClick={() => setOrderSide(side)}
-              className="flex-1 py-2 text-sm font-bold cursor-pointer transition-colors"
-              style={{
-                background: orderSide === side
-                  ? side === "BUY" ? "var(--accent)" : "var(--red)"
-                  : "transparent",
-                color: orderSide === side ? "#000" : "var(--fg-dim)",
-              }}
-            >
-              {side}
+        {/* Chart */}
+        <StockChart data={candles} isPositive={isUp} />
+
+        {/* Time Ranges */}
+        <div className="flex gap-1 px-4 py-3">
+          {TIME_RANGES.map((r) => (
+            <button key={r} onClick={() => setRange(r)} className="flex-1 py-1.5 text-xs font-bold rounded-lg cursor-pointer" style={{ background: range === r ? "var(--bg-input)" : "transparent", color: range === r ? "var(--fg)" : "var(--fg-dim)" }}>
+              {r}
             </button>
           ))}
         </div>
 
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex-1">
-            <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>
-              Shares
-            </label>
-            <input
-              type="number"
-              min="1"
-              placeholder="0"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-lg text-sm font-mono outline-none"
-              style={{ background: "var(--bg-input)", color: "var(--fg)", border: "1px solid var(--border)" }}
-            />
-          </div>
-          <div className="flex-1">
-            <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>
-              Est. Total
-            </label>
-            <div
-              className="px-3 py-2.5 rounded-lg text-sm font-mono"
-              style={{ background: "var(--bg-input)", color: qty > 0 ? "var(--fg)" : "var(--fg-dim)", border: "1px solid var(--border)" }}
-            >
-              {qty > 0 ? formatCurrency(total) : "$0.00"}
-            </div>
+        {/* Stats grid */}
+        <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>Key Statistics</h2>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
+            {[
+              { label: "Open", value: formatCurrency(stock.open) },
+              { label: "Prev Close", value: formatCurrency(stock.previousClose) },
+              { label: "Day High", value: formatCurrency(stock.high) },
+              { label: "Day Low", value: formatCurrency(stock.low) },
+              { label: "52W High", value: formatCurrency(stock.high52w) },
+              { label: "52W Low", value: formatCurrency(stock.low52w) },
+              { label: "Market Cap", value: stock.marketCap },
+              { label: "P/E Ratio", value: stock.peRatio.toFixed(1) },
+              { label: "EPS", value: `$${stock.eps.toFixed(2)}` },
+              { label: "Dividend", value: stock.dividend },
+              { label: "Volume", value: stock.volume },
+              { label: "Avg Volume", value: stock.avgVolume },
+            ].map((s) => (
+              <div key={s.label} className="flex justify-between items-center py-1">
+                <span className="text-xs" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
+                <span className="text-xs font-semibold font-mono">{s.value}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <button
-          onClick={handleOrder}
-          disabled={qty <= 0 || orderPlaced}
-          className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{
-            background: orderPlaced ? "var(--bg-input)" : orderSide === "BUY" ? "var(--accent)" : "var(--red)",
-            color: orderPlaced ? "var(--accent)" : "#000",
-          }}
-        >
-          {orderPlaced
-            ? "Order Placed!"
-            : `${orderSide} ${ticker} · Market Order`}
-        </button>
+        {/* About */}
+        <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About</h2>
+          <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+        </div>
 
-        <p className="text-center text-[10px] mt-2" style={{ color: "var(--fg-dim)" }}>
-          Paper trade only · No real money involved
-        </p>
+        {/* Community Trades — inline on mobile, also in sidebar on desktop */}
+        {recentTrades.length > 0 && (
+          <div className="lg:hidden" style={{ borderTop: "1px solid var(--border)" }}>
+            <div className="px-4 pt-3 pb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Community Trades</h2>
+            </div>
+            {recentTrades.map((trade) => {
+              const isBuy = trade.direction === "BUY";
+              return (
+                <div key={trade.id} className="flex items-center gap-3 px-4 py-2.5" style={{ borderBottom: "1px solid var(--border)" }}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold" style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}>
+                    {trade.user ? getInitials(trade.user.displayName) : "?"}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold">{trade.user?.displayName}</span>
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>{trade.direction}</span>
+                    </div>
+                    <div className="text-xs" style={{ color: "var(--fg-dim)" }}>{trade.quantity} shares @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Trade panel — mobile only */}
+        <div className="lg:hidden px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
+          <div className="flex rounded-xl overflow-hidden mb-3" style={{ background: "var(--bg-input)" }}>
+            {(["BUY", "SELL"] as const).map((side) => (
+              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2 text-sm font-bold cursor-pointer" style={{ background: orderSide === side ? (side === "BUY" ? "var(--accent)" : "var(--red)") : "transparent", color: orderSide === side ? "#000" : "var(--fg-dim)" }}>{side}</button>
+            ))}
+          </div>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex-1">
+              <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
+              <input type="number" min="1" placeholder="0" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-sm font-mono outline-none" style={{ background: "var(--bg-input)", color: "var(--fg)", border: "1px solid var(--border)" }} />
+            </div>
+            <div className="flex-1">
+              <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Est. Total</label>
+              <div className="px-3 py-2.5 rounded-lg text-sm font-mono" style={{ background: "var(--bg-input)", color: qty > 0 ? "var(--fg)" : "var(--fg-dim)", border: "1px solid var(--border)" }}>{qty > 0 ? formatCurrency(total) : "$0.00"}</div>
+            </div>
+          </div>
+          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50" style={{ background: orderPlaced ? "var(--bg-input)" : orderSide === "BUY" ? "var(--accent)" : "var(--red)", color: orderPlaced ? "var(--accent)" : "#000" }}>
+            {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker} · Market Order`}
+          </button>
+          <p className="text-center text-[10px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money involved</p>
+        </div>
+      </div>
+
+      {/* Right Sidebar — Buy/Sell Panel (desktop) */}
+      <div className="desktop-sidebar" style={{ borderLeft: "1px solid var(--border)" }}>
+        <div className="p-4">
+          {/* Buy / Sell toggle */}
+          <div className="flex rounded-lg overflow-hidden mb-4" style={{ background: "var(--bg-input)" }}>
+            {(["BUY", "SELL"] as const).map((side) => (
+              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2.5 text-sm font-bold cursor-pointer" style={{ background: orderSide === side ? (side === "BUY" ? "var(--accent)" : "var(--red)") : "transparent", color: orderSide === side ? "#000" : "var(--fg-dim)" }}>{side}</button>
+            ))}
+          </div>
+
+          {/* Amount presets */}
+          <div className="flex gap-2 mb-3">
+            {presets.map((p) => (
+              <button key={p} onClick={() => setQuantity(String(p))} className="flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer" style={{ background: quantity === String(p) ? "var(--bg-card-hover)" : "var(--bg-input)", color: "var(--fg)", border: quantity === String(p) ? "1px solid var(--accent)" : "1px solid var(--border)" }}>
+                {p}
+              </button>
+            ))}
+          </div>
+
+          {/* Shares input */}
+          <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
+          <input type="number" min="1" placeholder="0" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-sm font-mono outline-none mb-2" style={{ background: "var(--bg-input)", color: "var(--fg)", border: "1px solid var(--border)" }} />
+
+          <div className="flex justify-between text-xs mb-4 py-1">
+            <span style={{ color: "var(--fg-dim)" }}>Est. Total</span>
+            <span className="font-mono font-semibold">{qty > 0 ? formatCurrency(total) : "$0.00"}</span>
+          </div>
+
+          {/* Submit */}
+          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50" style={{ background: orderPlaced ? "var(--bg-input)" : orderSide === "BUY" ? "var(--accent)" : "var(--red)", color: orderPlaced ? "var(--accent)" : "#000" }}>
+            {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker}`}
+          </button>
+
+          <p className="text-center text-[10px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money</p>
+        </div>
+
+        {/* About section on right panel */}
+        <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About {stock.ticker}</h2>
+          <p className="text-[11px] leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mt-3">
+            {[
+              { label: "Market Cap", value: stock.marketCap },
+              { label: "P/E", value: stock.peRatio.toFixed(1) },
+              { label: "EPS", value: `$${stock.eps.toFixed(2)}` },
+              { label: "Dividend", value: stock.dividend },
+              { label: "Volume", value: stock.volume },
+              { label: "Avg Vol", value: stock.avgVolume },
+            ].map((s) => (
+              <div key={s.label} className="flex justify-between items-center">
+                <span className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
+                <span className="text-[10px] font-mono font-semibold">{s.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Community Trades on right panel */}
+        {recentTrades.length > 0 && (
+          <div style={{ borderTop: "1px solid var(--border)" }}>
+            <div className="px-4 pt-3 pb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Holders</h2>
+            </div>
+            {recentTrades.map((trade) => {
+              const isBuy = trade.direction === "BUY";
+              return (
+                <div key={trade.id} className="flex items-center gap-2 px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0" style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}>
+                    {trade.user ? getInitials(trade.user.displayName) : "?"}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[11px] font-semibold">{trade.user?.displayName}</span>
+                    <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
+                  </div>
+                  <span className="text-[9px] font-bold px-1 py-0.5 rounded shrink-0" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>
+                    {trade.direction}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

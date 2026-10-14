@@ -1,22 +1,74 @@
 "use client";
 
+import Link from "next/link";
 import { LeaderboardTable } from "@/components/leaderboard-table";
-import { mockLeaderboard } from "@/lib/mock-data";
-import { Trophy } from "lucide-react";
+import { FeedSidebar } from "@/components/feed-sidebar";
+import { FollowSidebar } from "@/components/follow-sidebar";
+import { mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
+import { Trophy, TrendingUp, TrendingDown } from "lucide-react";
 
 export default function LeaderboardPage() {
   return (
-    <div>
-      <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="flex items-center gap-2">
-          <Trophy size={20} style={{ color: "var(--yellow)" }} />
-          <h1 className="text-lg font-bold tracking-tight">Leaderboard</h1>
-        </div>
-        <p className="text-xs mt-1" style={{ color: "var(--fg-dim)" }}>
-          Top paper traders ranked by total return
-        </p>
+    <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
+      {/* Left Sidebar — Live Feed (desktop) */}
+      <div className="desktop-sidebar">
+        <FeedSidebar />
       </div>
-      <LeaderboardTable entries={mockLeaderboard} />
+
+      {/* Center — Leaderboard */}
+      <div className="lg:border-r" style={{ borderColor: "var(--border)" }}>
+        <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
+          <div className="flex items-center gap-2">
+            <Trophy size={20} style={{ color: "var(--yellow)" }} />
+            <h1 className="text-lg font-bold tracking-tight">Leaderboard</h1>
+          </div>
+          <p className="text-xs mt-1" style={{ color: "var(--fg-dim)" }}>
+            Top paper traders ranked by total return
+          </p>
+        </div>
+        <LeaderboardTable entries={mockLeaderboard} />
+
+        {/* Trending section below leaderboard on desktop */}
+        <div className="hidden lg:block px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
+            Trending Stocks
+          </h2>
+          <div className="grid grid-cols-2 gap-2">
+            {trendingTickers.map((t) => {
+              const quote = mockQuotes[t.ticker];
+              const isUp = quote?.changePercent >= 0;
+              return (
+                <Link
+                  key={t.ticker}
+                  href={`/stock/${t.ticker}`}
+                  className="flex items-center justify-between p-3 rounded-lg no-underline"
+                  style={{ background: "var(--bg-card)", color: "var(--fg)" }}
+                >
+                  <div>
+                    <div className="text-sm font-bold">{t.ticker}</div>
+                    <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs font-mono font-semibold">${quote?.price.toFixed(2)}</div>
+                    <div
+                      className="text-[10px] font-mono font-semibold flex items-center justify-end gap-0.5"
+                      style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                    >
+                      {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
+                      {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Right Sidebar — Follow Suggestions (desktop) */}
+      <div className="desktop-sidebar">
+        <FollowSidebar />
+      </div>
     </div>
   );
 }

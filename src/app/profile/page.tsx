@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
-import { mockTrades, mockPositions, mockUsers } from "@/lib/mock-data";
+import { mockTrades, mockPositions, mockUsers, mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
 import { formatCurrency, formatPercent, getInitials, timeAgo } from "@/lib/utils";
 import {
   Settings,
@@ -15,9 +15,11 @@ import {
   EyeOff,
   TrendingUp,
   TrendingDown,
+  Trophy,
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { FollowSidebar } from "@/components/follow-sidebar";
 
 export default function ProfilePage() {
   const { user, isLoggedIn, logout } = useAuth();
@@ -54,7 +56,7 @@ export default function ProfilePage() {
   const totalValue = displayUser.virtualBalance;
   const invested = userPositions.reduce((sum, p) => sum + (p.marketValue ?? 0), 0);
 
-  return (
+  const profileContent = (
     <div>
       {/* Profile Header */}
       <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
@@ -282,6 +284,105 @@ export default function ProfilePage() {
             );
           })
         )}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
+      {/* Left Sidebar — Leaderboard (desktop) */}
+      <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
+        <div className="px-3 py-3 sticky top-0" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
+            <Trophy size={12} /> Leaderboard
+          </h2>
+        </div>
+        {mockLeaderboard.map((entry, i) => {
+          const rankColors = ["var(--yellow)", "var(--fg-muted)", "#cd7f32"];
+          return (
+            <Link
+              key={entry.user.id}
+              href={`/profile/${entry.user.username}`}
+              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors"
+              style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
+            >
+              <div
+                className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                style={{
+                  color: i < 3 ? rankColors[i] : "var(--fg-dim)",
+                  background: i < 3 ? "var(--bg-input)" : "transparent",
+                }}
+              >
+                {i < 3 ? <Trophy size={11} /> : entry.rank}
+              </div>
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+              >
+                {getInitials(entry.user.displayName)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1">
+                  <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
+                  {entry.user.isVerified && <Shield size={10} style={{ color: "var(--accent)" }} />}
+                </div>
+                <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
+                  {entry.tradeCount} trades · {entry.winRate}%
+                </div>
+              </div>
+              <div
+                className="text-xs font-bold font-mono shrink-0"
+                style={{ color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)" }}
+              >
+                {formatPercent(entry.totalReturn)}
+              </div>
+            </Link>
+          );
+        })}
+
+        {/* Trending on desktop sidebar */}
+        <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
+          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
+            Trending
+          </h2>
+          {trendingTickers.map((t) => {
+            const quote = mockQuotes[t.ticker];
+            const isUp = quote?.changePercent >= 0;
+            return (
+              <Link
+                key={t.ticker}
+                href={`/stock/${t.ticker}`}
+                className="flex items-center justify-between py-1.5 no-underline"
+                style={{ color: "var(--fg)" }}
+              >
+                <div>
+                  <span className="text-xs font-bold">{t.ticker}</span>
+                  <span className="text-[10px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
+                  <span
+                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5"
+                    style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                  >
+                    {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
+                    {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Center — Profile Content */}
+      <div className="lg:border-r" style={{ borderColor: "var(--border)" }}>
+        {profileContent}
+      </div>
+
+      {/* Right Sidebar — Follow Suggestions (desktop) */}
+      <div className="desktop-sidebar">
+        <FollowSidebar />
       </div>
     </div>
   );
