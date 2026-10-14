@@ -49,7 +49,7 @@ export function ProfileContent({ username }: { username: string }) {
           </div>
         </div>
         <button
-          className="w-full mt-4 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
+          className="mt-4 py-2.5 px-8 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
           style={{ background: "var(--accent)", color: "#000" }}
         >
           <UserPlus size={16} />

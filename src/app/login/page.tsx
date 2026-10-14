@@ -40,9 +40,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col items-center">
       {/* Hero */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-12 pb-6">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-12 pb-6 w-full max-w-md">
         <div className="flex items-center gap-2 mb-2">
           <Zap size={32} style={{ color: "var(--accent)" }} />
           <h1 className="text-3xl font-black tracking-tight">StockFomo</h1>
@@ -72,7 +72,7 @@ export default function LoginPage() {
       </div>
 
       {/* Auth Form */}
-      <div className="px-6 pb-10">
+      <div className="px-6 pb-10 w-full max-w-md">
         <div className="flex rounded-xl overflow-hidden mb-5" style={{ background: "var(--bg-input)" }}>
           {(["login", "signup"] as const).map((m) => (
             <button
