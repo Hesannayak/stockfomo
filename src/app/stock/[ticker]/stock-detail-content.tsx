@@ -71,7 +71,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           </button>
           <div className="flex items-center gap-3 flex-1">
             <h1 className="text-lg font-bold">{stock.ticker}</h1>
-            <span className="text-xs px-2 py-0.5 rounded-md font-medium" style={{ background: "var(--bg-input)", color: "var(--fg-dim)" }}>
+            <span className="text-xs px-2 py-0.5 rounded-full font-medium" style={{ background: "var(--bg-input)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
               {stock.name}
             </span>
           </div>
@@ -114,9 +114,9 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         <StockChart data={candles} isPositive={isUp} />
 
         {/* Time Ranges */}
-        <div className="flex gap-1 px-4 py-3">
+        <div className="flex gap-1 px-4 py-3 mx-4 rounded-lg" style={{ background: "var(--bg-input)" }}>
           {TIME_RANGES.map((r) => (
-            <button key={r} onClick={() => setRange(r)} className="flex-1 py-1.5 text-xs font-bold rounded-lg cursor-pointer" style={{ background: range === r ? "var(--bg-input)" : "transparent", color: range === r ? "var(--fg)" : "var(--fg-dim)" }}>
+            <button key={r} onClick={() => setRange(r)} className="flex-1 py-1.5 text-xs font-bold rounded-lg cursor-pointer transition-all" style={{ background: range === r ? "var(--bg-elevated)" : "transparent", color: range === r ? "var(--fg)" : "var(--fg-dim)", boxShadow: range === r ? "0 1px 3px rgba(0,0,0,0.3)" : "none" }}>
               {r}
             </button>
           ))}

@@ -25,7 +25,7 @@ export function PortfolioSummary({
   const isUp = totalPnl >= 0;
 
   return (
-    <div className="p-4" style={{ background: "var(--bg-card)" }}>
+    <div className="p-4" style={{ background: "var(--bg-card)", borderBottom: "1px solid var(--border)" }}>
       <div className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--fg-dim)" }}>
         Portfolio Value
       </div>

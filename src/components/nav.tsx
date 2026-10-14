@@ -21,8 +21,8 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden"
-      style={{ background: "var(--bg-card)", borderTop: "1px solid var(--border)" }}
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden glass"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
     >
       <div className="flex items-center justify-around max-w-lg mx-auto h-16 px-4">
         {tabs.map((tab) => {
@@ -32,13 +32,17 @@ export function BottomNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex flex-col items-center gap-1 py-2 px-3 transition-colors"
+              className="flex flex-col items-center gap-1 py-2 px-3 transition-all relative"
               style={{ color: isActive ? "var(--accent)" : "var(--fg-dim)" }}
             >
+              {isActive && (
+                <div
+                  className="absolute -top-px left-3 right-3 h-0.5 rounded-full"
+                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(16, 185, 129, 0.4)" }}
+                />
+              )}
               <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span
-                className="text-[10px] font-semibold tracking-wide uppercase"
-              >
+              <span className="text-[10px] font-semibold tracking-wide uppercase">
                 {tab.label}
               </span>
             </Link>
@@ -47,7 +51,7 @@ export function BottomNav() {
       </div>
       <div
         className="h-[env(safe-area-inset-bottom,0px)]"
-        style={{ background: "var(--bg-card)" }}
+        style={{ background: "transparent" }}
       />
     </nav>
   );

@@ -41,8 +41,8 @@ export default function LeaderboardPage() {
                 <Link
                   key={t.ticker}
                   href={`/stock/${t.ticker}`}
-                  className="flex items-center justify-between p-3 rounded-lg no-underline"
-                  style={{ background: "var(--bg-card)", color: "var(--fg)" }}
+                  className="flex items-center justify-between p-3 rounded-xl no-underline transition-all hover:scale-[1.02]"
+                  style={{ background: "var(--bg-card)", color: "var(--fg)", border: "1px solid var(--border)" }}
                 >
                   <div>
                     <div className="text-sm font-bold">{t.ticker}</div>

@@ -41,8 +41,7 @@ export default function ProfilePage() {
         </p>
         <button
           onClick={() => router.push("/login")}
-          className="px-8 py-3 rounded-xl text-sm font-bold cursor-pointer"
-          style={{ background: "var(--accent)", color: "#000" }}
+          className="px-8 py-3 rounded-xl text-sm font-bold cursor-pointer btn-primary"
         >
           Log In
         </button>
@@ -64,7 +63,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-3">
             <div
               className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold"
-              style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+              style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
             >
               {getInitials(displayUser.displayName)}
             </div>
@@ -175,7 +174,7 @@ export default function ProfilePage() {
               <Link
                 key={pos.id}
                 href={`/stock/${pos.ticker}`}
-                className="flex items-center justify-between px-4 py-3 no-underline"
+                className="flex items-center justify-between px-4 py-3 no-underline transition-colors card-hover"
                 style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
               >
                 <div>
@@ -227,8 +226,7 @@ export default function ProfilePage() {
             <p className="text-sm" style={{ color: "var(--fg-dim)" }}>No trades yet</p>
             <button
               onClick={() => router.push("/trade")}
-              className="mt-3 px-6 py-2 rounded-lg text-sm font-semibold cursor-pointer"
-              style={{ background: "var(--accent)", color: "#000" }}
+              className="mt-3 px-6 py-2 rounded-lg text-sm font-semibold cursor-pointer btn-primary"
             >
               Make Your First Trade
             </button>
@@ -242,7 +240,7 @@ export default function ProfilePage() {
               <Link
                 key={trade.id}
                 href={`/stock/${trade.ticker}`}
-                className="flex items-center gap-3 px-4 py-3 no-underline"
+                className="flex items-center gap-3 px-4 py-3 no-underline transition-colors card-hover"
                 style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
               >
                 <div
@@ -292,7 +290,7 @@ export default function ProfilePage() {
     <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
-        <div className="px-3 py-3 sticky top-0" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
+        <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
           <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
             <Trophy size={12} /> Leaderboard
           </h2>
@@ -303,7 +301,7 @@ export default function ProfilePage() {
             <Link
               key={entry.user.id}
               href={`/profile/${entry.user.username}`}
-              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors"
+              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors card-hover"
               style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
             >
               <div
@@ -317,14 +315,16 @@ export default function ProfilePage() {
               </div>
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
-                style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+                style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
               >
                 {getInitials(entry.user.displayName)}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
-                  {entry.user.isVerified && <Shield size={10} style={{ color: "var(--accent)" }} />}
+                  {entry.user.isVerified && (
+                    <span className="text-[8px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                  )}
                 </div>
                 <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
                   {entry.tradeCount} trades · {entry.winRate}%
@@ -340,7 +340,6 @@ export default function ProfilePage() {
           );
         })}
 
-        {/* Trending on desktop sidebar */}
         <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
           <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
             Trending
@@ -352,7 +351,7 @@ export default function ProfilePage() {
               <Link
                 key={t.ticker}
                 href={`/stock/${t.ticker}`}
-                className="flex items-center justify-between py-1.5 no-underline"
+                className="flex items-center justify-between py-1.5 no-underline transition-opacity hover:opacity-80"
                 style={{ color: "var(--fg)" }}
               >
                 <div>
@@ -362,8 +361,8 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
                   <span
-                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5"
-                    style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
+                    style={{ color: isUp ? "var(--accent)" : "var(--red)", background: isUp ? "var(--accent-muted)" : "var(--red-muted)" }}
                   >
                     {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
                     {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%

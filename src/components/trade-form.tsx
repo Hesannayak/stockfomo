@@ -38,8 +38,8 @@ export function TradeForm() {
       {!selectedTicker ? (
         <div>
           <div
-            className="flex items-center gap-2 px-3 py-2.5 rounded-lg"
-            style={{ background: "var(--bg-input)" }}
+            className="flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all"
+            style={{ background: "var(--bg-input)", border: "1px solid var(--border)" }}
           >
             <Search size={16} style={{ color: "var(--fg-dim)" }} />
             <input
@@ -61,8 +61,8 @@ export function TradeForm() {
                 <button
                   key={ticker}
                   onClick={() => setSelectedTicker(ticker)}
-                  className="w-full flex items-center justify-between px-3 py-3 transition-colors cursor-pointer"
-                  style={{ borderBottom: "1px solid var(--border)" }}
+                  className="w-full flex items-center justify-between px-3 py-3 transition-colors cursor-pointer card-hover"
+                  style={{ borderBottom: "1px solid var(--border)", background: "transparent" }}
                 >
                   <div className="text-left">
                     <div className="text-sm font-bold">{ticker}</div>
@@ -113,7 +113,7 @@ export function TradeForm() {
           {quote && (
             <div
               className="p-4 rounded-xl mb-4"
-              style={{ background: "var(--bg-input)" }}
+              style={{ background: "var(--bg-input)", border: "1px solid var(--border)" }}
             >
               <div className="text-3xl font-bold font-mono">
                 {formatCurrency(quote.price)}
@@ -191,12 +191,7 @@ export function TradeForm() {
               onChange={(e) => setQuantity(e.target.value)}
               placeholder="0"
               min="1"
-              className="w-full px-4 py-3 rounded-lg text-lg font-mono font-bold outline-none"
-              style={{
-                background: "var(--bg-input)",
-                color: "var(--fg)",
-                border: "1px solid var(--border)",
-              }}
+              className="w-full px-4 py-3 rounded-xl text-lg font-mono font-bold input-field"
             />
           </div>
 
@@ -215,10 +210,11 @@ export function TradeForm() {
           <button
             onClick={handleSubmit}
             disabled={qty <= 0}
-            className="w-full py-3.5 rounded-xl text-sm font-bold transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl text-sm font-bold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
             style={{
               background: direction === "BUY" ? "var(--accent)" : "var(--red)",
               color: "#000",
+              boxShadow: direction === "BUY" ? "0 0 20px rgba(16, 185, 129, 0.2)" : "0 0 20px rgba(244, 63, 94, 0.2)",
             }}
           >
             {submitted

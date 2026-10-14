@@ -24,7 +24,7 @@ export default function FeedPage() {
     <div className="lg:grid lg:grid-cols-[280px_1fr_280px]">
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
-        <div className="px-3 py-3 sticky top-0" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
+        <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
           <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
             <Trophy size={12} /> Leaderboard
           </h2>
@@ -35,7 +35,7 @@ export default function FeedPage() {
             <Link
               key={entry.user.id}
               href={`/profile/${entry.user.username}`}
-              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors"
+              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors card-hover"
               style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
             >
               <div
@@ -49,14 +49,16 @@ export default function FeedPage() {
               </div>
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
-                style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+                style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
               >
                 {getInitials(entry.user.displayName)}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
-                  {entry.user.isVerified && <Shield size={10} style={{ color: "var(--accent)" }} />}
+                  {entry.user.isVerified && (
+                    <span className="text-[8px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                  )}
                 </div>
                 <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
                   {entry.tradeCount} trades · {entry.winRate}%
@@ -72,7 +74,6 @@ export default function FeedPage() {
           );
         })}
 
-        {/* Trending on desktop sidebar */}
         <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
           <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
             Trending
@@ -84,7 +85,7 @@ export default function FeedPage() {
               <Link
                 key={t.ticker}
                 href={`/stock/${t.ticker}`}
-                className="flex items-center justify-between py-1.5 no-underline"
+                className="flex items-center justify-between py-1.5 no-underline transition-opacity hover:opacity-80"
                 style={{ color: "var(--fg)" }}
               >
                 <div>
@@ -94,8 +95,8 @@ export default function FeedPage() {
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
                   <span
-                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5"
-                    style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
+                    style={{ color: isUp ? "var(--accent)" : "var(--red)", background: isUp ? "var(--accent-muted)" : "var(--red-muted)" }}
                   >
                     {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
                     {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%
@@ -119,22 +120,24 @@ export default function FeedPage() {
               <Zap size={20} style={{ color: "var(--accent)" }} fill="var(--accent)" />
               <h1 className="text-lg font-bold tracking-tight">StockFomo</h1>
             </div>
-            <button className="p-2 rounded-lg cursor-pointer" style={{ background: "var(--bg-card)" }}>
+            <button className="p-2 rounded-lg cursor-pointer relative" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
               <Bell size={18} style={{ color: "var(--fg-muted)" }} />
+              <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(16, 185, 129, 0.5)" }} />
             </button>
           </div>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-1 px-4 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="flex gap-1.5 px-4 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
           {filters.map((f) => (
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className="px-3 py-1.5 text-xs font-semibold rounded-full transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer"
               style={{
-                background: filter === f.key ? "var(--fg)" : "var(--bg-card)",
+                background: filter === f.key ? "var(--fg)" : "transparent",
                 color: filter === f.key ? "var(--bg)" : "var(--fg-dim)",
+                border: filter === f.key ? "1px solid transparent" : "1px solid var(--border)",
               }}
             >
               {f.label}

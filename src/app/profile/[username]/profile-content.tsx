@@ -17,7 +17,7 @@ export function ProfileContent({ username }: { username: string }) {
         <div className="flex items-start gap-4">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
-            style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+            style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
           >
             {getInitials(user.displayName)}
           </div>
@@ -49,8 +49,7 @@ export function ProfileContent({ username }: { username: string }) {
           </div>
         </div>
         <button
-          className="mt-4 py-2.5 px-8 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer"
-          style={{ background: "var(--accent)", color: "#000" }}
+          className="mt-4 py-2.5 px-8 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer btn-primary"
         >
           <UserPlus size={16} />
           Follow

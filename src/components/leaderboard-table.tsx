@@ -33,7 +33,8 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
             onClick={() => setTimeframe(tf.key)}
             className="flex-1 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer"
             style={{
-              background: timeframe === tf.key ? "var(--bg-card)" : "transparent",
+              background: timeframe === tf.key ? "var(--bg-elevated)" : "transparent",
+              boxShadow: timeframe === tf.key ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
               color: timeframe === tf.key ? "var(--fg)" : "var(--fg-dim)",
             }}
           >
@@ -48,8 +49,8 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
           <Link
             key={entry.user.id}
             href={`/profile/${entry.user.username}`}
-            className="flex items-center gap-3 px-4 py-3 transition-colors"
-            style={{ borderBottom: "1px solid var(--border)" }}
+            className="flex items-center gap-3 px-4 py-3 transition-colors card-hover no-underline"
+            style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
           >
             {/* Rank */}
             <div
@@ -65,7 +66,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
             {/* Avatar */}
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-              style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}
+              style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
             >
               {getInitials(entry.user.displayName)}
             </div>
