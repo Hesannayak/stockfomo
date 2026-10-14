@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { trendingTickers, mockQuotes } from "@/lib/mock-data";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
@@ -14,10 +15,11 @@ export function TrendingBar() {
           const quote = mockQuotes[t.ticker];
           const isUp = quote?.changePercent >= 0;
           return (
-            <div
+            <Link
               key={t.ticker}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg shrink-0 cursor-pointer transition-colors"
-              style={{ background: "var(--bg-card)" }}
+              href={`/stock/${t.ticker}`}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg shrink-0 cursor-pointer transition-colors no-underline"
+              style={{ background: "var(--bg-card)", color: "var(--fg)" }}
             >
               <div>
                 <div className="text-xs font-bold">{t.ticker}</div>
@@ -38,7 +40,7 @@ export function TrendingBar() {
                   {quote?.changePercent.toFixed(2)}%
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

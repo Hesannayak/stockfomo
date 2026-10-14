@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Flame, Skull, Rocket } from "lucide-react";
 import type { FeedItem } from "@/lib/types";
 import { formatCurrency, formatPercent, timeAgo, getInitials } from "@/lib/utils";
@@ -76,7 +77,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             >
               {trade.direction}
             </span>
-            <span className="font-bold text-base">{trade.ticker}</span>
+            <Link href={`/stock/${trade.ticker}`} className="font-bold text-base no-underline" style={{ color: "var(--fg)" }}>{trade.ticker}</Link>
             <span className="text-sm" style={{ color: "var(--fg-muted)" }}>
               {trade.quantity} shares @ {formatCurrency(trade.entryPrice)}
             </span>

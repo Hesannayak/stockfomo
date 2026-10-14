@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/nav";
+import { AuthProvider } from "@/lib/auth-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,10 +24,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen pb-20">
-        <div className="max-w-lg mx-auto">{children}</div>
-        <Suspense>
-          <BottomNav />
-        </Suspense>
+        <AuthProvider>
+          <div className="max-w-lg mx-auto">{children}</div>
+          <Suspense>
+            <BottomNav />
+          </Suspense>
+        </AuthProvider>
       </body>
     </html>
   );
