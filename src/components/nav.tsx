@@ -7,10 +7,12 @@ import {
   Trophy,
   ArrowLeftRight,
   User,
+  Compass,
 } from "lucide-react";
 
 const tabs = [
   { href: "/", label: "Feed", icon: Flame },
+  { href: "/discover", label: "Discover", icon: Compass },
   { href: "/leaderboard", label: "Ranks", icon: Trophy },
   { href: "/trade", label: "Trade", icon: ArrowLeftRight },
   { href: "/profile", label: "Profile", icon: User },

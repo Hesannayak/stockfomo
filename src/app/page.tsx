@@ -5,6 +5,7 @@ import Link from "next/link";
 import { TradeCard } from "@/components/trade-card";
 import { ThesisCard } from "@/components/thesis-card";
 import { TrendingBar } from "@/components/trending-bar";
+import { MarketIndicesBar } from "@/components/market-indices-bar";
 import { FollowSidebar } from "@/components/follow-sidebar";
 import { mockFeed, mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
 import { Bell, Zap, Trophy, TrendingUp, TrendingDown } from "lucide-react";
@@ -121,6 +122,11 @@ export default function FeedPage() {
               <div className="live-dot absolute top-1 right-1" />
             </button>
           </div>
+        </div>
+
+        {/* Market Indices */}
+        <div className="hidden lg:block">
+          <MarketIndicesBar />
         </div>
 
         {/* Filter Tabs */}

@@ -14,8 +14,8 @@ import {
 import { StockChart } from "@/components/stock-chart";
 import { FeedSidebar } from "@/components/feed-sidebar";
 import { ThesisThread } from "@/components/thesis-thread";
-import { getStockDetail, getStockCandles } from "@/lib/stock-data";
-import { mockTrades, mockUsers, mockTheses } from "@/lib/mock-data";
+import { getStockDetail, getStockCandles, getRelatedStocks } from "@/lib/stock-data";
+import { mockTrades, mockUsers, mockTheses, mockQuotes, allStocks } from "@/lib/mock-data";
 import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 const TIME_RANGES = ["1W", "1M", "3M", "1Y", "5Y"] as const;
@@ -74,11 +74,16 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           <button onClick={() => router.back()} className="cursor-pointer p-1 lg:hidden" style={{ color: "var(--fg)" }}>
             <ArrowLeft size={20} />
           </button>
-          <div className="flex items-center gap-3 flex-1">
+          <div className="flex items-center gap-2 flex-1 flex-wrap">
             <h1 className="text-base font-bold">{stock.ticker}</h1>
             <span className="text-xs px-2 py-0.5 rounded-md font-medium font-mono" style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
               {stock.name}
             </span>
+            {stock.sector && (
+              <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}>
+                {stock.sector}
+              </span>
+            )}
           </div>
 
           {/* Desktop inline stats */}
@@ -166,7 +171,121 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
           <h2 className="section-header mb-2">About</h2>
           <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+          {stock.industry && (
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-xs font-medium px-2 py-0.5 rounded-md" style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
+                {stock.industry}
+              </span>
+              {stock.sector && (
+                <span className="text-xs font-medium px-2 py-0.5 rounded-md" style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
+                  {stock.sector}
+                </span>
+              )}
+            </div>
+          )}
         </div>
+
+        {/* Analyst Ratings */}
+        {stock.analystRating && (
+          <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+            <h2 className="section-header mb-3">Analyst Ratings</h2>
+            <div className="flex items-center gap-3 mb-3">
+              <span
+                className="text-sm font-bold px-2.5 py-1 rounded-md"
+                style={{
+                  background: stock.analystRating.consensus.includes("Buy") ? "var(--green-muted)" : stock.analystRating.consensus.includes("Sell") ? "var(--red-muted)" : "var(--bg-elevated)",
+                  color: stock.analystRating.consensus.includes("Buy") ? "var(--green)" : stock.analystRating.consensus.includes("Sell") ? "var(--red)" : "var(--fg-muted)",
+                }}
+              >
+                {stock.analystRating.consensus}
+              </span>
+              <span className="text-sm font-mono font-semibold">
+                PT: {formatCurrency(stock.analystRating.priceTarget)}
+              </span>
+            </div>
+            <div className="flex gap-1 h-2.5 rounded-full overflow-hidden mb-2" style={{ background: "var(--bg-elevated)" }}>
+              <div className="rounded-l-full" style={{ width: `${(stock.analystRating.buy / (stock.analystRating.buy + stock.analystRating.hold + stock.analystRating.sell)) * 100}%`, background: "var(--green)" }} />
+              <div style={{ width: `${(stock.analystRating.hold / (stock.analystRating.buy + stock.analystRating.hold + stock.analystRating.sell)) * 100}%`, background: "var(--fg-dim)" }} />
+              <div className="rounded-r-full" style={{ width: `${(stock.analystRating.sell / (stock.analystRating.buy + stock.analystRating.hold + stock.analystRating.sell)) * 100}%`, background: "var(--red)" }} />
+            </div>
+            <div className="flex justify-between text-xs" style={{ color: "var(--fg-dim)" }}>
+              <span>{stock.analystRating.buy} Buy</span>
+              <span>{stock.analystRating.hold} Hold</span>
+              <span>{stock.analystRating.sell} Sell</span>
+            </div>
+          </div>
+        )}
+
+        {/* Earnings */}
+        {stock.earnings && stock.earnings.length > 0 && (
+          <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+            <h2 className="section-header mb-3">Recent Earnings</h2>
+            <div className="space-y-2">
+              {stock.earnings.map((e) => (
+                <div key={e.date} className="flex items-center justify-between p-2.5 rounded-lg" style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}>
+                  <div>
+                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>{e.date}</div>
+                    <div className="text-sm font-semibold mt-0.5">
+                      EPS: {e.epsActual !== null ? `$${e.epsActual.toFixed(2)}` : `Est $${e.epsEstimate.toFixed(2)}`}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+                      Rev: {e.revenueActual ?? e.revenueEstimate}
+                    </div>
+                    {e.surprise !== null ? (
+                      <span className="text-xs font-bold font-mono" style={{ color: e.surprise >= 0 ? "var(--green)" : "var(--red)" }}>
+                        {e.surprise >= 0 ? "+" : ""}{e.surprise.toFixed(1)}% surprise
+                      </span>
+                    ) : (
+                      <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>Upcoming</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* People Also Trade */}
+        {(() => {
+          const related = getRelatedStocks(ticker);
+          if (related.length === 0) return null;
+          return (
+            <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+              <h2 className="section-header mb-3">People Also Trade</h2>
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {related.map((t) => {
+                  const q = mockQuotes[t];
+                  const info = allStocks.find((s) => s.ticker === t);
+                  if (!q) return null;
+                  const up = q.changePercent >= 0;
+                  return (
+                    <Link
+                      key={t}
+                      href={`/stock/${t}`}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg shrink-0 no-underline transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      style={{ color: "var(--fg)", border: "1px solid var(--border)", minWidth: "140px" }}
+                    >
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-sm font-bold">{t}</span>
+                          <span className="text-xs truncate" style={{ color: "var(--fg-dim)" }}>{info?.name.split(" ")[0]}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-xs font-mono font-semibold">${q.price < 1 ? q.price.toFixed(3) : q.price.toFixed(2)}</span>
+                          <span className="text-xs font-mono font-medium" style={{ color: up ? "var(--green)" : "var(--red)" }}>
+                            {up ? "+" : ""}{q.changePercent.toFixed(2)}%
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Theses Thread */}
         <div style={{ borderTop: "1px solid var(--border)" }}>

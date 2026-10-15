@@ -1,5 +1,55 @@
 export type Direction = "BUY" | "SELL";
 export type TradeStatus = "OPEN" | "CLOSED";
+export type AssetType = "stock" | "etf" | "crypto";
+
+export type Sector =
+  | "Technology"
+  | "Communication Services"
+  | "Consumer Discretionary"
+  | "Healthcare"
+  | "Financials"
+  | "Industrials"
+  | "Consumer Staples"
+  | "Energy"
+  | "Utilities"
+  | "Real Estate"
+  | "Materials";
+
+export type MarketCapCategory = "mega" | "large" | "mid" | "small";
+
+export interface StockInfo {
+  ticker: string;
+  name: string;
+  type: AssetType;
+  sector?: Sector;
+  industry?: string;
+  marketCap?: MarketCapCategory;
+  sentiment: number;
+}
+
+export interface MarketIndex {
+  name: string;
+  value: number;
+  change: number;
+  changePercent: number;
+}
+
+export interface AnalystRating {
+  buy: number;
+  hold: number;
+  sell: number;
+  priceTarget: number;
+  consensus: "Strong Buy" | "Buy" | "Hold" | "Sell" | "Strong Sell";
+}
+
+export interface EarningsData {
+  date: string;
+  epsEstimate: number;
+  epsActual: number | null;
+  revenueEstimate: string;
+  revenueActual: string | null;
+  surprise: number | null;
+}
 
 export interface User {
   id: string;

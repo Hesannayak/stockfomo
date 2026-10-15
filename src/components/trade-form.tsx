@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Search, ArrowUp, ArrowDown, X } from "lucide-react";
-import { mockQuotes, trendingTickers } from "@/lib/mock-data";
+import { mockQuotes, allStocks } from "@/lib/mock-data";
 import { formatCurrency } from "@/lib/utils";
 
 const allTickers = Object.keys(mockQuotes);
@@ -18,7 +18,7 @@ export function TradeForm() {
     ? allTickers.filter(
         (t) =>
           t.toLowerCase().includes(search.toLowerCase()) ||
-          trendingTickers.find((tt) => tt.ticker === t)?.name.toLowerCase().includes(search.toLowerCase())
+          allStocks.find((s) => s.ticker === t)?.name.toLowerCase().includes(search.toLowerCase())
       )
     : allTickers;
 
@@ -54,7 +54,7 @@ export function TradeForm() {
           <div className="mt-3">
             {filtered.map((ticker) => {
               const q = mockQuotes[ticker];
-              const info = trendingTickers.find((t) => t.ticker === ticker);
+              const info = allStocks.find((t) => t.ticker === ticker);
               const isUp = q.changePercent >= 0;
               return (
                 <button
@@ -93,7 +93,7 @@ export function TradeForm() {
             <div>
               <div className="text-xl font-bold">{selectedTicker}</div>
               <div className="text-sm font-mono" style={{ color: "var(--fg-muted)" }}>
-                {trendingTickers.find((t) => t.ticker === selectedTicker)?.name ?? selectedTicker}
+                {allStocks.find((t) => t.ticker === selectedTicker)?.name ?? selectedTicker}
               </div>
             </div>
             <button

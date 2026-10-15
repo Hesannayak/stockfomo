@@ -1,4 +1,4 @@
-import { User, Trade, Thesis, FeedItem, LeaderboardEntry, Position, StockQuote } from "./types";
+import { User, Trade, Thesis, FeedItem, LeaderboardEntry, Position, StockQuote, StockInfo, MarketIndex } from "./types";
 
 function hoursAgo(h: number) {
   return `${h}h`;
@@ -6,6 +6,265 @@ function hoursAgo(h: number) {
 function minutesAgo(m: number) {
   return `${m}m`;
 }
+
+function makeQuote(ticker: string, price: number, changePct: number, volume: number): StockQuote {
+  const change = +(price * changePct / 100).toFixed(2);
+  const previousClose = +(price - change).toFixed(2);
+  const high = +(price * (1 + Math.abs(changePct) / 100 * 0.6 + 0.003)).toFixed(2);
+  const low = +(price * (1 - Math.abs(changePct) / 100 * 0.4 - 0.003)).toFixed(2);
+  const open = +(previousClose + change * 0.3).toFixed(2);
+  return { ticker, price, change, changePercent: changePct, high, low, open, previousClose, volume };
+}
+
+// ── All assets ──────────────────────────────────────────────────
+
+export const allStocks: StockInfo[] = [
+  // Technology (18)
+  { ticker: "AAPL", name: "Apple Inc.", type: "stock", sector: "Technology", industry: "Consumer Electronics", marketCap: "mega", sentiment: 74 },
+  { ticker: "MSFT", name: "Microsoft Corp.", type: "stock", sector: "Technology", industry: "Software", marketCap: "mega", sentiment: 76 },
+  { ticker: "NVDA", name: "NVIDIA Corp.", type: "stock", sector: "Technology", industry: "Semiconductors", marketCap: "mega", sentiment: 87 },
+  { ticker: "AMD", name: "Advanced Micro Devices", type: "stock", sector: "Technology", industry: "Semiconductors", marketCap: "large", sentiment: 65 },
+  { ticker: "AVGO", name: "Broadcom Inc.", type: "stock", sector: "Technology", industry: "Semiconductors", marketCap: "mega", sentiment: 72 },
+  { ticker: "CRM", name: "Salesforce Inc.", type: "stock", sector: "Technology", industry: "Software", marketCap: "large", sentiment: 63 },
+  { ticker: "ADBE", name: "Adobe Inc.", type: "stock", sector: "Technology", industry: "Software", marketCap: "large", sentiment: 58 },
+  { ticker: "ORCL", name: "Oracle Corp.", type: "stock", sector: "Technology", industry: "Software", marketCap: "large", sentiment: 67 },
+  { ticker: "INTC", name: "Intel Corp.", type: "stock", sector: "Technology", industry: "Semiconductors", marketCap: "mid", sentiment: 38 },
+  { ticker: "CSCO", name: "Cisco Systems", type: "stock", sector: "Technology", industry: "Networking", marketCap: "large", sentiment: 52 },
+  { ticker: "PLTR", name: "Palantir Technologies", type: "stock", sector: "Technology", industry: "Software", marketCap: "large", sentiment: 79 },
+  { ticker: "ARM", name: "Arm Holdings", type: "stock", sector: "Technology", industry: "Semiconductors", marketCap: "large", sentiment: 83 },
+  { ticker: "CRWD", name: "CrowdStrike Holdings", type: "stock", sector: "Technology", industry: "Cybersecurity", marketCap: "large", sentiment: 71 },
+  { ticker: "NOW", name: "ServiceNow Inc.", type: "stock", sector: "Technology", industry: "Software", marketCap: "large", sentiment: 74 },
+  { ticker: "SMCI", name: "Super Micro Computer", type: "stock", sector: "Technology", industry: "Hardware", marketCap: "mid", sentiment: 72 },
+  { ticker: "SNOW", name: "Snowflake Inc.", type: "stock", sector: "Technology", industry: "Cloud Computing", marketCap: "mid", sentiment: 48 },
+  { ticker: "NET", name: "Cloudflare Inc.", type: "stock", sector: "Technology", industry: "Cloud Computing", marketCap: "mid", sentiment: 69 },
+  { ticker: "SHOP", name: "Shopify Inc.", type: "stock", sector: "Technology", industry: "E-Commerce", marketCap: "large", sentiment: 75 },
+
+  // Communication Services (5)
+  { ticker: "GOOG", name: "Alphabet Inc.", type: "stock", sector: "Communication Services", industry: "Internet", marketCap: "mega", sentiment: 68 },
+  { ticker: "META", name: "Meta Platforms", type: "stock", sector: "Communication Services", industry: "Social Media", marketCap: "mega", sentiment: 81 },
+  { ticker: "NFLX", name: "Netflix Inc.", type: "stock", sector: "Communication Services", industry: "Streaming", marketCap: "large", sentiment: 70 },
+  { ticker: "DIS", name: "Walt Disney Co.", type: "stock", sector: "Communication Services", industry: "Entertainment", marketCap: "large", sentiment: 55 },
+  { ticker: "CMCSA", name: "Comcast Corp.", type: "stock", sector: "Communication Services", industry: "Telecom", marketCap: "large", sentiment: 44 },
+
+  // Consumer Discretionary (7)
+  { ticker: "AMZN", name: "Amazon.com Inc.", type: "stock", sector: "Consumer Discretionary", industry: "E-Commerce", marketCap: "mega", sentiment: 73 },
+  { ticker: "TSLA", name: "Tesla Inc.", type: "stock", sector: "Consumer Discretionary", industry: "Electric Vehicles", marketCap: "mega", sentiment: 54 },
+  { ticker: "HD", name: "Home Depot Inc.", type: "stock", sector: "Consumer Discretionary", industry: "Home Improvement", marketCap: "large", sentiment: 60 },
+  { ticker: "NKE", name: "Nike Inc.", type: "stock", sector: "Consumer Discretionary", industry: "Apparel", marketCap: "large", sentiment: 42 },
+  { ticker: "SBUX", name: "Starbucks Corp.", type: "stock", sector: "Consumer Discretionary", industry: "Restaurants", marketCap: "large", sentiment: 50 },
+  { ticker: "MCD", name: "McDonald's Corp.", type: "stock", sector: "Consumer Discretionary", industry: "Restaurants", marketCap: "large", sentiment: 62 },
+  { ticker: "RIVN", name: "Rivian Automotive", type: "stock", sector: "Consumer Discretionary", industry: "Electric Vehicles", marketCap: "mid", sentiment: 42 },
+
+  // Healthcare (6)
+  { ticker: "JNJ", name: "Johnson & Johnson", type: "stock", sector: "Healthcare", industry: "Pharmaceuticals", marketCap: "mega", sentiment: 56 },
+  { ticker: "UNH", name: "UnitedHealth Group", type: "stock", sector: "Healthcare", industry: "Health Insurance", marketCap: "mega", sentiment: 64 },
+  { ticker: "PFE", name: "Pfizer Inc.", type: "stock", sector: "Healthcare", industry: "Pharmaceuticals", marketCap: "large", sentiment: 35 },
+  { ticker: "LLY", name: "Eli Lilly & Co.", type: "stock", sector: "Healthcare", industry: "Pharmaceuticals", marketCap: "mega", sentiment: 85 },
+  { ticker: "ABBV", name: "AbbVie Inc.", type: "stock", sector: "Healthcare", industry: "Pharmaceuticals", marketCap: "large", sentiment: 68 },
+  { ticker: "MRK", name: "Merck & Co.", type: "stock", sector: "Healthcare", industry: "Pharmaceuticals", marketCap: "large", sentiment: 58 },
+
+  // Financials (9)
+  { ticker: "JPM", name: "JPMorgan Chase", type: "stock", sector: "Financials", industry: "Banks", marketCap: "mega", sentiment: 72 },
+  { ticker: "BAC", name: "Bank of America", type: "stock", sector: "Financials", industry: "Banks", marketCap: "large", sentiment: 55 },
+  { ticker: "GS", name: "Goldman Sachs", type: "stock", sector: "Financials", industry: "Investment Banking", marketCap: "large", sentiment: 66 },
+  { ticker: "V", name: "Visa Inc.", type: "stock", sector: "Financials", industry: "Payments", marketCap: "mega", sentiment: 75 },
+  { ticker: "MA", name: "Mastercard Inc.", type: "stock", sector: "Financials", industry: "Payments", marketCap: "mega", sentiment: 74 },
+  { ticker: "COIN", name: "Coinbase Global", type: "stock", sector: "Financials", industry: "Crypto Exchange", marketCap: "mid", sentiment: 82 },
+  { ticker: "SQ", name: "Block Inc.", type: "stock", sector: "Financials", industry: "Fintech", marketCap: "mid", sentiment: 66 },
+  { ticker: "SOFI", name: "SoFi Technologies", type: "stock", sector: "Financials", industry: "Fintech", marketCap: "small", sentiment: 77 },
+  { ticker: "MSTR", name: "MicroStrategy Inc.", type: "stock", sector: "Financials", industry: "Software/BTC", marketCap: "mid", sentiment: 78 },
+
+  // Industrials (6)
+  { ticker: "BA", name: "Boeing Co.", type: "stock", sector: "Industrials", industry: "Aerospace", marketCap: "large", sentiment: 40 },
+  { ticker: "CAT", name: "Caterpillar Inc.", type: "stock", sector: "Industrials", industry: "Machinery", marketCap: "large", sentiment: 65 },
+  { ticker: "HON", name: "Honeywell Int'l", type: "stock", sector: "Industrials", industry: "Conglomerate", marketCap: "large", sentiment: 58 },
+  { ticker: "GE", name: "GE Aerospace", type: "stock", sector: "Industrials", industry: "Aerospace", marketCap: "large", sentiment: 71 },
+  { ticker: "LMT", name: "Lockheed Martin", type: "stock", sector: "Industrials", industry: "Defense", marketCap: "large", sentiment: 68 },
+  { ticker: "RKLB", name: "Rocket Lab USA", type: "stock", sector: "Industrials", industry: "Aerospace", marketCap: "small", sentiment: 88 },
+
+  // Consumer Staples (5)
+  { ticker: "PG", name: "Procter & Gamble", type: "stock", sector: "Consumer Staples", industry: "Household Products", marketCap: "mega", sentiment: 60 },
+  { ticker: "KO", name: "Coca-Cola Co.", type: "stock", sector: "Consumer Staples", industry: "Beverages", marketCap: "mega", sentiment: 58 },
+  { ticker: "PEP", name: "PepsiCo Inc.", type: "stock", sector: "Consumer Staples", industry: "Beverages", marketCap: "mega", sentiment: 55 },
+  { ticker: "WMT", name: "Walmart Inc.", type: "stock", sector: "Consumer Staples", industry: "Retail", marketCap: "mega", sentiment: 70 },
+  { ticker: "COST", name: "Costco Wholesale", type: "stock", sector: "Consumer Staples", industry: "Retail", marketCap: "large", sentiment: 76 },
+
+  // Energy (3)
+  { ticker: "XOM", name: "Exxon Mobil Corp.", type: "stock", sector: "Energy", industry: "Oil & Gas", marketCap: "mega", sentiment: 52 },
+  { ticker: "CVX", name: "Chevron Corp.", type: "stock", sector: "Energy", industry: "Oil & Gas", marketCap: "large", sentiment: 50 },
+  { ticker: "COP", name: "ConocoPhillips", type: "stock", sector: "Energy", industry: "Oil & Gas", marketCap: "large", sentiment: 48 },
+
+  // Utilities (2)
+  { ticker: "NEE", name: "NextEra Energy", type: "stock", sector: "Utilities", industry: "Renewable Energy", marketCap: "large", sentiment: 62 },
+  { ticker: "DUK", name: "Duke Energy Corp.", type: "stock", sector: "Utilities", industry: "Electric Utilities", marketCap: "large", sentiment: 50 },
+
+  // Real Estate (2)
+  { ticker: "AMT", name: "American Tower", type: "stock", sector: "Real Estate", industry: "REITs", marketCap: "large", sentiment: 55 },
+  { ticker: "PLD", name: "Prologis Inc.", type: "stock", sector: "Real Estate", industry: "REITs", marketCap: "large", sentiment: 53 },
+
+  // Materials (2)
+  { ticker: "LIN", name: "Linde plc", type: "stock", sector: "Materials", industry: "Chemicals", marketCap: "large", sentiment: 62 },
+  { ticker: "SHW", name: "Sherwin-Williams", type: "stock", sector: "Materials", industry: "Chemicals", marketCap: "large", sentiment: 58 },
+
+  // ETFs (8)
+  { ticker: "SPY", name: "SPDR S&P 500 ETF", type: "etf", sentiment: 64 },
+  { ticker: "VOO", name: "Vanguard S&P 500 ETF", type: "etf", sentiment: 62 },
+  { ticker: "QQQ", name: "Invesco QQQ Trust", type: "etf", sentiment: 70 },
+  { ticker: "IWM", name: "iShares Russell 2000", type: "etf", sentiment: 48 },
+  { ticker: "DIA", name: "SPDR Dow Jones ETF", type: "etf", sentiment: 56 },
+  { ticker: "VTI", name: "Vanguard Total Market", type: "etf", sentiment: 64 },
+  { ticker: "ARKK", name: "ARK Innovation ETF", type: "etf", sentiment: 52 },
+  { ticker: "XLK", name: "Technology Select SPDR", type: "etf", sentiment: 68 },
+
+  // Crypto (5)
+  { ticker: "BTC", name: "Bitcoin", type: "crypto", sentiment: 80 },
+  { ticker: "ETH", name: "Ethereum", type: "crypto", sentiment: 72 },
+  { ticker: "SOL", name: "Solana", type: "crypto", sentiment: 78 },
+  { ticker: "DOGE", name: "Dogecoin", type: "crypto", sentiment: 60 },
+  { ticker: "XRP", name: "XRP", type: "crypto", sentiment: 65 },
+];
+
+// ── Market Indices ──────────────────────────────────────────────
+
+export const mockIndices: MarketIndex[] = [
+  { name: "S&P 500", value: 5842.30, change: 22.10, changePercent: 0.38 },
+  { name: "NASDAQ", value: 18492.80, change: 98.40, changePercent: 0.53 },
+  { name: "DOW", value: 42780.50, change: -45.20, changePercent: -0.11 },
+  { name: "Russell 2000", value: 2218.40, change: 12.60, changePercent: 0.57 },
+];
+
+// ── Quotes for all assets ───────────────────────────────────────
+
+export const mockQuotes: Record<string, StockQuote> = {
+  // Technology
+  AAPL: makeQuote("AAPL", 234.10, 0.77, 54_200_000),
+  MSFT: makeQuote("MSFT", 422.10, 0.84, 21_300_000),
+  NVDA: makeQuote("NVDA", 148.75, 2.94, 312_400_000),
+  AMD: makeQuote("AMD", 162.80, -0.85, 43_500_000),
+  AVGO: makeQuote("AVGO", 186.40, 1.52, 28_700_000),
+  CRM: makeQuote("CRM", 312.80, 0.92, 8_400_000),
+  ADBE: makeQuote("ADBE", 487.30, -0.64, 4_200_000),
+  ORCL: makeQuote("ORCL", 178.50, 1.38, 12_600_000),
+  INTC: makeQuote("INTC", 22.40, -2.18, 58_300_000),
+  CSCO: makeQuote("CSCO", 57.80, 0.35, 16_200_000),
+  PLTR: makeQuote("PLTR", 84.20, 4.21, 145_300_000),
+  ARM: makeQuote("ARM", 168.90, 2.55, 9_100_000),
+  CRWD: makeQuote("CRWD", 358.20, 1.62, 6_800_000),
+  NOW: makeQuote("NOW", 924.50, 1.14, 3_200_000),
+  SMCI: makeQuote("SMCI", 45.10, 6.62, 67_800_000),
+  SNOW: makeQuote("SNOW", 172.40, -2.16, 8_300_000),
+  NET: makeQuote("NET", 118.40, 1.81, 5_600_000),
+  SHOP: makeQuote("SHOP", 109.20, 3.21, 12_800_000),
+
+  // Communication Services
+  GOOG: makeQuote("GOOG", 176.30, -0.68, 22_400_000),
+  META: makeQuote("META", 612.40, 1.42, 18_900_000),
+  NFLX: makeQuote("NFLX", 782.60, 1.85, 7_200_000),
+  DIS: makeQuote("DIS", 112.40, -0.53, 11_800_000),
+  CMCSA: makeQuote("CMCSA", 42.30, -0.71, 19_400_000),
+
+  // Consumer Discretionary
+  AMZN: makeQuote("AMZN", 198.70, 1.17, 38_700_000),
+  TSLA: makeQuote("TSLA", 348.90, -2.30, 89_600_000),
+  HD: makeQuote("HD", 392.80, 0.48, 5_300_000),
+  NKE: makeQuote("NKE", 78.40, -1.52, 14_600_000),
+  SBUX: makeQuote("SBUX", 98.20, 0.31, 8_700_000),
+  MCD: makeQuote("MCD", 298.50, 0.67, 4_100_000),
+  RIVN: makeQuote("RIVN", 16.30, -5.23, 28_400_000),
+
+  // Healthcare
+  JNJ: makeQuote("JNJ", 158.40, 0.25, 7_800_000),
+  UNH: makeQuote("UNH", 568.20, -0.42, 4_200_000),
+  PFE: makeQuote("PFE", 28.60, -1.38, 32_400_000),
+  LLY: makeQuote("LLY", 842.30, 2.14, 5_600_000),
+  ABBV: makeQuote("ABBV", 192.50, 0.84, 6_800_000),
+  MRK: makeQuote("MRK", 128.40, -0.31, 9_200_000),
+
+  // Financials
+  JPM: makeQuote("JPM", 218.60, 0.92, 8_400_000),
+  BAC: makeQuote("BAC", 42.80, 0.47, 28_600_000),
+  GS: makeQuote("GS", 512.40, 1.18, 3_200_000),
+  V: makeQuote("V", 292.80, 0.55, 6_100_000),
+  MA: makeQuote("MA", 478.30, 0.62, 3_800_000),
+  COIN: makeQuote("COIN", 263.50, 5.11, 14_600_000),
+  SQ: makeQuote("SQ", 82.60, 2.35, 11_500_000),
+  SOFI: makeQuote("SOFI", 14.85, 4.58, 42_700_000),
+  MSTR: makeQuote("MSTR", 214.80, 4.58, 31_200_000),
+
+  // Industrials
+  BA: makeQuote("BA", 178.20, -1.84, 12_400_000),
+  CAT: makeQuote("CAT", 368.40, 0.72, 4_600_000),
+  HON: makeQuote("HON", 212.30, 0.38, 4_200_000),
+  GE: makeQuote("GE", 182.60, 1.24, 7_800_000),
+  LMT: makeQuote("LMT", 548.20, 0.55, 2_400_000),
+  RKLB: makeQuote("RKLB", 24.60, 7.89, 35_200_000),
+
+  // Consumer Staples
+  PG: makeQuote("PG", 172.40, 0.41, 6_200_000),
+  KO: makeQuote("KO", 62.80, 0.32, 12_400_000),
+  PEP: makeQuote("PEP", 168.30, -0.24, 5_800_000),
+  WMT: makeQuote("WMT", 82.40, 0.85, 9_400_000),
+  COST: makeQuote("COST", 892.30, 1.12, 2_800_000),
+
+  // Energy
+  XOM: makeQuote("XOM", 118.40, -0.68, 14_200_000),
+  CVX: makeQuote("CVX", 162.30, -0.55, 8_600_000),
+  COP: makeQuote("COP", 112.40, -0.89, 6_400_000),
+
+  // Utilities
+  NEE: makeQuote("NEE", 82.60, 0.73, 8_200_000),
+  DUK: makeQuote("DUK", 108.40, 0.28, 4_600_000),
+
+  // Real Estate
+  AMT: makeQuote("AMT", 218.60, -0.46, 3_800_000),
+  PLD: makeQuote("PLD", 124.30, -0.32, 5_200_000),
+
+  // Materials
+  LIN: makeQuote("LIN", 468.20, 0.64, 2_400_000),
+  SHW: makeQuote("SHW", 368.40, 0.52, 1_800_000),
+
+  // ETFs
+  SPY: makeQuote("SPY", 582.40, 0.36, 72_100_000),
+  VOO: makeQuote("VOO", 537.80, 0.35, 4_200_000),
+  QQQ: makeQuote("QQQ", 504.30, 0.64, 45_600_000),
+  IWM: makeQuote("IWM", 222.40, 0.58, 28_400_000),
+  DIA: makeQuote("DIA", 428.60, -0.10, 5_200_000),
+  VTI: makeQuote("VTI", 278.40, 0.42, 6_800_000),
+  ARKK: makeQuote("ARKK", 52.80, 2.34, 18_600_000),
+  XLK: makeQuote("XLK", 218.40, 0.82, 8_400_000),
+
+  // Crypto
+  BTC: makeQuote("BTC", 68420.00, 3.24, 42_800_000),
+  ETH: makeQuote("ETH", 3842.50, 2.68, 18_400_000),
+  SOL: makeQuote("SOL", 178.40, 5.42, 8_600_000),
+  DOGE: makeQuote("DOGE", 0.142, 4.41, 3_200_000_000),
+  XRP: makeQuote("XRP", 0.628, 2.12, 1_800_000_000),
+};
+
+// ── Trending tickers (top 24 by sentiment) ──────────────────────
+
+export const trendingTickers: StockInfo[] = [...allStocks]
+  .sort((a, b) => b.sentiment - a.sentiment)
+  .slice(0, 24);
+
+// ── Stocks by sector ────────────────────────────────────────────
+
+export function getStocksBySector(): Record<string, StockInfo[]> {
+  const sectors: Record<string, StockInfo[]> = {};
+  for (const s of allStocks) {
+    if (s.sector) {
+      if (!sectors[s.sector]) sectors[s.sector] = [];
+      sectors[s.sector].push(s);
+    }
+  }
+  return sectors;
+}
+
+export function getStocksByType(type: StockInfo["type"]): StockInfo[] {
+  return allStocks.filter((s) => s.type === type);
+}
+
+// ── Users, Trades, Theses (unchanged) ───────────────────────────
 
 export const mockUsers: User[] = [
   {
@@ -189,58 +448,4 @@ export const mockPositions: Position[] = [
     id: "p3", userId: "u1", ticker: "AMZN", quantity: 15, avgEntryPrice: 192.40,
     currentPrice: 198.70, marketValue: 2980.5, unrealizedPnl: 94.5, unrealizedPnlPercent: 3.27,
   },
-];
-
-export const mockQuotes: Record<string, StockQuote> = {
-  NVDA: { ticker: "NVDA", price: 148.75, change: 4.25, changePercent: 2.94, high: 150.20, low: 143.80, open: 144.50, previousClose: 144.50, volume: 312_400_000 },
-  TSLA: { ticker: "TSLA", price: 348.90, change: -8.20, changePercent: -2.30, high: 358.10, low: 346.50, open: 357.10, previousClose: 357.10, volume: 89_600_000 },
-  AAPL: { ticker: "AAPL", price: 234.10, change: 1.80, changePercent: 0.77, high: 235.40, low: 231.90, open: 232.30, previousClose: 232.30, volume: 54_200_000 },
-  SPY: { ticker: "SPY", price: 582.40, change: 2.10, changePercent: 0.36, high: 584.00, low: 579.80, open: 580.30, previousClose: 580.30, volume: 72_100_000 },
-  PLTR: { ticker: "PLTR", price: 84.20, change: 3.40, changePercent: 4.21, high: 85.10, low: 79.80, open: 80.80, previousClose: 80.80, volume: 145_300_000 },
-  SMCI: { ticker: "SMCI", price: 45.10, change: 2.80, changePercent: 6.62, high: 46.20, low: 42.00, open: 42.30, previousClose: 42.30, volume: 67_800_000 },
-  AMD: { ticker: "AMD", price: 162.80, change: -1.40, changePercent: -0.85, high: 165.20, low: 161.50, open: 164.20, previousClose: 164.20, volume: 43_500_000 },
-  VOO: { ticker: "VOO", price: 537.80, change: 1.90, changePercent: 0.35, high: 539.20, low: 534.60, open: 535.90, previousClose: 535.90, volume: 4_200_000 },
-  MSFT: { ticker: "MSFT", price: 422.10, change: 3.50, changePercent: 0.84, high: 424.30, low: 418.20, open: 418.60, previousClose: 418.60, volume: 21_300_000 },
-  AMZN: { ticker: "AMZN", price: 198.70, change: 2.30, changePercent: 1.17, high: 199.80, low: 195.40, open: 196.40, previousClose: 196.40, volume: 38_700_000 },
-  META: { ticker: "META", price: 612.40, change: 8.60, changePercent: 1.42, high: 615.20, low: 602.80, open: 603.80, previousClose: 603.80, volume: 18_900_000 },
-  GOOG: { ticker: "GOOG", price: 176.30, change: -1.20, changePercent: -0.68, high: 178.40, low: 175.10, open: 177.50, previousClose: 177.50, volume: 22_400_000 },
-  COIN: { ticker: "COIN", price: 263.50, change: 12.80, changePercent: 5.11, high: 268.30, low: 249.70, open: 250.70, previousClose: 250.70, volume: 14_600_000 },
-  MSTR: { ticker: "MSTR", price: 214.80, change: 9.40, changePercent: 4.58, high: 218.60, low: 204.10, open: 205.40, previousClose: 205.40, volume: 31_200_000 },
-  CRWD: { ticker: "CRWD", price: 358.20, change: 5.70, changePercent: 1.62, high: 361.40, low: 351.30, open: 352.50, previousClose: 352.50, volume: 6_800_000 },
-  SNOW: { ticker: "SNOW", price: 172.40, change: -3.80, changePercent: -2.16, high: 177.20, low: 171.10, open: 176.20, previousClose: 176.20, volume: 8_300_000 },
-  SQ: { ticker: "SQ", price: 82.60, change: 1.90, changePercent: 2.35, high: 83.40, low: 80.20, open: 80.70, previousClose: 80.70, volume: 11_500_000 },
-  SOFI: { ticker: "SOFI", price: 14.85, change: 0.65, changePercent: 4.58, high: 15.10, low: 14.08, open: 14.20, previousClose: 14.20, volume: 42_700_000 },
-  RIVN: { ticker: "RIVN", price: 16.30, change: -0.90, changePercent: -5.23, high: 17.40, low: 16.10, open: 17.20, previousClose: 17.20, volume: 28_400_000 },
-  ARM: { ticker: "ARM", price: 168.90, change: 4.20, changePercent: 2.55, high: 170.80, low: 163.50, open: 164.70, previousClose: 164.70, volume: 9_100_000 },
-  NET: { ticker: "NET", price: 118.40, change: 2.10, changePercent: 1.81, high: 119.60, low: 115.80, open: 116.30, previousClose: 116.30, volume: 5_600_000 },
-  SHOP: { ticker: "SHOP", price: 109.20, change: 3.40, changePercent: 3.21, high: 110.50, low: 105.30, open: 105.80, previousClose: 105.80, volume: 12_800_000 },
-  RKLB: { ticker: "RKLB", price: 24.60, change: 1.80, changePercent: 7.89, high: 25.10, low: 22.50, open: 22.80, previousClose: 22.80, volume: 35_200_000 },
-  QQQ: { ticker: "QQQ", price: 504.30, change: 3.20, changePercent: 0.64, high: 506.10, low: 500.40, open: 501.10, previousClose: 501.10, volume: 45_600_000 },
-};
-
-export const trendingTickers = [
-  { ticker: "NVDA", name: "NVIDIA Corp", sentiment: 87 },
-  { ticker: "PLTR", name: "Palantir Technologies", sentiment: 79 },
-  { ticker: "SMCI", name: "Super Micro Computer", sentiment: 72 },
-  { ticker: "TSLA", name: "Tesla Inc", sentiment: 54 },
-  { ticker: "AMD", name: "Advanced Micro Devices", sentiment: 65 },
-  { ticker: "AAPL", name: "Apple Inc", sentiment: 74 },
-  { ticker: "META", name: "Meta Platforms", sentiment: 81 },
-  { ticker: "GOOG", name: "Alphabet Inc", sentiment: 68 },
-  { ticker: "MSFT", name: "Microsoft Corp", sentiment: 76 },
-  { ticker: "AMZN", name: "Amazon.com Inc", sentiment: 73 },
-  { ticker: "COIN", name: "Coinbase Global", sentiment: 82 },
-  { ticker: "MSTR", name: "MicroStrategy Inc", sentiment: 78 },
-  { ticker: "CRWD", name: "CrowdStrike Holdings", sentiment: 71 },
-  { ticker: "SNOW", name: "Snowflake Inc", sentiment: 48 },
-  { ticker: "SQ", name: "Block Inc", sentiment: 66 },
-  { ticker: "SOFI", name: "SoFi Technologies", sentiment: 77 },
-  { ticker: "RIVN", name: "Rivian Automotive", sentiment: 42 },
-  { ticker: "ARM", name: "Arm Holdings", sentiment: 83 },
-  { ticker: "NET", name: "Cloudflare Inc", sentiment: 69 },
-  { ticker: "SHOP", name: "Shopify Inc", sentiment: 75 },
-  { ticker: "RKLB", name: "Rocket Lab USA", sentiment: 88 },
-  { ticker: "QQQ", name: "Invesco QQQ Trust", sentiment: 70 },
-  { ticker: "SPY", name: "SPDR S&P 500 ETF", sentiment: 64 },
-  { ticker: "VOO", name: "Vanguard S&P 500 ETF", sentiment: 62 },
 ];

@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Zap, Flame, Trophy, ArrowLeftRight, User, Search, Bell } from "lucide-react";
+import { Zap, Flame, Trophy, ArrowLeftRight, User, Search, Bell, Compass } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { getInitials } from "@/lib/utils";
 
 const tabs = [
   { href: "/", label: "Feed", icon: Flame },
+  { href: "/discover", label: "Discover", icon: Compass },
   { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
   { href: "/trade", label: "Trade", icon: ArrowLeftRight },
   { href: "/profile", label: "Profile", icon: User },
