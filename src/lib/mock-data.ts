@@ -1,4 +1,4 @@
-import { User, Trade, FeedItem, LeaderboardEntry, Position, StockQuote } from "./types";
+import { User, Trade, Thesis, FeedItem, LeaderboardEntry, Position, StockQuote } from "./types";
 
 function hoursAgo(h: number) {
   return `${h}h`;
@@ -83,7 +83,58 @@ export const mockTrades: Trade[] = [
   },
 ];
 
-export const mockFeed: FeedItem[] = mockTrades.map((trade) => ({
+export const mockTheses: Thesis[] = [
+  {
+    id: "th1", userId: "u2", ticker: "NVDA", direction: "BUY",
+    title: "NVDA is the infrastructure backbone of the AI era",
+    body: "NVIDIA's data center revenue grew 427% YoY last quarter. Every major cloud provider — AWS, Azure, GCP — is locked into multi-year NVIDIA GPU contracts. The CUDA moat is real: switching costs are enormous because the entire ML ecosystem (PyTorch, TensorFlow, JAX) is optimized for CUDA. Competitors like AMD's MI300 exist, but developer tooling and library support lag years behind.\n\nBlackwell is ramping production with reported $11B+ in pre-orders. The gross margins on data center GPUs sit at 78%, which is almost unheard of in hardware. Even if AI spending slows (it won't — enterprise adoption is just starting), NVIDIA's gaming and automotive verticals provide a floor.\n\nAt 35x forward earnings for a company growing revenue 100%+ annually, this is cheap. My PT is $200 within 12 months.",
+    createdAt: minutesAgo(25),
+    reactions: { fire: 34, skull: 3, rocket: 22 },
+    replyCount: 8,
+  },
+  {
+    id: "th2", userId: "u4", ticker: "PLTR", direction: "BUY",
+    title: "Palantir's AIP platform is an underappreciated growth engine",
+    body: "Most people still think of Palantir as a government contractor. That narrative is 3 years stale. The AIP (Artificial Intelligence Platform) boot camps are converting enterprise prospects at an incredible rate — they went from 0 to 560+ organizations in under a year.\n\nThe unit economics tell the story: net dollar retention is 115%, meaning existing customers keep spending more. Government revenue provides stable, predictable cash flow while commercial revenue is the growth vector (now 55% of total and accelerating).\n\nPalantir is one of the few companies that can actually deploy AI at enterprise scale with real security and compliance. That's a genuine moat in a market flooded with AI wrappers. Rule of 40 score above 55. I'm long with a 12-month target of $100.",
+    createdAt: hoursAgo(1),
+    reactions: { fire: 41, skull: 5, rocket: 28 },
+    replyCount: 12,
+  },
+  {
+    id: "th3", userId: "u1", ticker: "TSLA", direction: "SELL",
+    title: "Tesla's auto margins are compressing faster than bulls admit",
+    body: "I shorted TSLA at $352. Here's my bear case: automotive gross margins have fallen from 28% to 18% over the past 18 months due to aggressive price cuts. The price cuts were supposed to drive volume — they haven't. Global deliveries are flat YoY while BYD is eating Tesla's lunch in China and Europe.\n\nThe FSD narrative keeps the stock elevated, but after 8 years of \"next year\" promises, the robotaxi fleet is still vaporware. Waymo has more autonomous miles driven than Tesla. The energy business is legitimate but it's 7% of revenue — not enough to justify a $1.1T market cap.\n\nAt 80x forward earnings with declining margins, this is a momentum stock masquerading as a growth stock. Fair value is $180-220.",
+    createdAt: minutesAgo(50),
+    reactions: { fire: 18, skull: 12, rocket: 7 },
+    replyCount: 15,
+  },
+  {
+    id: "th4", userId: "u5", ticker: "VOO", direction: "BUY",
+    title: "Why I keep DCA-ing into VOO every paycheck",
+    body: "This isn't a flashy thesis. VOO (S&P 500 index) has returned 10.5% annualized over the past 30 years. After inflation, that's about 7.5% real. No stock picking, no timing, no stress.\n\nFor my risk-adjusted strategy: 80% VOO, 15% individual names, 5% speculation. The 80% in VOO means I sleep well at night. Market timing loses to DCA over 10+ year horizons in 92% of historical periods studied.\n\nThe S&P is market-cap weighted, so it naturally rebalances toward winners. You got NVIDIA's 3000% run just by holding the index. That's the beauty of it.",
+    createdAt: hoursAgo(4),
+    reactions: { fire: 12, skull: 1, rocket: 15 },
+    replyCount: 4,
+  },
+  {
+    id: "th5", userId: "u3", ticker: "SPY", direction: "BUY",
+    title: "SPY $600 by year end — here's the macro setup",
+    body: "The Fed is done hiking. Inflation is trending toward 2.5%. Corporate earnings are beating estimates at a 78% clip this quarter. That's the trifecta for equities.\n\nThe put/call ratio is still elevated, meaning there's a wall of worry to climb. When sentiment is cautious but fundamentals are strong, that's historically the best setup for a grind higher. Breadth is improving too — the equal-weight S&P is finally catching up to the cap-weighted index.\n\nSeasonality is also in our favor: Q4 has been positive 80% of the time historically. I'm holding 100 shares with a covered call at $600 strike for December.",
+    createdAt: hoursAgo(6),
+    reactions: { fire: 9, skull: 4, rocket: 11 },
+    replyCount: 6,
+  },
+  {
+    id: "th6", userId: "u2", ticker: "AAPL", direction: "BUY",
+    title: "Apple Intelligence will drive the biggest upgrade cycle since iPhone 6",
+    body: "Apple's installed base is 2.2 billion devices. Only 15% of iPhones are iPhone 15 or newer — the minimum for Apple Intelligence features. That means 85% of the base needs to upgrade to access the AI features that are becoming table stakes.\n\nServices revenue is already $24B/quarter with 40%+ margins. Every new device sold feeds the services flywheel: App Store, iCloud, Apple TV+, Apple Music. The hardware is the razor, services are the blade.\n\nThe Vision Pro flopped at $3,500, but Apple will iterate down to $1,500 within 2 years. That's when spatial computing goes mainstream. Meanwhile, the core iPhone + Services combo generates $100B+ in annual free cash flow. At 30x earnings, it's fairly valued, but the upgrade cycle catalyst gives 15-20% upside from here.",
+    createdAt: hoursAgo(9),
+    reactions: { fire: 27, skull: 2, rocket: 19 },
+    replyCount: 9,
+  },
+];
+
+const tradeFeedItems: FeedItem[] = mockTrades.map((trade) => ({
   id: `fi-${trade.id}`,
   type: "trade" as const,
   trade,
@@ -95,6 +146,27 @@ export const mockFeed: FeedItem[] = mockTrades.map((trade) => ({
     rocket: Math.floor(Math.random() * 30),
   },
 }));
+
+const thesisFeedItems: FeedItem[] = mockTheses.map((thesis) => ({
+  id: `fi-${thesis.id}`,
+  type: "thesis" as const,
+  thesis: { ...thesis, user: mockUsers.find((u) => u.id === thesis.userId) },
+  user: mockUsers.find((u) => u.id === thesis.userId)!,
+  timestamp: thesis.createdAt,
+  reactions: thesis.reactions,
+}));
+
+export const mockFeed: FeedItem[] = [
+  ...tradeFeedItems,
+  ...thesisFeedItems,
+].sort((a, b) => {
+  const parseTime = (t: string) => {
+    const m = t.match(/^(\d+)(m|h)$/);
+    if (!m) return 0;
+    return m[2] === "m" ? parseInt(m[1]) : parseInt(m[1]) * 60;
+  };
+  return parseTime(a.timestamp) - parseTime(b.timestamp);
+});
 
 export const mockLeaderboard: LeaderboardEntry[] = [
   { rank: 1, user: mockUsers[3], totalReturn: 67.3, winRate: 58, tradeCount: 89, streak: 5 },

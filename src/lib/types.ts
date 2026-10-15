@@ -66,11 +66,25 @@ export interface StockQuote {
   volume: number;
 }
 
-export interface FeedItem {
+export interface Thesis {
   id: string;
-  type: "trade";
-  trade: Trade;
+  userId: string;
+  ticker: string;
+  direction: Direction;
+  title: string;
+  body: string;
+  createdAt: string;
+  user?: User;
+  reactions: { fire: number; skull: number; rocket: number };
+  replyCount: number;
+}
+
+export type FeedItem = {
+  id: string;
   user: User;
   timestamp: string;
   reactions: { fire: number; skull: number; rocket: number };
-}
+} & (
+  | { type: "trade"; trade: Trade }
+  | { type: "thesis"; thesis: Thesis }
+);

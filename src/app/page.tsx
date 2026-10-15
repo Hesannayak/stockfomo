@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { TradeCard } from "@/components/trade-card";
+import { ThesisCard } from "@/components/thesis-card";
 import { TrendingBar } from "@/components/trending-bar";
 import { FollowSidebar } from "@/components/follow-sidebar";
 import { mockFeed, mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
@@ -149,7 +150,11 @@ export default function FeedPage() {
         <div>
           {mockFeed.map((item, i) => (
             <div key={item.id} className={`animate-in stagger-${Math.min(i + 1, 8)}`}>
-              <TradeCard item={item} />
+              {item.type === "thesis" ? (
+                <ThesisCard item={item} />
+              ) : (
+                <TradeCard item={item} />
+              )}
             </div>
           ))}
         </div>

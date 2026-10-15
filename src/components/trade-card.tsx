@@ -6,7 +6,7 @@ import { Flame, Skull, Rocket, MessageCircle } from "lucide-react";
 import type { FeedItem } from "@/lib/types";
 import { formatCurrency, formatPercent, timeAgo, getInitials } from "@/lib/utils";
 
-export function TradeCard({ item }: { item: FeedItem }) {
+export function TradeCard({ item }: { item: FeedItem & { type: "trade" } }) {
   const { trade, user, reactions, timestamp } = item;
   const [localReactions, setLocalReactions] = useState(reactions);
 

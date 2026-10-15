@@ -13,7 +13,7 @@ export function FeedSidebar() {
           Live Feed
         </h2>
       </div>
-      {mockFeed.map((item) => {
+      {mockFeed.filter((item) => item.type === "trade").map((item) => {
         const { trade, user, timestamp } = item;
         const isBuy = trade.direction === "BUY";
         return (

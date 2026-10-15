@@ -13,8 +13,9 @@ import {
 } from "lucide-react";
 import { StockChart } from "@/components/stock-chart";
 import { FeedSidebar } from "@/components/feed-sidebar";
+import { ThesisThread } from "@/components/thesis-thread";
 import { getStockDetail, getStockCandles } from "@/lib/stock-data";
-import { mockTrades, mockUsers } from "@/lib/mock-data";
+import { mockTrades, mockUsers, mockTheses } from "@/lib/mock-data";
 import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 const TIME_RANGES = ["1W", "1M", "3M", "1Y", "5Y"] as const;
@@ -32,6 +33,10 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
   const recentTrades = mockTrades
     .filter((t) => t.ticker === ticker)
     .map((t) => ({ ...t, user: mockUsers.find((u) => u.id === t.userId) }));
+
+  const tickerTheses = mockTheses
+    .filter((th) => th.ticker === ticker)
+    .map((th) => ({ ...th, user: mockUsers.find((u) => u.id === th.userId) }));
 
   if (!stock) {
     return (
@@ -161,6 +166,11 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
           <h2 className="section-header mb-2">About</h2>
           <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+        </div>
+
+        {/* Theses Thread */}
+        <div style={{ borderTop: "1px solid var(--border)" }}>
+          <ThesisThread ticker={ticker} theses={tickerTheses} />
         </div>
 
         {/* Community Trades — inline on mobile */}
