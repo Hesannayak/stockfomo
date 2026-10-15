@@ -115,7 +115,7 @@ export default function FeedPage() {
               <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
                 <Zap size={13} color="#fff" fill="#fff" />
               </div>
-              <h1 className="text-[15px] font-bold tracking-tight">StockFomo</h1>
+              <h1 className="text-[15px] font-bold tracking-tight">Stockhome</h1>
             </div>
             <button className="p-1.5 rounded-md cursor-pointer relative" style={{ color: "var(--fg-dim)" }}>
               <Bell size={18} />

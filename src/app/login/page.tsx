@@ -34,7 +34,7 @@ export default function EarlyAccessPage() {
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "var(--fg)" }}>
             <Zap size={17} color="#fff" fill="#fff" />
           </div>
-          <h1 className="text-xl font-bold tracking-tight">StockFomo</h1>
+          <h1 className="text-xl font-bold tracking-tight">Stockhome</h1>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
           The social stock trading platform
