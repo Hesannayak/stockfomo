@@ -16,14 +16,14 @@ export function ProfileContent({ username }: { username: string }) {
       <div className="p-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-start gap-4">
           <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
-            style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
+            className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold shrink-0"
+            style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
           >
             {getInitials(user.displayName)}
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold">{user.displayName}</h1>
+              <h1 className="text-lg font-bold">{user.displayName}</h1>
               {user.isVerified && (
                 <Shield size={16} style={{ color: "var(--blue)" }} />
               )}
@@ -49,7 +49,7 @@ export function ProfileContent({ username }: { username: string }) {
           </div>
         </div>
         <button
-          className="mt-4 py-2.5 px-8 rounded-xl text-sm font-bold flex items-center justify-center gap-2 cursor-pointer btn-primary"
+          className="mt-4 py-2.5 px-8 rounded-md text-sm font-medium flex items-center justify-center gap-2 cursor-pointer btn-primary"
         >
           <UserPlus size={16} />
           Follow
@@ -72,7 +72,7 @@ export function ProfileContent({ username }: { username: string }) {
             style={{ borderRight: i < 2 ? "1px solid var(--border)" : "none" }}
           >
             <div className="section-header mb-0.5">{stat.label}</div>
-            <div className="text-lg font-bold font-mono mt-0.5" style={{ color: stat.color }}>
+            <div className="text-sm font-bold font-mono mt-0.5" style={{ color: stat.color }}>
               {stat.value}
             </div>
           </div>

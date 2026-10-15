@@ -15,32 +15,32 @@ export function FollowSidebar() {
       {suggestedUsers.map((user) => (
         <div
           key={user.id}
-          className="flex items-center gap-3 px-4 py-3 transition-colors card-hover"
+          className="flex items-center gap-2.5 px-4 py-2.5 transition-colors card-hover"
           style={{ borderBottom: "1px solid var(--border)" }}
         >
           <Link
             href={`/profile/${user.username}`}
-            className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0 no-underline"
-            style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1.5px solid var(--border)" }}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 no-underline"
+            style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
           >
             {getInitials(user.displayName)}
           </Link>
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5">
-              <Link href={`/profile/${user.username}`} className="text-sm font-semibold truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
+            <div className="flex items-center gap-1">
+              <Link href={`/profile/${user.username}`} className="text-[13px] font-medium truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
                 {user.displayName}
               </Link>
               {user.isVerified && (
                 <span className="pro-badge">PRO</span>
               )}
             </div>
-            <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </div>
           </div>
           <button
-            className="px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer shrink-0 transition-all hover:opacity-90"
-            style={{ background: "var(--accent)", color: "#fff" }}
+            className="px-2.5 py-1 rounded-md text-xs font-medium cursor-pointer shrink-0 transition-all hover:bg-[var(--accent-hover)] hover:text-white"
+            style={{ background: "var(--fg)", color: "#fff" }}
           >
             Follow
           </button>

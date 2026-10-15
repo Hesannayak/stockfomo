@@ -38,7 +38,7 @@ export function TradeForm() {
       {!selectedTicker ? (
         <div>
           <div
-            className="flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all input-field"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-md transition-all input-field"
           >
             <Search size={16} style={{ color: "var(--fg-dim)" }} />
             <input
@@ -91,7 +91,7 @@ export function TradeForm() {
           {/* Selected Stock Header */}
           <div className="flex items-center justify-between mb-4">
             <div>
-              <div className="text-2xl font-bold">{selectedTicker}</div>
+              <div className="text-xl font-bold">{selectedTicker}</div>
               <div className="text-sm font-mono" style={{ color: "var(--fg-muted)" }}>
                 {trendingTickers.find((t) => t.ticker === selectedTicker)?.name ?? selectedTicker}
               </div>
@@ -113,7 +113,7 @@ export function TradeForm() {
             <div
               className="rank-card p-4 mb-4"
             >
-              <div className="text-3xl font-bold font-mono">
+              <div className="text-2xl font-bold font-mono">
                 {formatCurrency(quote.price)}
               </div>
               <div
@@ -182,7 +182,7 @@ export function TradeForm() {
               onChange={(e) => setQuantity(e.target.value)}
               placeholder="0"
               min="1"
-              className="w-full px-4 py-3 rounded-xl text-lg font-mono font-bold input-field"
+              className="w-full px-3.5 py-2.5 rounded-md text-base font-mono font-semibold input-field"
             />
           </div>
 
@@ -201,7 +201,7 @@ export function TradeForm() {
           <button
             onClick={handleSubmit}
             disabled={qty <= 0}
-            className="w-full py-3.5 rounded-xl text-sm font-bold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
+            className="w-full py-2.5 rounded-md text-sm font-medium transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
             style={{
               background: direction === "BUY" ? "var(--green)" : "var(--red)",
               color: "#fff",

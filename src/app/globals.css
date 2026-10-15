@@ -3,32 +3,35 @@
 :root {
   --bg: #FFFFFF;
   --bg-card: #FFFFFF;
-  --bg-card-hover: #F6F8FA;
-  --bg-input: #F6F8FA;
-  --bg-elevated: #F3F4F6;
-  --border: #E5E7EB;
-  --border-light: #D1D5DB;
-  --fg: #111827;
-  --fg-muted: #4B5563;
-  --fg-dim: #9CA3AF;
-  --accent: #7C3AED;
-  --accent-hover: #6D28D9;
-  --accent-muted: rgba(124, 58, 237, 0.06);
-  --accent-glow: rgba(124, 58, 237, 0.04);
+  --bg-card-hover: #FAFAFA;
+  --bg-input: #FAFAFA;
+  --bg-elevated: #F5F5F5;
+  --border: #EBEBEB;
+  --border-light: #D4D4D4;
+  --fg: #0A0A0A;
+  --fg-muted: #525252;
+  --fg-dim: #A3A3A3;
+  --accent: #0A0A0A;
+  --accent-hover: #262626;
+  --accent-muted: rgba(10, 10, 10, 0.05);
+  --accent-glow: rgba(10, 10, 10, 0.03);
   --green: #16A34A;
   --green-muted: rgba(22, 163, 74, 0.06);
   --red: #DC2626;
   --red-muted: rgba(220, 38, 38, 0.06);
-  --yellow: #D97706;
-  --yellow-muted: rgba(217, 119, 6, 0.06);
+  --yellow: #CA8A04;
+  --yellow-muted: rgba(202, 138, 4, 0.06);
   --blue: #2563EB;
   --blue-muted: rgba(37, 99, 235, 0.06);
-  --gold: #D97706;
-  --silver: #9CA3AF;
-  --bronze: #B45309;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-lg: 16px;
+  --gold: #CA8A04;
+  --silver: #A3A3A3;
+  --bronze: #A16207;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.03);
   color-scheme: light;
 }
 
@@ -57,8 +60,8 @@ body {
 }
 
 ::selection {
-  background: var(--accent-muted);
-  color: var(--accent);
+  background: rgba(10, 10, 10, 0.08);
+  color: var(--fg);
 }
 
 ::-webkit-scrollbar {
@@ -108,9 +111,9 @@ input::placeholder {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
 }
 
 .glass-border {
@@ -118,7 +121,7 @@ input::placeholder {
 }
 
 .card-hover {
-  transition: background 0.15s ease;
+  transition: background 0.12s ease;
 }
 .card-hover:hover {
   background: var(--bg-card-hover);
@@ -128,24 +131,16 @@ input::placeholder {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   transition: all 0.15s ease;
 }
 .rank-card:hover {
-  background: var(--bg-card-hover);
   border-color: var(--border-light);
-}
-.rank-card-gold {
-  border-left: 3px solid var(--gold);
-}
-.rank-card-silver {
-  border-left: 3px solid var(--silver);
-}
-.rank-card-bronze {
-  border-left: 3px solid var(--bronze);
+  box-shadow: var(--shadow);
 }
 
 .section-header {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -155,27 +150,26 @@ input::placeholder {
 .stat-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 6px;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 5px;
   font-size: 12px;
   font-weight: 600;
   font-family: var(--font-mono, monospace);
 }
 
 .live-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--green);
   animation: pulse-glow 2s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
 }
 
 .desktop-sidebar {
   position: sticky;
-  top: 56px;
-  height: calc(100vh - 56px - 32px);
+  top: 52px;
+  height: calc(100vh - 52px - 32px);
   overflow-y: auto;
 }
 
@@ -190,12 +184,11 @@ input::placeholder {
   color: #fff;
   font-weight: 600;
   border-radius: var(--radius);
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   cursor: pointer;
 }
 .btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 .btn-primary:active {
   transform: scale(0.98);
@@ -220,10 +213,10 @@ input::placeholder {
   border-radius: var(--radius);
   color: var(--fg);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .input-field:focus {
-  border-color: var(--accent);
+  border-color: var(--border-light);
   box-shadow: 0 0 0 3px var(--accent-muted);
 }
 
@@ -246,11 +239,11 @@ input::placeholder {
 .pro-badge {
   display: inline-flex;
   align-items: center;
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 9px;
   font-weight: 700;
   background: var(--fg);
   color: var(--bg);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }

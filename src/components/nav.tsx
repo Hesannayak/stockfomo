@@ -33,16 +33,16 @@ export function BottomNav() {
               key={tab.href}
               href={tab.href}
               className="flex flex-col items-center gap-1 py-2 px-3 transition-all relative"
-              style={{ color: isActive ? "var(--accent)" : "var(--fg-dim)" }}
+              style={{ color: isActive ? "var(--fg)" : "var(--fg-dim)" }}
             >
               {isActive && (
                 <div
                   className="absolute -top-px left-3 right-3 h-0.5 rounded-full"
-                  style={{ background: "var(--accent)" }}
+                  style={{ background: "var(--fg)" }}
                 />
               )}
-              <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span className="text-[10px] font-semibold tracking-wide uppercase">
+              <tab.icon size={20} strokeWidth={isActive ? 2 : 1.5} />
+              <span className="text-[10px] font-medium tracking-wide uppercase">
                 {tab.label}
               </span>
             </Link>

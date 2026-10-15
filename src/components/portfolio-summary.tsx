@@ -27,7 +27,7 @@ export function PortfolioSummary({
   return (
     <div className="p-4" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
       <div className="section-header mb-1">Portfolio Value</div>
-      <div className="text-3xl font-extrabold tracking-tight font-mono">
+      <div className="text-2xl font-bold tracking-tight font-mono">
         {formatCurrency(portfolioValue)}
       </div>
       <div className="flex items-center gap-2 mt-1">
@@ -50,7 +50,7 @@ export function PortfolioSummary({
           { label: "Invested", value: formatCurrency(totalInvested) },
           { label: "Positions", value: positions.length.toString() },
         ].map((item) => (
-          <div key={item.label} className="text-center p-2 rounded-lg" style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}>
+          <div key={item.label} className="text-center p-2 rounded-md" style={{ background: "var(--bg-elevated)" }}>
             <div className="section-header mb-0.5">{item.label}</div>
             <div className="text-sm font-bold font-mono">{item.value}</div>
           </div>

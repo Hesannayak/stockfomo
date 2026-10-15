@@ -23,16 +23,16 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
   return (
     <div>
       {/* Timeframe Tabs */}
-      <div className="flex gap-1.5 p-4 pb-3">
+      <div className="flex gap-1 p-4 pb-3">
         {timeframes.map((tf) => (
           <button
             key={tf.key}
             onClick={() => setTimeframe(tf.key)}
-            className="px-3.5 py-1.5 text-[13px] font-semibold rounded-full transition-all cursor-pointer"
+            className="px-3 py-1 text-[13px] rounded-md transition-all cursor-pointer"
             style={{
               background: timeframe === tf.key ? "var(--fg)" : "transparent",
               color: timeframe === tf.key ? "var(--bg)" : "var(--fg-dim)",
-              border: timeframe === tf.key ? "1px solid transparent" : "1px solid var(--border)",
+              fontWeight: timeframe === tf.key ? 600 : 400,
             }}
           >
             {tf.label}

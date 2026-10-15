@@ -56,7 +56,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
   const presets = [10, 25, 50, 100];
 
   return (
-    <div className="lg:grid lg:grid-cols-[260px_1fr_300px]">
+    <div className="lg:grid lg:grid-cols-[240px_1fr_300px]">
       {/* Left Sidebar — Feed (desktop) */}
       <div className="desktop-sidebar">
         <FeedSidebar />
@@ -70,8 +70,8 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
             <ArrowLeft size={20} />
           </button>
           <div className="flex items-center gap-3 flex-1">
-            <h1 className="text-lg font-bold">{stock.ticker}</h1>
-            <span className="text-xs px-2 py-0.5 rounded-lg font-medium font-mono" style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
+            <h1 className="text-base font-bold">{stock.ticker}</h1>
+            <span className="text-xs px-2 py-0.5 rounded-md font-medium font-mono" style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}>
               {stock.name}
             </span>
           </div>
@@ -100,7 +100,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
 
         {/* Price */}
         <div className="px-4 pt-3 pb-2">
-          <div className="text-3xl font-extrabold font-mono">{formatCurrency(stock.price)}</div>
+          <div className="text-2xl font-bold font-mono">{formatCurrency(stock.price)}</div>
           <div className="flex items-center gap-1.5 mt-1">
             {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
             <span className="text-sm font-semibold font-mono" style={{ color: isUp ? "var(--green)" : "var(--red)" }}>
@@ -119,7 +119,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
             <button
               key={r}
               onClick={() => setRange(r)}
-              className="flex-1 py-1.5 text-xs font-bold rounded-full cursor-pointer transition-all"
+              className="flex-1 py-1.5 text-xs font-medium rounded-md cursor-pointer transition-all"
               style={{
                 background: range === r ? "var(--fg)" : "transparent",
                 color: range === r ? "var(--bg)" : "var(--fg-dim)",
@@ -173,7 +173,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               const isBuy = trade.direction === "BUY";
               return (
                 <div key={trade.id} className="flex items-center gap-3 px-4 py-2.5" style={{ borderBottom: "1px solid var(--border)" }}>
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}>
                     {trade.user ? getInitials(trade.user.displayName) : "?"}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -191,9 +191,9 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
 
         {/* Trade panel — mobile only */}
         <div className="lg:hidden px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
-          <div className="flex rounded-xl overflow-hidden mb-3" style={{ background: "var(--bg-elevated)" }}>
+          <div className="flex rounded-md overflow-hidden mb-3" style={{ background: "var(--bg-elevated)" }}>
             {(["BUY", "SELL"] as const).map((side) => (
-              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2 text-sm font-bold cursor-pointer transition-all" style={{ background: orderSide === side ? (side === "BUY" ? "var(--green)" : "var(--red)") : "transparent", color: orderSide === side ? "#fff" : "var(--fg-dim)" }}>{side}</button>
+              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2 text-sm font-semibold cursor-pointer transition-all" style={{ background: orderSide === side ? (side === "BUY" ? "var(--green)" : "var(--red)") : "transparent", color: orderSide === side ? "#fff" : "var(--fg-dim)" }}>{side}</button>
             ))}
           </div>
           <div className="flex items-center gap-3 mb-3">
@@ -206,7 +206,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               <div className="px-3 py-2.5 rounded-lg text-sm font-mono" style={{ background: "var(--bg-elevated)", color: qty > 0 ? "var(--fg)" : "var(--fg-dim)", border: "1px solid var(--border)" }}>{qty > 0 ? formatCurrency(total) : "$0.00"}</div>
             </div>
           </div>
-          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50 transition-all" style={{ background: orderPlaced ? "var(--bg-elevated)" : orderSide === "BUY" ? "var(--green)" : "var(--red)", color: orderPlaced ? "var(--green)" : "#fff" }}>
+          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-2.5 rounded-md text-sm font-medium cursor-pointer disabled:opacity-50 transition-all" style={{ background: orderPlaced ? "var(--bg-elevated)" : orderSide === "BUY" ? "var(--green)" : "var(--red)", color: orderPlaced ? "var(--green)" : "#fff" }}>
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker} · Market Order`}
           </button>
           <p className="text-center text-xs font-mono mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money involved</p>
@@ -217,16 +217,16 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
       <div className="desktop-sidebar" style={{ borderLeft: "1px solid var(--border)" }}>
         <div className="p-4">
           {/* Buy / Sell toggle */}
-          <div className="flex rounded-lg overflow-hidden mb-4" style={{ background: "var(--bg-elevated)" }}>
+          <div className="flex rounded-md overflow-hidden mb-4" style={{ background: "var(--bg-elevated)" }}>
             {(["BUY", "SELL"] as const).map((side) => (
-              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2.5 text-sm font-bold cursor-pointer transition-all" style={{ background: orderSide === side ? (side === "BUY" ? "var(--green)" : "var(--red)") : "transparent", color: orderSide === side ? "#fff" : "var(--fg-dim)" }}>{side}</button>
+              <button key={side} onClick={() => setOrderSide(side)} className="flex-1 py-2.5 text-sm font-semibold cursor-pointer transition-all" style={{ background: orderSide === side ? (side === "BUY" ? "var(--green)" : "var(--red)") : "transparent", color: orderSide === side ? "#fff" : "var(--fg-dim)" }}>{side}</button>
             ))}
           </div>
 
           {/* Amount presets */}
           <div className="flex gap-2 mb-3">
             {presets.map((p) => (
-              <button key={p} onClick={() => setQuantity(String(p))} className="flex-1 py-2 rounded-lg text-xs font-bold cursor-pointer transition-all" style={{ background: quantity === String(p) ? "var(--bg-card-hover)" : "var(--bg-elevated)", color: "var(--fg)", border: quantity === String(p) ? "1px solid var(--accent)" : "1px solid var(--border)" }}>
+              <button key={p} onClick={() => setQuantity(String(p))} className="flex-1 py-2 rounded-md text-xs font-semibold cursor-pointer transition-all" style={{ background: quantity === String(p) ? "var(--bg-card-hover)" : "var(--bg-elevated)", color: "var(--fg)", border: quantity === String(p) ? "1px solid var(--fg)" : "1px solid var(--border)" }}>
                 {p}
               </button>
             ))}
@@ -242,7 +242,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           </div>
 
           {/* Submit */}
-          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50 transition-all" style={{ background: orderPlaced ? "var(--bg-elevated)" : orderSide === "BUY" ? "var(--green)" : "var(--red)", color: orderPlaced ? "var(--green)" : "#fff" }}>
+          <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-2.5 rounded-md text-sm font-medium cursor-pointer disabled:opacity-50 transition-all" style={{ background: orderPlaced ? "var(--bg-elevated)" : orderSide === "BUY" ? "var(--green)" : "var(--red)", color: orderPlaced ? "var(--green)" : "#fff" }}>
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker}`}
           </button>
 
@@ -281,7 +281,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               const isBuy = trade.direction === "BUY";
               return (
                 <div key={trade.id} className="flex items-center gap-2 px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}>
                     {trade.user ? getInitials(trade.user.displayName) : "?"}
                   </div>
                   <div className="flex-1 min-w-0">

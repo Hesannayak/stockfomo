@@ -7,11 +7,11 @@ import { FollowSidebar } from "@/components/follow-sidebar";
 import { mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
 import { Trophy, TrendingUp, TrendingDown } from "lucide-react";
 
-const tickerColors = ["#7C3AED", "#2563EB", "#D97706", "#DC2626", "#0891B2"];
+const tickerColors = ["#0A0A0A", "#525252", "#CA8A04", "#DC2626", "#0891B2"];
 
 export default function LeaderboardPage() {
   return (
-    <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
+    <div className="lg:grid lg:grid-cols-[240px_1fr_260px]">
       {/* Left Sidebar — Live Feed (desktop) */}
       <div className="desktop-sidebar">
         <FeedSidebar />
@@ -20,11 +20,8 @@ export default function LeaderboardPage() {
       {/* Center — Leaderboard */}
       <div className="lg:border-r" style={{ borderColor: "var(--border)" }}>
         <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
-          <div className="flex items-center gap-2">
-            <span className="text-lg">🏆</span>
-            <h1 className="text-lg font-bold tracking-tight">Leaderboard</h1>
-          </div>
-          <p className="text-xs mt-1" style={{ color: "var(--fg-dim)" }}>
+          <h1 className="text-base font-bold tracking-tight">Leaderboard</h1>
+          <p className="text-xs mt-0.5" style={{ color: "var(--fg-dim)" }}>
             Top paper traders ranked by total return across all portfolios.
           </p>
         </div>
@@ -33,8 +30,8 @@ export default function LeaderboardPage() {
         {/* Trending Stocks */}
         <div className="px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-sm">Trending Stocks</h2>
-            <Link href="/trade" className="text-xs font-semibold no-underline" style={{ color: "var(--accent)" }}>
+            <h2 className="text-sm font-semibold">Trending Stocks</h2>
+            <Link href="/trade" className="text-xs font-medium no-underline hover:underline" style={{ color: "var(--fg-muted)" }}>
               View All
             </Link>
           </div>

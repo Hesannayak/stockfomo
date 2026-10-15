@@ -31,21 +31,21 @@ export function TradeCard({ item }: { item: FeedItem }) {
 
   return (
     <div
-      className="px-4 py-4 transition-colors card-hover"
+      className="px-4 py-3.5 transition-colors card-hover"
       style={{ borderBottom: "1px solid var(--border)" }}
     >
       <div className="flex items-start gap-3">
         <Link
           href={`/profile/${user.username}`}
-          className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 no-underline transition-transform hover:scale-105"
-          style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1.5px solid var(--border)" }}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 no-underline"
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
         >
           {getInitials(user.displayName)}
         </Link>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <Link href={`/profile/${user.username}`} className="font-semibold text-[15px] no-underline hover:underline" style={{ color: "var(--fg)" }}>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <Link href={`/profile/${user.username}`} className="font-semibold text-sm no-underline hover:underline" style={{ color: "var(--fg)" }}>
               {user.displayName}
             </Link>
             {user.isVerified && (
@@ -59,38 +59,39 @@ export function TradeCard({ item }: { item: FeedItem }) {
             </span>
           </div>
 
-          <div className="mt-2.5 flex items-center gap-2 flex-wrap">
+          <div className="mt-2 flex items-center gap-2 flex-wrap">
             <span
               className="stat-pill uppercase tracking-wide"
               style={{
                 background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--green)" : "var(--red)",
+                fontSize: "11px",
               }}
             >
               {trade.direction}
             </span>
             <Link
               href={`/stock/${trade.ticker}`}
-              className="font-bold text-base no-underline hover:underline"
+              className="font-bold text-sm no-underline hover:underline"
               style={{ color: "var(--fg)" }}
             >
               {trade.ticker}
             </Link>
-            <span className="text-sm font-mono" style={{ color: "var(--fg-muted)" }}>
+            <span className="text-[13px] font-mono" style={{ color: "var(--fg-muted)" }}>
               {trade.quantity} shares @ {formatCurrency(trade.entryPrice)}
             </span>
           </div>
 
           {pnl !== null && pnlPct !== null && (
             <div
-              className="mt-2.5 inline-flex items-center gap-2 text-sm font-semibold px-3 py-1.5 rounded-lg"
+              className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-semibold px-2.5 py-1 rounded-md"
               style={{
                 background: isPositive ? "var(--green-muted)" : "var(--red-muted)",
                 color: isPositive ? "var(--green)" : "var(--red)",
               }}
             >
               <span className="font-mono">{formatCurrency(pnl)}</span>
-              <span style={{ opacity: 0.6 }}>({formatPercent(pnlPct)})</span>
+              <span style={{ opacity: 0.5 }}>({formatPercent(pnlPct)})</span>
               {isOpen && (
                 <span
                   className="stat-pill uppercase"
@@ -102,7 +103,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             </div>
           )}
 
-          <div className="mt-3 flex items-center gap-1.5">
+          <div className="mt-2.5 flex items-center gap-1">
             {[
               { key: "fire" as const, icon: Flame },
               { key: "rocket" as const, icon: Rocket },
@@ -111,17 +112,15 @@ export function TradeCard({ item }: { item: FeedItem }) {
               <button
                 key={key}
                 onClick={() => react(key)}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all cursor-pointer"
-                style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--border-light)"; e.currentTarget.style.color = "var(--fg-muted)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--fg-dim)"; }}
+                className="flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all cursor-pointer hover:bg-[var(--bg-elevated)]"
+                style={{ color: "var(--fg-dim)" }}
               >
                 <Icon size={12} />
-                <span className="font-mono text-xs">{localReactions[key]}</span>
+                <span className="font-mono text-[11px]">{localReactions[key]}</span>
               </button>
             ))}
             <button
-              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all cursor-pointer ml-auto"
+              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all cursor-pointer ml-auto hover:bg-[var(--bg-elevated)]"
               style={{ color: "var(--fg-dim)" }}
             >
               <MessageCircle size={12} />

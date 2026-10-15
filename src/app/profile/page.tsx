@@ -32,18 +32,18 @@ export default function ProfilePage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
         <div
-          className="w-20 h-20 rounded-full flex items-center justify-center text-3xl mb-4"
-          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "2px solid var(--border)" }}
+          className="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)" }}
         >
           ?
         </div>
-        <h2 className="text-xl font-bold mb-2">Not Logged In</h2>
+        <h2 className="text-lg font-bold mb-2">Not Logged In</h2>
         <p className="text-sm mb-6" style={{ color: "var(--fg-dim)" }}>
           Log in to track your portfolio and trades
         </p>
         <button
           onClick={() => router.push("/login")}
-          className="px-8 py-3 rounded-xl text-sm font-bold cursor-pointer btn-primary"
+          className="px-8 py-2.5 rounded-md text-sm font-medium cursor-pointer btn-primary"
         >
           Log In
         </button>
@@ -64,14 +64,14 @@ export default function ProfilePage() {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div
-              className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold"
-              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
+              className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold"
+              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
             >
               {getInitials(displayUser.displayName)}
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h1 className="text-lg font-bold">{displayUser.displayName}</h1>
+                <h1 className="text-base font-bold">{displayUser.displayName}</h1>
                 {displayUser.isVerified && <Shield size={14} style={{ color: "var(--blue)" }} />}
               </div>
               <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
@@ -118,7 +118,7 @@ export default function ProfilePage() {
             {showBalance ? <Eye size={14} /> : <EyeOff size={14} />}
           </button>
         </div>
-        <div className="text-3xl font-extrabold font-mono">
+        <div className="text-2xl font-bold font-mono">
           {showBalance ? formatCurrency(totalValue) : "••••••"}
         </div>
         <div className="flex items-center gap-1.5 mt-1">
@@ -220,7 +220,7 @@ export default function ProfilePage() {
             <p className="text-sm" style={{ color: "var(--fg-dim)" }}>No trades yet</p>
             <button
               onClick={() => router.push("/trade")}
-              className="mt-3 px-6 py-2 rounded-lg text-sm font-semibold cursor-pointer btn-primary"
+              className="mt-3 px-6 py-2 rounded-md text-sm font-medium cursor-pointer btn-primary"
             >
               Make Your First Trade
             </button>
@@ -282,7 +282,7 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
+    <div className="lg:grid lg:grid-cols-[240px_1fr_260px]">
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
         <div className="px-4 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
@@ -309,7 +309,7 @@ export default function ProfilePage() {
             </div>
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
+              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
             >
               {getInitials(entry.user.displayName)}
             </div>

@@ -25,10 +25,9 @@ export function TickerTape() {
               <span className="font-semibold" style={{ color: "var(--fg)" }}>{q.ticker}</span>
               <span className="font-mono">${q.price.toFixed(2)}</span>
               <span
-                className="font-mono font-semibold px-1.5 py-0.5 rounded"
+                className="font-mono font-semibold"
                 style={{
-                  color: isUp ? "var(--accent)" : "var(--red)",
-                  background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
+                  color: isUp ? "var(--green)" : "var(--red)",
                 }}
               >
                 {isUp ? "+" : ""}{q.changePercent.toFixed(2)}%

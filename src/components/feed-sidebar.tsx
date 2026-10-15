@@ -25,7 +25,7 @@ export function FeedSidebar() {
           >
             <div
               className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
-              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
+              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
             >
               {getInitials(user.displayName)}
             </div>
