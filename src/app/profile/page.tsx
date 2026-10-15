@@ -118,7 +118,7 @@ export default function ProfilePage() {
             {showBalance ? <Eye size={14} /> : <EyeOff size={14} />}
           </button>
         </div>
-        <div className="text-3xl font-black font-mono">
+        <div className="text-3xl font-extrabold font-mono">
           {showBalance ? formatCurrency(totalValue) : "••••••"}
         </div>
         <div className="flex items-center gap-1.5 mt-1">
@@ -158,7 +158,7 @@ export default function ProfilePage() {
         <div>
           <div className="px-4 pt-4 pb-2 flex items-center justify-between">
             <h2 className="section-header">Open Positions</h2>
-            <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
               {userPositions.length} positions
             </span>
           </div>
@@ -186,7 +186,7 @@ export default function ProfilePage() {
                       {isUp ? "+" : ""}{formatPercent(pos.unrealizedPnlPercent ?? 0)}
                     </span>
                   </div>
-                  <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                  <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                     {pos.quantity} shares · avg {formatCurrency(pos.avgEntryPrice)}
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function ProfilePage() {
                       {trade.status}
                     </span>
                   </div>
-                  <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                  <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                     {trade.quantity} @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
                   </div>
                 </div>
@@ -308,7 +308,7 @@ export default function ProfilePage() {
               {String(entry.rank).padStart(2, "0")}
             </div>
             <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
               style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
             >
               {getInitials(entry.user.displayName)}
@@ -320,7 +320,7 @@ export default function ProfilePage() {
                   <span className="pro-badge">PRO</span>
                 )}
               </div>
-              <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                 {entry.tradeCount} trades · {entry.winRate}%
               </div>
             </div>
@@ -347,7 +347,7 @@ export default function ProfilePage() {
               >
                 <div>
                   <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-[11px] ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-xs ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>

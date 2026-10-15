@@ -34,7 +34,7 @@ export default function EarlyAccessPage() {
           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--green)" }}>
             <Zap size={22} color="#fff" fill="#fff" />
           </div>
-          <h1 className="text-2xl font-black tracking-tight">StockFomo</h1>
+          <h1 className="text-2xl font-extrabold tracking-tight">StockFomo</h1>
           <span
             className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
             style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
@@ -55,7 +55,7 @@ export default function EarlyAccessPage() {
           ].map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-lg font-bold font-mono" style={{ color: "var(--fg)" }}>{s.value}</div>
-              <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
+              <div className="text-xs uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
             </div>
           ))}
         </div>

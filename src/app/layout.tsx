@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/nav";
 import { TopNav } from "@/components/top-nav";
 import { TickerTape } from "@/components/ticker-tape";
 import { AuthProvider } from "@/lib/auth-context";
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${ibmPlexMono.variable}`}>
       <body className="min-h-screen pb-16 lg:pb-8">
         <AuthProvider>
           <Suspense>

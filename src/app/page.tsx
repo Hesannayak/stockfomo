@@ -49,7 +49,7 @@ export default function FeedPage() {
               {String(entry.rank).padStart(2, "0")}
             </div>
             <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
               style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
             >
               {getInitials(entry.user.displayName)}
@@ -61,7 +61,7 @@ export default function FeedPage() {
                   <span className="pro-badge">PRO</span>
                 )}
               </div>
-              <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                 {entry.tradeCount} trades · {entry.winRate}%
               </div>
             </div>
@@ -88,7 +88,7 @@ export default function FeedPage() {
               >
                 <div>
                   <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-[11px] ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-xs ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
@@ -122,7 +122,7 @@ export default function FeedPage() {
               <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "var(--green)" }}>
                 <Zap size={15} color="#fff" fill="#fff" />
               </div>
-              <h1 className="text-lg font-bold tracking-tight">StockFomo</h1>
+              <h1 className="text-lg font-extrabold tracking-tight">StockFomo</h1>
               <span
                 className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
                 style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
@@ -143,7 +143,7 @@ export default function FeedPage() {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className="px-3.5 py-1.5 text-[12px] font-semibold rounded-full transition-all cursor-pointer"
+              className="px-3.5 py-1.5 text-[13px] font-semibold rounded-full transition-all cursor-pointer"
               style={{
                 background: filter === f.key ? "var(--fg)" : "transparent",
                 color: filter === f.key ? "var(--bg)" : "var(--fg-dim)",

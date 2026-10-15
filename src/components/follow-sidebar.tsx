@@ -27,19 +27,19 @@ export function FollowSidebar() {
           </Link>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
-              <Link href={`/profile/${user.username}`} className="text-[13px] font-semibold truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
+              <Link href={`/profile/${user.username}`} className="text-sm font-semibold truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
                 {user.displayName}
               </Link>
               {user.isVerified && (
                 <span className="pro-badge">PRO</span>
               )}
             </div>
-            <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </div>
           </div>
           <button
-            className="px-3 py-1.5 rounded-lg text-[11px] font-bold cursor-pointer shrink-0 transition-all hover:opacity-90"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer shrink-0 transition-all hover:opacity-90"
             style={{ background: "var(--accent)", color: "#fff" }}
           >
             Follow
@@ -72,7 +72,7 @@ export function FollowSidebar() {
                   {isBuy ? "bought" : "sold"} {trade.ticker} @ {formatCurrency(trade.entryPrice)}
                 </span>
               </div>
-              <div className="text-[11px] font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-xs font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
                 {timeAgo(trade.createdAt)}
               </div>
             </div>

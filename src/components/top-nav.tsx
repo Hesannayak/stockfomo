@@ -26,7 +26,7 @@ export function TopNav() {
         <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "var(--green)" }}>
           <Zap size={15} color="#fff" fill="#fff" />
         </div>
-        <span className="text-sm font-black tracking-tight">StockFomo</span>
+        <span className="text-[15px] font-extrabold tracking-tight">StockFomo</span>
         <span
           className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
           style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
@@ -42,7 +42,7 @@ export function TopNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all no-underline"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all no-underline"
               style={{
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
                 fontWeight: isActive ? 700 : 500,
@@ -65,7 +65,7 @@ export function TopNav() {
           <Search size={13} />
           <span>Search markets...</span>
           <kbd
-            className="text-[11px] px-1.5 py-0.5 rounded font-mono"
+            className="text-xs px-1.5 py-0.5 rounded font-mono"
             style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
           >
             /

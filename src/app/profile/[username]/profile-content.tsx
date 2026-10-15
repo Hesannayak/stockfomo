@@ -98,7 +98,7 @@ export function ProfileContent({ username }: { username: string }) {
                 >
                   <div>
                     <div className="font-bold text-sm">{pos.ticker}</div>
-                    <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                       {pos.quantity} shares @ {formatCurrency(pos.avgEntryPrice)}
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export function ProfileContent({ username }: { username: string }) {
                     {trade.status}
                   </span>
                 </div>
-                <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                   {trade.quantity} @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
                 </div>
               </div>

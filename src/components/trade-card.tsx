@@ -45,16 +45,16 @@ export function TradeCard({ item }: { item: FeedItem }) {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <Link href={`/profile/${user.username}`} className="font-semibold text-sm no-underline hover:underline" style={{ color: "var(--fg)" }}>
+            <Link href={`/profile/${user.username}`} className="font-semibold text-[15px] no-underline hover:underline" style={{ color: "var(--fg)" }}>
               {user.displayName}
             </Link>
             {user.isVerified && (
               <span className="pro-badge">PRO</span>
             )}
-            <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </span>
-            <span className="text-[11px] font-mono ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-xs font-mono ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
               {timeAgo(timestamp)}
             </span>
           </div>
@@ -117,7 +117,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--fg-dim)"; }}
               >
                 <Icon size={12} />
-                <span className="font-mono text-[11px]">{localReactions[key]}</span>
+                <span className="font-mono text-xs">{localReactions[key]}</span>
               </button>
             ))}
             <button

@@ -50,7 +50,7 @@ export default function LeaderboardPage() {
                   style={{ color: "var(--fg)", border: "1px solid var(--border)", minWidth: "150px" }}
                 >
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-bold shrink-0"
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0"
                     style={{ background: tickerColors[idx % tickerColors.length], color: "#fff" }}
                   >
                     {t.ticker.slice(0, 2)}
@@ -58,7 +58,7 @@ export default function LeaderboardPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       <span className="text-sm font-bold">{t.ticker}</span>
-                      <span className="text-[11px]" style={{ color: "var(--fg-dim)" }}>
+                      <span className="text-xs" style={{ color: "var(--fg-dim)" }}>
                         {t.name.split(" ")[0]}
                       </span>
                     </div>
@@ -67,7 +67,7 @@ export default function LeaderboardPage() {
                         ${quote?.price.toFixed(2)}
                       </span>
                       <span
-                        className="text-[11px] font-mono font-semibold"
+                        className="text-xs font-mono font-semibold"
                         style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                       >
                         {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%

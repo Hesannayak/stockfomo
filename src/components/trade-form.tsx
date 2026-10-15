@@ -65,7 +65,7 @@ export function TradeForm() {
                 >
                   <div className="text-left">
                     <div className="text-sm font-bold">{ticker}</div>
-                    <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                       {info?.name ?? ticker}
                     </div>
                   </div>

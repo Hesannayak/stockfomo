@@ -43,11 +43,11 @@ export function FeedSidebar() {
                 >
                   {trade.direction}
                 </span>
-                <span className="text-[11px] ml-auto shrink-0 font-mono" style={{ color: "var(--fg-dim)" }}>
+                <span className="text-xs ml-auto shrink-0 font-mono" style={{ color: "var(--fg-dim)" }}>
                   {timeAgo(timestamp)}
                 </span>
               </div>
-              <div className="text-[11px] font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-xs font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
                 <span className="font-semibold" style={{ color: "var(--fg-muted)" }}>{trade.ticker}</span>
                 {" "}{formatCurrency(trade.entryPrice)} × {trade.quantity}
               </div>

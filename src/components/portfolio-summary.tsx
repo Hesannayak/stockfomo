@@ -27,7 +27,7 @@ export function PortfolioSummary({
   return (
     <div className="p-4" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
       <div className="section-header mb-1">Portfolio Value</div>
-      <div className="text-3xl font-bold tracking-tight font-mono">
+      <div className="text-3xl font-extrabold tracking-tight font-mono">
         {formatCurrency(portfolioValue)}
       </div>
       <div className="flex items-center gap-2 mt-1">
@@ -39,7 +39,7 @@ export function PortfolioSummary({
           <span className="font-mono">{formatCurrency(totalPnl)}</span>
           <span className="font-mono" style={{ opacity: 0.7 }}>({formatPercent(totalPnlPercent)})</span>
         </div>
-        <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+        <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
           today
         </span>
       </div>
