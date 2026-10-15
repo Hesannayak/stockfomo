@@ -54,9 +54,9 @@ export default function EarlyAccessPage() {
         {/* Social proof */}
         <div className="flex items-center justify-center gap-6 mb-10">
           {[
-            { icon: TrendingUp, value: "10K+", label: "Waitlist" },
-            { icon: Trophy, value: "$2.4B", label: "Volume" },
-            { icon: Users, value: "98%", label: "Satisfaction" },
+            { icon: TrendingUp, value: "12+", label: "Waitlist" },
+            { icon: Trophy, value: "$10k", label: "Volume" },
+            { icon: Users, value: "80%", label: "Satisfaction" },
           ].map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-lg font-bold font-mono" style={{ color: "var(--fg)" }}>{s.value}</div>
