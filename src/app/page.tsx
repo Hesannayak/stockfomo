@@ -58,7 +58,7 @@ export default function FeedPage() {
               <div className="flex items-center gap-1">
                 <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
                 {entry.user.isVerified && (
-                  <span className="text-[9px] font-bold px-1 py-px rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                  <span className="pro-badge">PRO</span>
                 )}
               </div>
               <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
@@ -67,7 +67,7 @@ export default function FeedPage() {
             </div>
             <div
               className="text-xs font-bold font-mono shrink-0"
-              style={{ color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)" }}
+              style={{ color: entry.totalReturn >= 0 ? "var(--green)" : "var(--red)" }}
             >
               {formatPercent(entry.totalReturn)}
             </div>
@@ -95,8 +95,8 @@ export default function FeedPage() {
                   <span
                     className="stat-pill"
                     style={{
-                      color: isUp ? "var(--accent)" : "var(--red)",
-                      background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
+                      color: isUp ? "var(--green)" : "var(--red)",
+                      background: isUp ? "var(--green-muted)" : "var(--red-muted)",
                       fontSize: "10px",
                     }}
                   >
@@ -119,11 +119,18 @@ export default function FeedPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Zap size={20} style={{ color: "var(--accent)" }} fill="var(--accent)" />
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "var(--green)" }}>
+                <Zap size={15} color="#fff" fill="#fff" />
+              </div>
               <h1 className="text-lg font-bold tracking-tight">StockFomo</h1>
-              <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.15)" }}>Beta</span>
+              <span
+                className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+                style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+              >
+                Beta
+              </span>
             </div>
-            <button className="p-2 rounded-lg cursor-pointer relative" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+            <button className="p-2 rounded-lg cursor-pointer relative" style={{ background: "var(--bg)", border: "1px solid var(--border)" }}>
               <Bell size={18} style={{ color: "var(--fg-muted)" }} />
               <div className="live-dot absolute top-1.5 right-1.5" />
             </button>

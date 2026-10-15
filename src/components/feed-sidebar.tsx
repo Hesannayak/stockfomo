@@ -35,8 +35,8 @@ export function FeedSidebar() {
                 <span
                   className="stat-pill"
                   style={{
-                    background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
-                    color: isBuy ? "var(--accent)" : "var(--red)",
+                    background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
+                    color: isBuy ? "var(--green)" : "var(--red)",
                     fontSize: "10px",
                     padding: "1px 6px",
                   }}

@@ -25,7 +25,7 @@ export function ProfileContent({ username }: { username: string }) {
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold">{user.displayName}</h1>
               {user.isVerified && (
-                <Shield size={16} style={{ color: "var(--accent)" }} />
+                <Shield size={16} style={{ color: "var(--blue)" }} />
               )}
             </div>
             <div className="text-sm font-mono" style={{ color: "var(--fg-dim)" }}>
@@ -62,7 +62,7 @@ export function ProfileContent({ username }: { username: string }) {
         style={{ borderBottom: "1px solid var(--border)" }}
       >
         {[
-          { label: "Total P&L", value: formatCurrency(user.totalPnl), color: user.totalPnl >= 0 ? "var(--accent)" : "var(--red)" },
+          { label: "Total P&L", value: formatCurrency(user.totalPnl), color: user.totalPnl >= 0 ? "var(--green)" : "var(--red)" },
           { label: "Win Rate", value: `${user.winRate}%`, color: "var(--fg)" },
           { label: "Trades", value: user.tradeCount.toString(), color: "var(--fg)" },
         ].map((stat, i) => (
@@ -108,7 +108,7 @@ export function ProfileContent({ username }: { username: string }) {
                     </div>
                     <div
                       className="text-xs font-mono font-semibold"
-                      style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                      style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                     >
                       {formatPercent(pos.unrealizedPnlPercent ?? 0)}
                     </div>
@@ -138,8 +138,8 @@ export function ProfileContent({ username }: { username: string }) {
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
                 style={{
-                  background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
-                  color: isBuy ? "var(--accent)" : "var(--red)",
+                  background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
+                  color: isBuy ? "var(--green)" : "var(--red)",
                 }}
               >
                 {isBuy ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
@@ -166,7 +166,7 @@ export function ProfileContent({ username }: { username: string }) {
                 <div className="text-right">
                   <div
                     className="text-sm font-mono font-semibold"
-                    style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                    style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                   >
                     {formatCurrency(pnl)}
                   </div>

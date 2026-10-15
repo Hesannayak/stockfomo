@@ -1,33 +1,35 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0B0E14;
-  --bg-card: #0D1117;
-  --bg-card-hover: #151B23;
-  --bg-input: #161B22;
-  --bg-elevated: #1C2128;
-  --border: #21262D;
-  --border-light: #30363D;
-  --fg: #E6EDF3;
-  --fg-muted: #8B949E;
-  --fg-dim: #6E7681;
-  --accent: #00FF6A;
-  --accent-hover: #00e05e;
-  --accent-muted: rgba(0, 255, 106, 0.08);
-  --accent-glow: rgba(0, 255, 106, 0.04);
-  --red: #ff4d6a;
-  --red-muted: rgba(255, 77, 106, 0.08);
-  --yellow: #f0b429;
-  --yellow-muted: rgba(240, 180, 41, 0.08);
-  --blue: #7c3aed;
-  --blue-muted: rgba(124, 58, 237, 0.08);
-  --gold: #F0B429;
-  --silver: #8B949E;
-  --bronze: #cd7f32;
+  --bg: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F6F8FA;
+  --bg-input: #F6F8FA;
+  --bg-elevated: #F3F4F6;
+  --border: #E5E7EB;
+  --border-light: #D1D5DB;
+  --fg: #111827;
+  --fg-muted: #4B5563;
+  --fg-dim: #9CA3AF;
+  --accent: #7C3AED;
+  --accent-hover: #6D28D9;
+  --accent-muted: rgba(124, 58, 237, 0.06);
+  --accent-glow: rgba(124, 58, 237, 0.04);
+  --green: #16A34A;
+  --green-muted: rgba(22, 163, 74, 0.06);
+  --red: #DC2626;
+  --red-muted: rgba(220, 38, 38, 0.06);
+  --yellow: #D97706;
+  --yellow-muted: rgba(217, 119, 6, 0.06);
+  --blue: #2563EB;
+  --blue-muted: rgba(37, 99, 235, 0.06);
+  --gold: #D97706;
+  --silver: #9CA3AF;
+  --bronze: #B45309;
   --radius: 12px;
   --radius-sm: 8px;
   --radius-lg: 16px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -89,7 +91,7 @@ input::placeholder {
 
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 @keyframes shimmer {
@@ -106,25 +108,24 @@ input::placeholder {
 }
 
 .glass {
-  background: rgba(11, 14, 20, 0.85);
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
 }
 
 .glass-border {
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border);
 }
 
 .card-hover {
-  transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease;
 }
 .card-hover:hover {
   background: var(--bg-card-hover);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 .rank-card {
-  background: var(--bg-card);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all 0.15s ease;
@@ -166,9 +167,9 @@ input::placeholder {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--green);
   animation: pulse-glow 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(0, 255, 106, 0.4);
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.4);
 }
 
 .desktop-sidebar {
@@ -184,17 +185,9 @@ input::placeholder {
   }
 }
 
-.glow-green {
-  box-shadow: 0 0 16px rgba(0, 255, 106, 0.12), 0 0 48px rgba(0, 255, 106, 0.04);
-}
-
-.glow-red {
-  box-shadow: 0 0 16px rgba(255, 77, 106, 0.12), 0 0 48px rgba(255, 77, 106, 0.04);
-}
-
 .btn-primary {
   background: var(--accent);
-  color: #000;
+  color: #fff;
   font-weight: 600;
   border-radius: var(--radius);
   transition: all 0.2s ease;
@@ -202,7 +195,7 @@ input::placeholder {
 }
 .btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 0 20px rgba(0, 255, 106, 0.25);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 .btn-primary:active {
   transform: scale(0.98);
@@ -217,12 +210,12 @@ input::placeholder {
   cursor: pointer;
 }
 .btn-ghost:hover {
-  background: var(--bg-input);
+  background: var(--bg-elevated);
   color: var(--fg);
 }
 
 .input-field {
-  background: var(--bg-input);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--fg);
@@ -248,4 +241,16 @@ input::placeholder {
   flex: 1;
   height: 1px;
   background: var(--border);
+}
+
+.pro-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--fg);
+  color: var(--bg);
+  letter-spacing: 0.02em;
 }

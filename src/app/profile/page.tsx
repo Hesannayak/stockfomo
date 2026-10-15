@@ -72,7 +72,7 @@ export default function ProfilePage() {
             <div>
               <div className="flex items-center gap-1.5">
                 <h1 className="text-lg font-bold">{displayUser.displayName}</h1>
-                {displayUser.isVerified && <Shield size={14} style={{ color: "var(--accent)" }} />}
+                {displayUser.isVerified && <Shield size={14} style={{ color: "var(--blue)" }} />}
               </div>
               <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
             </div>
@@ -123,12 +123,12 @@ export default function ProfilePage() {
         </div>
         <div className="flex items-center gap-1.5 mt-1">
           {displayUser.totalPnl >= 0
-            ? <TrendingUp size={14} style={{ color: "var(--accent)" }} />
+            ? <TrendingUp size={14} style={{ color: "var(--green)" }} />
             : <TrendingDown size={14} style={{ color: "var(--red)" }} />
           }
           <span
             className="text-sm font-semibold font-mono"
-            style={{ color: displayUser.totalPnl >= 0 ? "var(--accent)" : "var(--red)" }}
+            style={{ color: displayUser.totalPnl >= 0 ? "var(--green)" : "var(--red)" }}
           >
             {displayUser.totalPnl >= 0 ? "+" : ""}{formatCurrency(displayUser.totalPnl)} all time
           </span>
@@ -178,8 +178,8 @@ export default function ProfilePage() {
                     <span
                       className="stat-pill"
                       style={{
-                        background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
-                        color: isUp ? "var(--accent)" : "var(--red)",
+                        background: isUp ? "var(--green-muted)" : "var(--red-muted)",
+                        color: isUp ? "var(--green)" : "var(--red)",
                         fontSize: "10px",
                       }}
                     >
@@ -197,7 +197,7 @@ export default function ProfilePage() {
                     </div>
                     <div
                       className="text-xs font-mono"
-                      style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                      style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                     >
                       {isUp ? "+" : ""}{formatCurrency(pnl)}
                     </div>
@@ -240,8 +240,8 @@ export default function ProfilePage() {
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
                   style={{
-                    background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
-                    color: isBuy ? "var(--accent)" : "var(--red)",
+                    background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
+                    color: isBuy ? "var(--green)" : "var(--red)",
                   }}
                 >
                   {isBuy ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
@@ -267,7 +267,7 @@ export default function ProfilePage() {
                 {trade.status === "CLOSED" && (
                   <div
                     className="text-sm font-mono font-semibold"
-                    style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                    style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                   >
                     {isUp ? "+" : ""}{formatCurrency(pnl)}
                   </div>
@@ -317,7 +317,7 @@ export default function ProfilePage() {
               <div className="flex items-center gap-1">
                 <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
                 {entry.user.isVerified && (
-                  <span className="text-[9px] font-bold px-1 py-px rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                  <span className="pro-badge">PRO</span>
                 )}
               </div>
               <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
@@ -326,7 +326,7 @@ export default function ProfilePage() {
             </div>
             <div
               className="text-xs font-bold font-mono shrink-0"
-              style={{ color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)" }}
+              style={{ color: entry.totalReturn >= 0 ? "var(--green)" : "var(--red)" }}
             >
               {formatPercent(entry.totalReturn)}
             </div>
@@ -354,8 +354,8 @@ export default function ProfilePage() {
                   <span
                     className="stat-pill"
                     style={{
-                      color: isUp ? "var(--accent)" : "var(--red)",
-                      background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
+                      color: isUp ? "var(--green)" : "var(--red)",
+                      background: isUp ? "var(--green-muted)" : "var(--red-muted)",
                       fontSize: "10px",
                     }}
                   >

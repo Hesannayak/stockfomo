@@ -49,12 +49,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
               {user.displayName}
             </Link>
             {user.isVerified && (
-              <span
-                className="text-[9px] font-bold px-1.5 py-0.5 rounded"
-                style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
-              >
-                PRO
-              </span>
+              <span className="pro-badge">PRO</span>
             )}
             <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
@@ -68,8 +63,8 @@ export function TradeCard({ item }: { item: FeedItem }) {
             <span
               className="stat-pill uppercase tracking-wide"
               style={{
-                background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
-                color: isBuy ? "var(--accent)" : "var(--red)",
+                background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
+                color: isBuy ? "var(--green)" : "var(--red)",
               }}
             >
               {trade.direction}
@@ -90,8 +85,8 @@ export function TradeCard({ item }: { item: FeedItem }) {
             <div
               className="mt-2.5 inline-flex items-center gap-2 text-sm font-semibold px-3 py-1.5 rounded-lg"
               style={{
-                background: isPositive ? "var(--accent-muted)" : "var(--red-muted)",
-                color: isPositive ? "var(--accent)" : "var(--red)",
+                background: isPositive ? "var(--green-muted)" : "var(--red-muted)",
+                color: isPositive ? "var(--green)" : "var(--red)",
               }}
             >
               <span className="font-mono">{formatCurrency(pnl)}</span>

@@ -25,7 +25,7 @@ export function PortfolioSummary({
   const isUp = totalPnl >= 0;
 
   return (
-    <div className="p-4" style={{ background: "var(--bg-card)", borderBottom: "1px solid var(--border)" }}>
+    <div className="p-4" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
       <div className="section-header mb-1">Portfolio Value</div>
       <div className="text-3xl font-bold tracking-tight font-mono">
         {formatCurrency(portfolioValue)}
@@ -33,7 +33,7 @@ export function PortfolioSummary({
       <div className="flex items-center gap-2 mt-1">
         <div
           className="flex items-center gap-1 text-sm font-semibold"
-          style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+          style={{ color: isUp ? "var(--green)" : "var(--red)" }}
         >
           {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
           <span className="font-mono">{formatCurrency(totalPnl)}</span>

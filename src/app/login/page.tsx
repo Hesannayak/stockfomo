@@ -27,25 +27,20 @@ export default function EarlyAccessPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Background glow effects */}
-      <div
-        className="absolute top-[-30%] left-[-10%] w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none"
-        style={{ background: "var(--accent)" }}
-      />
-      <div
-        className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none"
-        style={{ background: "var(--blue)" }}
-      />
-
+    <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "var(--bg)" }}>
       <div className="relative z-10 w-full max-w-[420px] px-6 py-12">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-2">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center glow-green" style={{ background: "var(--accent)" }}>
-            <Zap size={22} color="#000" fill="#000" />
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--green)" }}>
+            <Zap size={22} color="#fff" fill="#fff" />
           </div>
           <h1 className="text-2xl font-black tracking-tight">StockFomo</h1>
-          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.15)" }}>Beta</span>
+          <span
+            className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+            style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+          >
+            Beta
+          </span>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
           The social paper trading platform
@@ -71,9 +66,9 @@ export default function EarlyAccessPage() {
             <div className="flex flex-col items-center text-center py-4 fade-in">
               <div
                 className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
-                style={{ background: "var(--accent-muted)", border: "2px solid var(--accent)" }}
+                style={{ background: "var(--green-muted)", border: "2px solid var(--green)" }}
               >
-                <Check size={28} style={{ color: "var(--accent)" }} />
+                <Check size={28} style={{ color: "var(--green)" }} />
               </div>
               <h2 className="text-xl font-bold mb-2">You're on the list!</h2>
               <p className="text-sm mb-1" style={{ color: "var(--fg-muted)" }}>
@@ -131,8 +126,8 @@ export default function EarlyAccessPage() {
                   "Compete on the leaderboard",
                 ].map((feature) => (
                   <div key={feature} className="flex items-center gap-2.5">
-                    <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: "var(--accent-muted)" }}>
-                      <Check size={10} style={{ color: "var(--accent)" }} />
+                    <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: "var(--green-muted)" }}>
+                      <Check size={10} style={{ color: "var(--green)" }} />
                     </div>
                     <span className="text-xs" style={{ color: "var(--fg-muted)" }}>{feature}</span>
                   </div>

@@ -75,7 +75,7 @@ export function TradeForm() {
                     </div>
                     <div
                       className="text-xs font-mono"
-                      style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
+                      style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                     >
                       {isUp ? "+" : ""}
                       {q.changePercent.toFixed(2)}%
@@ -119,7 +119,7 @@ export function TradeForm() {
               <div
                 className="text-sm font-semibold font-mono mt-1"
                 style={{
-                  color: quote.changePercent >= 0 ? "var(--accent)" : "var(--red)",
+                  color: quote.changePercent >= 0 ? "var(--green)" : "var(--red)",
                 }}
               >
                 {quote.changePercent >= 0 ? "+" : ""}
@@ -153,8 +153,8 @@ export function TradeForm() {
               onClick={() => setDirection("BUY")}
               className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-md text-sm font-bold transition-all cursor-pointer"
               style={{
-                background: direction === "BUY" ? "var(--accent-muted)" : "transparent",
-                color: direction === "BUY" ? "var(--accent)" : "var(--fg-dim)",
+                background: direction === "BUY" ? "var(--green-muted)" : "transparent",
+                color: direction === "BUY" ? "var(--green)" : "var(--fg-dim)",
               }}
             >
               <ArrowUp size={16} />
@@ -203,8 +203,8 @@ export function TradeForm() {
             disabled={qty <= 0}
             className="w-full py-3.5 rounded-xl text-sm font-bold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
             style={{
-              background: direction === "BUY" ? "var(--accent)" : "var(--red)",
-              color: "var(--bg)",
+              background: direction === "BUY" ? "var(--green)" : "var(--red)",
+              color: "#fff",
             }}
           >
             {submitted

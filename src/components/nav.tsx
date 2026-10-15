@@ -21,8 +21,8 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden glass"
-      style={{ borderTop: "1px solid var(--border)" }}
+      className="fixed bottom-0 left-0 right-0 z-50 lg:hidden"
+      style={{ background: "var(--bg)", borderTop: "1px solid var(--border)" }}
     >
       <div className="flex items-center justify-around max-w-lg mx-auto h-16 px-4">
         {tabs.map((tab) => {
@@ -38,7 +38,7 @@ export function BottomNav() {
               {isActive && (
                 <div
                   className="absolute -top-px left-3 right-3 h-0.5 rounded-full"
-                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(0, 255, 106, 0.3)" }}
+                  style={{ background: "var(--accent)" }}
                 />
               )}
               <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />

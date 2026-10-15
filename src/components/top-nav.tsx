@@ -19,14 +19,20 @@ export function TopNav() {
 
   return (
     <header
-      className="hidden lg:flex items-center h-14 px-5 sticky top-0 z-50 glass glass-border"
+      className="hidden lg:flex items-center h-14 px-5 sticky top-0 z-50"
+      style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
     >
       <Link href="/" className="flex items-center gap-2 mr-8 no-underline" style={{ color: "var(--fg)" }}>
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "var(--accent)" }}>
-          <Zap size={15} color="#000" fill="#000" />
+        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "var(--green)" }}>
+          <Zap size={15} color="#fff" fill="#fff" />
         </div>
         <span className="text-sm font-black tracking-tight">StockFomo</span>
-        <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.15)" }}>Beta</span>
+        <span
+          className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+        >
+          Beta
+        </span>
       </Link>
 
       <nav className="flex items-center gap-0.5">
@@ -36,17 +42,14 @@ export function TopNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all no-underline relative"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all no-underline"
               style={{
-                background: isActive ? "var(--bg-elevated)" : "transparent",
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
+                fontWeight: isActive ? 700 : 500,
               }}
             >
               <tab.icon size={14} strokeWidth={isActive ? 2.5 : 1.5} />
               {tab.label}
-              {isActive && (
-                <div className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full" style={{ background: "var(--accent)" }} />
-              )}
             </Link>
           );
         })}
@@ -57,13 +60,13 @@ export function TopNav() {
       <div className="flex items-center gap-2">
         <div
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs cursor-pointer transition-colors"
-          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+          style={{ background: "var(--bg)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
         >
           <Search size={13} />
-          <span>Search stocks...</span>
+          <span>Search markets...</span>
           <kbd
             className="text-[11px] px-1.5 py-0.5 rounded font-mono"
-            style={{ background: "var(--bg)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+            style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
           >
             /
           </kbd>
