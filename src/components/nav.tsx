@@ -42,7 +42,7 @@ export function BottomNav() {
                 />
               )}
               <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span className="text-[10px] font-semibold tracking-wide uppercase">
+              <span className="text-[11px] font-semibold tracking-wide uppercase">
                 {tab.label}
               </span>
             </Link>

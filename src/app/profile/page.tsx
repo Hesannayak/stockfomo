@@ -148,7 +148,7 @@ export default function ProfilePage() {
           { label: "Trades", value: displayUser.tradeCount.toString() },
         ].map((stat) => (
           <div key={stat.label} className="text-center py-3" style={{ borderRight: "1px solid var(--border)" }}>
-            <div className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
               {stat.label}
             </div>
             <div className="text-sm font-bold font-mono mt-0.5">{stat.value}</div>
@@ -160,7 +160,7 @@ export default function ProfilePage() {
       {userPositions.length > 0 && (
         <div>
           <div className="px-4 pt-4 pb-2 flex items-center justify-between">
-            <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
+            <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
               Open Positions
             </h2>
             <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
@@ -181,7 +181,7 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">{pos.ticker}</span>
                     <span
-                      className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                      className="text-[11px] font-bold px-1.5 py-0.5 rounded"
                       style={{
                         background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
                         color: isUp ? "var(--accent)" : "var(--red)",
@@ -217,7 +217,7 @@ export default function ProfilePage() {
       {/* Trade History */}
       <div>
         <div className="px-4 pt-4 pb-2">
-          <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
             Trade History
           </h2>
         </div>
@@ -256,7 +256,7 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">{trade.ticker}</span>
                     <span
-                      className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                      className="text-[11px] font-bold px-1.5 py-0.5 rounded"
                       style={{
                         background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-input)",
                         color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
@@ -291,7 +291,7 @@ export default function ProfilePage() {
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
         <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
             <Trophy size={12} /> Leaderboard
           </h2>
         </div>
@@ -305,7 +305,7 @@ export default function ProfilePage() {
               style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
             >
               <div
-                className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
                 style={{
                   color: i < 3 ? rankColors[i] : "var(--fg-dim)",
                   background: i < 3 ? "var(--bg-input)" : "transparent",
@@ -314,7 +314,7 @@ export default function ProfilePage() {
                 {i < 3 ? <Trophy size={11} /> : entry.rank}
               </div>
               <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
                 style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
               >
                 {getInitials(entry.user.displayName)}
@@ -323,10 +323,10 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
                   {entry.user.isVerified && (
-                    <span className="text-[8px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                    <span className="text-[10px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
                   )}
                 </div>
-                <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>
                   {entry.tradeCount} trades · {entry.winRate}%
                 </div>
               </div>
@@ -341,7 +341,7 @@ export default function ProfilePage() {
         })}
 
         <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
             Trending
           </h2>
           {trendingTickers.map((t) => {
@@ -356,12 +356,12 @@ export default function ProfilePage() {
               >
                 <div>
                   <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-[10px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-[11px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
                   <span
-                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
+                    className="text-[11px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
                     style={{ color: isUp ? "var(--accent)" : "var(--red)", background: isUp ? "var(--accent-muted)" : "var(--red-muted)" }}
                   >
                     {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}

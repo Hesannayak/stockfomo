@@ -31,7 +31,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
           <button
             key={tf.key}
             onClick={() => setTimeframe(tf.key)}
-            className="flex-1 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer"
+            className="flex-1 py-2 text-[13px] font-semibold rounded-md transition-colors cursor-pointer"
             style={{
               background: timeframe === tf.key ? "var(--bg-elevated)" : "transparent",
               boxShadow: timeframe === tf.key ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
@@ -98,7 +98,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
               </div>
               {entry.streak > 0 && (
                 <div
-                  className="flex items-center justify-end gap-0.5 text-[10px] font-semibold mt-0.5"
+                  className="flex items-center justify-end gap-0.5 text-[11px] font-semibold mt-0.5"
                   style={{ color: "var(--yellow)" }}
                 >
                   <Flame size={10} />

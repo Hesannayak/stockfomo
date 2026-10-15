@@ -25,7 +25,7 @@ export default function FeedPage() {
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
         <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
             <Trophy size={12} /> Leaderboard
           </h2>
         </div>
@@ -39,7 +39,7 @@ export default function FeedPage() {
               style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
             >
               <div
-                className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
                 style={{
                   color: i < 3 ? rankColors[i] : "var(--fg-dim)",
                   background: i < 3 ? "var(--bg-input)" : "transparent",
@@ -48,7 +48,7 @@ export default function FeedPage() {
                 {i < 3 ? <Trophy size={11} /> : entry.rank}
               </div>
               <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
                 style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
               >
                 {getInitials(entry.user.displayName)}
@@ -57,10 +57,10 @@ export default function FeedPage() {
                 <div className="flex items-center gap-1">
                   <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
                   {entry.user.isVerified && (
-                    <span className="text-[8px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                    <span className="text-[10px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
                   )}
                 </div>
-                <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>
                   {entry.tradeCount} trades · {entry.winRate}%
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function FeedPage() {
         })}
 
         <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
             Trending
           </h2>
           {trendingTickers.map((t) => {
@@ -90,12 +90,12 @@ export default function FeedPage() {
               >
                 <div>
                   <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-[10px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-[11px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
                   <span
-                    className="text-[10px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
+                    className="text-[11px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
                     style={{ color: isUp ? "var(--accent)" : "var(--red)", background: isUp ? "var(--accent-muted)" : "var(--red-muted)" }}
                   >
                     {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
@@ -133,7 +133,7 @@ export default function FeedPage() {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className="px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer"
+              className="px-3.5 py-1.5 text-[13px] font-semibold rounded-full transition-all cursor-pointer"
               style={{
                 background: filter === f.key ? "var(--fg)" : "transparent",
                 color: filter === f.key ? "var(--bg)" : "var(--fg-dim)",

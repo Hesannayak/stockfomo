@@ -48,7 +48,7 @@ export function PortfolioSummary({
 
       <div className="grid grid-cols-3 gap-3 mt-4">
         <div className="text-center p-2 rounded-lg" style={{ background: "var(--bg-input)" }}>
-          <div className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
+          <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
             Cash
           </div>
           <div className="text-sm font-bold font-mono mt-0.5">
@@ -56,7 +56,7 @@ export function PortfolioSummary({
           </div>
         </div>
         <div className="text-center p-2 rounded-lg" style={{ background: "var(--bg-input)" }}>
-          <div className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
+          <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
             Invested
           </div>
           <div className="text-sm font-bold font-mono mt-0.5">
@@ -64,7 +64,7 @@ export function PortfolioSummary({
           </div>
         </div>
         <div className="text-center p-2 rounded-lg" style={{ background: "var(--bg-input)" }}>
-          <div className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
+          <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
             Positions
           </div>
           <div className="text-sm font-bold font-mono mt-0.5">{positions.length}</div>

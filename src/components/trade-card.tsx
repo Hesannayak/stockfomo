@@ -50,7 +50,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             </Link>
             {user.isVerified && (
               <span
-                className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
                 style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
               >
                 PRO
@@ -59,14 +59,14 @@ export function TradeCard({ item }: { item: FeedItem }) {
             <span className="text-xs" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </span>
-            <span className="text-[11px] ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-xs ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
               {timeAgo(timestamp)}
             </span>
           </div>
 
           <div className="mt-2.5 flex items-center gap-2 flex-wrap">
             <span
-              className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
+              className="text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
               style={{
                 background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--accent)" : "var(--red)",
@@ -76,7 +76,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             </span>
             <Link
               href={`/stock/${trade.ticker}`}
-              className="font-bold text-[15px] no-underline hover:underline"
+              className="font-bold text-base no-underline hover:underline"
               style={{ color: "var(--fg)" }}
             >
               {trade.ticker}
@@ -98,7 +98,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
               <span style={{ opacity: 0.6 }}>({formatPercent(pnlPct)})</span>
               {isOpen && (
                 <span
-                  className="text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase"
+                  className="text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase"
                   style={{ background: "var(--yellow-muted)", color: "var(--yellow)" }}
                 >
                   Open
@@ -122,7 +122,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = "transparent"}
               >
                 <Icon size={12} />
-                <span className="font-mono text-[11px]">{localReactions[key]}</span>
+                <span className="font-mono text-xs">{localReactions[key]}</span>
               </button>
             ))}
             <button

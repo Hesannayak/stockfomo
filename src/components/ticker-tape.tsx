@@ -19,7 +19,7 @@ export function TickerTape() {
             <Link
               key={`${q.ticker}-${i}`}
               href={`/stock/${q.ticker}`}
-              className="inline-flex items-center gap-2 text-[11px] no-underline shrink-0 transition-opacity hover:opacity-80"
+              className="inline-flex items-center gap-2 text-xs no-underline shrink-0 transition-opacity hover:opacity-80"
               style={{ color: "var(--fg-muted)" }}
             >
               <span className="font-semibold" style={{ color: "var(--fg)" }}>{q.ticker}</span>

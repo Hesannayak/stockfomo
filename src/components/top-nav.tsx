@@ -35,7 +35,7 @@ export function TopNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all no-underline relative"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all no-underline relative"
               style={{
                 background: isActive ? "var(--bg-input)" : "transparent",
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
@@ -61,7 +61,7 @@ export function TopNav() {
           <Search size={13} />
           <span>Search stocks...</span>
           <kbd
-            className="text-[10px] px-1.5 py-0.5 rounded font-mono"
+            className="text-[11px] px-1.5 py-0.5 rounded font-mono"
             style={{ background: "var(--bg)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
           >
             /
@@ -77,7 +77,7 @@ export function TopNav() {
         {isLoggedIn && user ? (
           <Link
             href="/profile"
-            className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold no-underline transition-all"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold no-underline transition-all"
             style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "2px solid var(--accent)" }}
           >
             {getInitials(user.displayName)}

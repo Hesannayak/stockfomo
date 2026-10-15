@@ -71,7 +71,7 @@ export function ProfileContent({ username }: { username: string }) {
             className="text-center py-3"
             style={{ borderRight: "1px solid var(--border)" }}
           >
-            <div className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
               {stat.label}
             </div>
             <div className="text-lg font-bold font-mono mt-0.5" style={{ color: stat.color }}>
@@ -154,7 +154,7 @@ export function ProfileContent({ username }: { username: string }) {
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-sm">{trade.ticker}</span>
                   <span
-                    className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                    className="text-[11px] font-bold px-1.5 py-0.5 rounded"
                     style={{
                       background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-input)",
                       color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",

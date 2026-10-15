@@ -124,7 +124,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
 
         {/* Stats grid */}
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>Key Statistics</h2>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>Key Statistics</h2>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
             {[
               { label: "Open", value: formatCurrency(stock.open) },
@@ -150,7 +150,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
 
         {/* About */}
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About</h2>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About</h2>
           <p className="text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
         </div>
 
@@ -158,7 +158,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         {recentTrades.length > 0 && (
           <div className="lg:hidden" style={{ borderTop: "1px solid var(--border)" }}>
             <div className="px-4 pt-3 pb-2">
-              <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Community Trades</h2>
+              <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Community Trades</h2>
             </div>
             {recentTrades.map((trade) => {
               const isBuy = trade.direction === "BUY";
@@ -170,7 +170,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold">{trade.user?.displayName}</span>
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>{trade.direction}</span>
+                      <span className="text-[11px] font-bold px-1.5 py-0.5 rounded" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>{trade.direction}</span>
                     </div>
                     <div className="text-xs" style={{ color: "var(--fg-dim)" }}>{trade.quantity} shares @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}</div>
                   </div>
@@ -189,18 +189,18 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           </div>
           <div className="flex items-center gap-3 mb-3">
             <div className="flex-1">
-              <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
+              <label className="text-[11px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
               <input type="number" min="1" placeholder="0" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-sm font-mono outline-none" style={{ background: "var(--bg-input)", color: "var(--fg)", border: "1px solid var(--border)" }} />
             </div>
             <div className="flex-1">
-              <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Est. Total</label>
+              <label className="text-[11px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Est. Total</label>
               <div className="px-3 py-2.5 rounded-lg text-sm font-mono" style={{ background: "var(--bg-input)", color: qty > 0 ? "var(--fg)" : "var(--fg-dim)", border: "1px solid var(--border)" }}>{qty > 0 ? formatCurrency(total) : "$0.00"}</div>
             </div>
           </div>
           <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50" style={{ background: orderPlaced ? "var(--bg-input)" : orderSide === "BUY" ? "var(--accent)" : "var(--red)", color: orderPlaced ? "var(--accent)" : "#000" }}>
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker} · Market Order`}
           </button>
-          <p className="text-center text-[10px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money involved</p>
+          <p className="text-center text-[11px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money involved</p>
         </div>
       </div>
 
@@ -224,7 +224,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           </div>
 
           {/* Shares input */}
-          <label className="text-[10px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
+          <label className="text-[11px] uppercase tracking-wider font-semibold mb-1 block" style={{ color: "var(--fg-dim)" }}>Shares</label>
           <input type="number" min="1" placeholder="0" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="w-full px-3 py-2.5 rounded-lg text-sm font-mono outline-none mb-2" style={{ background: "var(--bg-input)", color: "var(--fg)", border: "1px solid var(--border)" }} />
 
           <div className="flex justify-between text-xs mb-4 py-1">
@@ -237,13 +237,13 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker}`}
           </button>
 
-          <p className="text-center text-[10px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money</p>
+          <p className="text-center text-[11px] mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money</p>
         </div>
 
         {/* About section on right panel */}
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About {stock.ticker}</h2>
-          <p className="text-[11px] leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-2" style={{ color: "var(--fg-dim)" }}>About {stock.ticker}</h2>
+          <p className="text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mt-3">
             {[
@@ -255,8 +255,8 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               { label: "Avg Vol", value: stock.avgVolume },
             ].map((s) => (
               <div key={s.label} className="flex justify-between items-center">
-                <span className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
-                <span className="text-[10px] font-mono font-semibold">{s.value}</span>
+                <span className="text-[11px]" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
+                <span className="text-[11px] font-mono font-semibold">{s.value}</span>
               </div>
             ))}
           </div>
@@ -266,20 +266,20 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         {recentTrades.length > 0 && (
           <div style={{ borderTop: "1px solid var(--border)" }}>
             <div className="px-4 pt-3 pb-2">
-              <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Holders</h2>
+              <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>Holders</h2>
             </div>
             {recentTrades.map((trade) => {
               const isBuy = trade.direction === "BUY";
               return (
                 <div key={trade.id} className="flex items-center gap-2 px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0" style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0" style={{ background: "var(--bg-input)", color: "var(--fg-muted)" }}>
                     {trade.user ? getInitials(trade.user.displayName) : "?"}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[11px] font-semibold">{trade.user?.displayName}</span>
-                    <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
+                    <span className="text-xs font-semibold">{trade.user?.displayName}</span>
+                    <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
                   </div>
-                  <span className="text-[9px] font-bold px-1 py-0.5 rounded shrink-0" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>
+                  <span className="text-[10px] font-bold px-1 py-0.5 rounded shrink-0" style={{ background: isBuy ? "var(--accent-muted)" : "var(--red-muted)", color: isBuy ? "var(--accent)" : "var(--red)" }}>
                     {trade.direction}
                   </span>
                 </div>

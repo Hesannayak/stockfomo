@@ -89,7 +89,7 @@ export default function LoginPage() {
           ].map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-lg font-bold font-mono" style={{ color: "var(--fg)" }}>{s.value}</div>
-              <div className="text-[10px] uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
+              <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -171,7 +171,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-[11px] mt-6" style={{ color: "var(--fg-dim)" }}>
+        <p className="text-center text-xs mt-6" style={{ color: "var(--fg-dim)" }}>
           Paper trading only · No real money · No broker needed
         </p>
       </div>

@@ -11,7 +11,7 @@ export function FollowSidebar() {
   return (
     <div className="h-full overflow-y-auto" style={{ borderLeft: "1px solid var(--border)" }}>
       <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
-        <h2 className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
+        <h2 className="text-[13px] font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
           Follow Top Traders
         </h2>
       </div>
@@ -30,17 +30,17 @@ export function FollowSidebar() {
           </Link>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1">
-              <Link href={`/profile/${user.username}`} className="text-xs font-semibold truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
+              <Link href={`/profile/${user.username}`} className="text-[13px] font-semibold truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
                 {user.displayName}
               </Link>
               {user.isVerified && (
-                <span className="text-[8px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                <span className="text-[10px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
               )}
             </div>
-            <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>@{user.username}</div>
+            <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>@{user.username}</div>
           </div>
           <button
-            className="px-2.5 py-1 rounded-full text-[10px] font-bold cursor-pointer shrink-0 transition-all hover:opacity-90"
+            className="px-2.5 py-1 rounded-full text-[11px] font-bold cursor-pointer shrink-0 transition-all hover:opacity-90"
             style={{ background: "var(--accent)", color: "#000" }}
           >
             Follow
@@ -49,7 +49,7 @@ export function FollowSidebar() {
       ))}
 
       <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", borderTop: "1px solid var(--border)" }}>
-        <h2 className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
+        <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
           Recent Activity
         </h2>
       </div>
@@ -65,9 +65,9 @@ export function FollowSidebar() {
           >
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-semibold truncate">{user?.displayName}</span>
+                <span className="text-xs font-semibold truncate">{user?.displayName}</span>
                 <span
-                  className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+                  className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
                   style={{
                     background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
                     color: isBuy ? "var(--accent)" : "var(--red)",
@@ -76,7 +76,7 @@ export function FollowSidebar() {
                   {trade.direction}
                 </span>
               </div>
-              <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>
                 {trade.ticker} · {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
               </div>
             </div>

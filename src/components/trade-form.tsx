@@ -136,7 +136,7 @@ export function TradeForm() {
                   { label: "Vol", value: `${(quote.volume / 1_000_000).toFixed(1)}M` },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
-                    <div className="text-[10px] uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-[11px] uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
                       {item.label}
                     </div>
                     <div className="text-xs font-mono font-semibold mt-0.5">
@@ -223,7 +223,7 @@ export function TradeForm() {
           </button>
 
           <p
-            className="text-[11px] text-center mt-3"
+            className="text-xs text-center mt-3"
             style={{ color: "var(--fg-dim)" }}
           >
             Paper trade only · No real money involved

@@ -30,7 +30,7 @@ export default function LeaderboardPage() {
 
         {/* Trending section below leaderboard on desktop */}
         <div className="hidden lg:block px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
-          <h2 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
+          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
             Trending Stocks
           </h2>
           <div className="grid grid-cols-2 gap-2">
@@ -46,12 +46,12 @@ export default function LeaderboardPage() {
                 >
                   <div>
                     <div className="text-sm font-bold">{t.ticker}</div>
-                    <div className="text-[10px]" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</div>
+                    <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-xs font-mono font-semibold">${quote?.price.toFixed(2)}</div>
                     <div
-                      className="text-[10px] font-mono font-semibold flex items-center justify-end gap-0.5"
+                      className="text-[11px] font-mono font-semibold flex items-center justify-end gap-0.5"
                       style={{ color: isUp ? "var(--accent)" : "var(--red)" }}
                     >
                       {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
