@@ -26,6 +26,7 @@ export function TopNav() {
           <Zap size={15} color="#000" fill="#000" />
         </div>
         <span className="text-sm font-black tracking-tight">StockFomo</span>
+        <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.2)" }}>Beta</span>
       </Link>
 
       <nav className="flex items-center gap-0.5">
@@ -71,7 +72,7 @@ export function TopNav() {
           <Bell size={15} />
           <div
             className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-            style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(16, 185, 129, 0.5)" }}
+            style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(0, 255, 106, 0.5)" }}
           />
         </button>
         {isLoggedIn && user ? (
@@ -87,7 +88,7 @@ export function TopNav() {
             href="/login"
             className="px-3.5 py-1.5 rounded-lg text-xs font-semibold no-underline btn-primary"
           >
-            Sign In
+            Early Access
           </Link>
         )}
       </div>

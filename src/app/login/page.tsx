@@ -1,59 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Zap, TrendingUp, Users, Trophy, ArrowRight } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
+import { Zap, TrendingUp, Users, Trophy, ArrowRight, Check, Sparkles } from "lucide-react";
 
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-    </svg>
-  );
-}
-
-export default function LoginPage() {
-  const [mode, setMode] = useState<"login" | "signup">("login");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+export default function EarlyAccessPage() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const { login, signup, loginWithGoogle } = useAuth();
-  const router = useRouter();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
-    if (!username.trim() || !password.trim()) {
-      setError("Please fill in all fields");
+    if (!email.trim()) {
+      setError("Please enter your email");
       return;
     }
 
-    if (mode === "signup" && !displayName.trim()) {
-      setError("Please enter your display name");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError("Please enter a valid email");
       return;
     }
 
-    const ok = mode === "login"
-      ? login(username.trim(), password)
-      : signup(displayName.trim(), username.trim(), password);
-
-    if (ok) {
-      router.push("/");
-    } else {
-      setError("Login failed. Try again.");
-    }
-  }
-
-  function handleGoogle() {
-    if (loginWithGoogle()) {
-      router.push("/");
-    }
+    setSubmitted(true);
   }
 
   return (
@@ -75,6 +45,7 @@ export default function LoginPage() {
             <Zap size={22} color="#000" fill="#000" />
           </div>
           <h1 className="text-2xl font-black tracking-tight">StockFomo</h1>
+          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.2)" }}>Beta</span>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
           The social paper trading platform
@@ -83,7 +54,7 @@ export default function LoginPage() {
         {/* Social proof */}
         <div className="flex items-center justify-center gap-6 mb-10">
           {[
-            { icon: TrendingUp, value: "10K+", label: "Traders" },
+            { icon: TrendingUp, value: "10K+", label: "Waitlist" },
             { icon: Trophy, value: "$2.4B", label: "Volume" },
             { icon: Users, value: "98%", label: "Satisfaction" },
           ].map((s) => (
@@ -94,81 +65,81 @@ export default function LoginPage() {
           ))}
         </div>
 
-        {/* Auth Card */}
+        {/* Card */}
         <div className="glass glass-border rounded-2xl p-6">
-          {/* Google Sign-In */}
-          <button
-            onClick={handleGoogle}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer"
-            style={{
-              background: "#fff",
-              color: "#1f1f1f",
-              border: "none",
-            }}
-          >
-            <GoogleIcon />
-            Continue with Google
-          </button>
-
-          <div className="divider my-5">or</div>
-
-          {/* Mode Toggle */}
-          <div className="flex rounded-xl overflow-hidden mb-5 p-1" style={{ background: "var(--bg-input)" }}>
-            {(["login", "signup"] as const).map((m) => (
-              <button
-                key={m}
-                onClick={() => { setMode(m); setError(""); }}
-                className="flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer"
-                style={{
-                  background: mode === m ? "var(--bg-elevated)" : "transparent",
-                  color: mode === m ? "var(--fg)" : "var(--fg-dim)",
-                  boxShadow: mode === m ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
-                }}
+          {submitted ? (
+            <div className="flex flex-col items-center text-center py-4 fade-in">
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
+                style={{ background: "var(--accent-muted)", border: "2px solid var(--accent)" }}
               >
-                {m === "login" ? "Log In" : "Sign Up"}
-              </button>
-            ))}
-          </div>
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            {mode === "signup" && (
-              <input
-                type="text"
-                placeholder="Display Name"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                className="w-full px-4 py-3 text-sm input-field"
-              />
-            )}
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-3 text-sm input-field"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 text-sm input-field"
-            />
-
-            {error && (
-              <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium" style={{ background: "var(--red-muted)", color: "var(--red)" }}>
-                {error}
+                <Check size={28} style={{ color: "var(--accent)" }} />
               </div>
-            )}
+              <h2 className="text-xl font-bold mb-2">You're on the list!</h2>
+              <p className="text-sm mb-1" style={{ color: "var(--fg-muted)" }}>
+                We'll notify you at <strong style={{ color: "var(--fg)" }}>{email}</strong> when it's your turn.
+              </p>
+              <p className="text-xs mt-3" style={{ color: "var(--fg-dim)" }}>
+                Early members get priority access + exclusive perks
+              </p>
+              <div
+                className="flex items-center gap-2 mt-5 px-4 py-2 rounded-lg text-xs font-medium"
+                style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
+              >
+                <Sparkles size={13} />
+                Position #10,847 in line
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="text-center mb-5">
+                <h2 className="text-lg font-bold mb-1">Get Early Access</h2>
+                <p className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                  Join the waitlist — be first to trade with top traders
+                </p>
+              </div>
 
-            <button
-              type="submit"
-              className="w-full py-3 text-sm font-semibold btn-primary flex items-center justify-center gap-2 mt-1"
-            >
-              {mode === "login" ? "Log In" : "Create Account"}
-              <ArrowRight size={14} />
-            </button>
-          </form>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                  className="w-full px-4 py-3 text-sm input-field"
+                  autoComplete="email"
+                />
+
+                {error && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium" style={{ background: "var(--red-muted)", color: "var(--red)" }}>
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full py-3 text-sm font-semibold btn-primary flex items-center justify-center gap-2"
+                >
+                  Join the Waitlist
+                  <ArrowRight size={14} />
+                </button>
+              </form>
+
+              <div className="flex flex-col gap-2.5 mt-6 pt-5" style={{ borderTop: "1px solid var(--border)" }}>
+                {[
+                  "Paper trade with $100K virtual cash",
+                  "Follow top traders & copy their moves",
+                  "Compete on the leaderboard",
+                ].map((feature) => (
+                  <div key={feature} className="flex items-center gap-2.5">
+                    <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0" style={{ background: "var(--accent-muted)" }}>
+                      <Check size={10} style={{ color: "var(--accent)" }} />
+                    </div>
+                    <span className="text-xs" style={{ color: "var(--fg-muted)" }}>{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         <p className="text-center text-xs mt-6" style={{ color: "var(--fg-dim)" }}>

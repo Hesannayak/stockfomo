@@ -38,7 +38,7 @@ export function BottomNav() {
               {isActive && (
                 <div
                   className="absolute -top-px left-3 right-3 h-0.5 rounded-full"
-                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(16, 185, 129, 0.4)" }}
+                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(0, 255, 106, 0.4)" }}
                 />
               )}
               <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />

@@ -119,10 +119,11 @@ export default function FeedPage() {
             <div className="flex items-center gap-2">
               <Zap size={20} style={{ color: "var(--accent)" }} fill="var(--accent)" />
               <h1 className="text-lg font-bold tracking-tight">StockFomo</h1>
+              <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.2)" }}>Beta</span>
             </div>
             <button className="p-2 rounded-lg cursor-pointer relative" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
               <Bell size={18} style={{ color: "var(--fg-muted)" }} />
-              <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(16, 185, 129, 0.5)" }} />
+              <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(0, 255, 106, 0.5)" }} />
             </button>
           </div>
         </div>
