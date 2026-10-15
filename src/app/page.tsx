@@ -8,7 +8,7 @@ import { TrendingBar } from "@/components/trending-bar";
 import { MarketIndicesBar } from "@/components/market-indices-bar";
 import { FollowSidebar } from "@/components/follow-sidebar";
 import { mockFeed, mockLeaderboard, mockQuotes, trendingTickers } from "@/lib/mock-data";
-import { Bell, Zap, Trophy, TrendingUp, TrendingDown } from "lucide-react";
+import { Bell, Trophy, TrendingUp, TrendingDown } from "lucide-react";
 import { formatPercent, getInitials } from "@/lib/utils";
 
 type Filter = "all" | "following" | "trending";
@@ -112,9 +112,7 @@ export default function FeedPage() {
         >
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
-                <Zap size={13} color="#fff" fill="#fff" />
-              </div>
+              <img src="/logo.png" alt="StockFomo" className="w-6 h-6 rounded-md" />
               <h1 className="text-[15px] font-bold tracking-tight">StockFomo</h1>
             </div>
             <button className="p-1.5 rounded-md cursor-pointer relative" style={{ color: "var(--fg-dim)" }}>

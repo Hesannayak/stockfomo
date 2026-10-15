@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Zap, Flame, Trophy, ArrowLeftRight, User, Search, Bell, Compass } from "lucide-react";
+import { Flame, Trophy, ArrowLeftRight, User, Search, Bell, Compass } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { getInitials } from "@/lib/utils";
 
@@ -24,9 +24,7 @@ export function TopNav() {
       style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}
     >
       <Link href="/" className="flex items-center gap-2 mr-8 no-underline" style={{ color: "var(--fg)" }}>
-        <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
-          <Zap size={13} color="#fff" fill="#fff" />
-        </div>
+        <img src="/logo.png" alt="StockFomo" className="w-6 h-6 rounded-md" />
         <span className="text-[15px] font-bold tracking-tight">StockFomo</span>
       </Link>
 

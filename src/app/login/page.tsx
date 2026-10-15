@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Zap, TrendingUp, Users, Trophy, ArrowRight, Check, Sparkles } from "lucide-react";
+import { TrendingUp, Users, Trophy, ArrowRight, Check, Sparkles } from "lucide-react";
 
 export default function EarlyAccessPage() {
   const [email, setEmail] = useState("");
@@ -31,9 +31,7 @@ export default function EarlyAccessPage() {
       <div className="relative z-10 w-full max-w-[380px] px-6 py-16 animate-in">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-1.5">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "var(--fg)" }}>
-            <Zap size={17} color="#fff" fill="#fff" />
-          </div>
+          <img src="/logo.png" alt="StockFomo" className="w-8 h-8 rounded-lg" />
           <h1 className="text-xl font-bold tracking-tight">StockFomo</h1>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
