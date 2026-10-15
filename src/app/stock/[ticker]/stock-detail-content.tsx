@@ -99,7 +99,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         </div>
 
         {/* Price */}
-        <div className="px-4 pt-3 pb-2">
+        <div className="px-4 pt-3 pb-2 animate-in">
           <div className="text-2xl font-bold font-mono">{formatCurrency(stock.price)}</div>
           <div className="flex items-center gap-1.5 mt-1">
             {isUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}

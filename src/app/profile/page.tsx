@@ -58,7 +58,7 @@ export default function ProfilePage() {
   const invested = userPositions.reduce((sum, p) => sum + (p.marketValue ?? 0), 0);
 
   const profileContent = (
-    <div>
+    <div className="animate-in">
       {/* Profile Header */}
       <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-start justify-between mb-4">

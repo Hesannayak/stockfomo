@@ -1,21 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { mockUsers, mockTrades } from "@/lib/mock-data";
 import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 export function FollowSidebar() {
   const suggestedUsers = mockUsers.filter((u) => u.isVerified || (u.followerCount ?? 0) > 1000);
+  const [following, setFollowing] = useState<Set<string>>(new Set());
 
   return (
     <div className="h-full overflow-y-auto" style={{ borderLeft: "1px solid var(--border)" }}>
       <div className="px-4 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
         <h2 className="section-header">Follow Top Traders</h2>
       </div>
-      {suggestedUsers.map((user) => (
+      {suggestedUsers.map((user, i) => (
         <div
           key={user.id}
-          className="flex items-center gap-2.5 px-4 py-2.5 transition-colors card-hover"
+          className={`flex items-center gap-2.5 px-4 py-2.5 transition-colors card-hover animate-slide stagger-${Math.min(i + 1, 8)}`}
           style={{ borderBottom: "1px solid var(--border)" }}
         >
           <Link
@@ -39,10 +41,19 @@ export function FollowSidebar() {
             </div>
           </div>
           <button
-            className="px-2.5 py-1 rounded-md text-xs font-medium cursor-pointer shrink-0 transition-all hover:bg-[var(--accent-hover)] hover:text-white"
-            style={{ background: "var(--fg)", color: "#fff" }}
+            onClick={() => setFollowing((prev) => {
+              const next = new Set(prev);
+              next.has(user.id) ? next.delete(user.id) : next.add(user.id);
+              return next;
+            })}
+            className="px-2.5 py-1 rounded-md text-xs font-medium cursor-pointer shrink-0 transition-all active:scale-90"
+            style={{
+              background: following.has(user.id) ? "var(--bg-elevated)" : "var(--fg)",
+              color: following.has(user.id) ? "var(--fg-muted)" : "#fff",
+              border: following.has(user.id) ? "1px solid var(--border)" : "1px solid transparent",
+            }}
           >
-            Follow
+            {following.has(user.id) ? "Following" : "Follow"}
           </button>
         </div>
       ))}

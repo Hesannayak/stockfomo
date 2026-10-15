@@ -18,7 +18,7 @@ export function TrendingBar() {
             <Link
               key={t.ticker}
               href={`/stock/${t.ticker}`}
-              className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl shrink-0 cursor-pointer transition-all no-underline hover:scale-[1.01]"
+              className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl shrink-0 cursor-pointer transition-all no-underline hover:scale-[1.02] active:scale-[0.98]"
               style={{ background: "var(--bg)", color: "var(--fg)", border: "1px solid var(--border)" }}
             >
               <div>

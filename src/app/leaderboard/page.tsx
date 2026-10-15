@@ -35,7 +35,7 @@ export default function LeaderboardPage() {
               View All
             </Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-1">
+          <div className="flex gap-3 overflow-x-auto pb-1" style={{ scrollBehavior: "smooth" }}>
             {trendingTickers.map((t, idx) => {
               const quote = mockQuotes[t.ticker];
               const isUp = quote?.changePercent >= 0;
@@ -43,7 +43,7 @@ export default function LeaderboardPage() {
                 <Link
                   key={t.ticker}
                   href={`/stock/${t.ticker}`}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl shrink-0 no-underline transition-all hover:scale-[1.01]"
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl shrink-0 no-underline transition-all hover:scale-[1.02] hover:shadow-[var(--shadow)] active:scale-[0.98] animate-scale stagger-${Math.min(idx + 1, 8)}`}
                   style={{ color: "var(--fg)", border: "1px solid var(--border)", minWidth: "150px" }}
                 >
                   <div

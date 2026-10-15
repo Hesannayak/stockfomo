@@ -92,6 +92,21 @@ input::placeholder {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
@@ -102,6 +117,17 @@ input::placeholder {
   100% { background-position: 200% 0; }
 }
 
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .ticker-scroll {
   animation: ticker-scroll 30s linear infinite;
 }
@@ -109,6 +135,31 @@ input::placeholder {
 .fade-in {
   animation: fade-in 0.35s ease-out both;
 }
+
+.animate-in {
+  animation: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale {
+  animation: fade-in-scale 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide {
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-pop {
+  animation: pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-1 { animation-delay: 0.03s; }
+.stagger-2 { animation-delay: 0.06s; }
+.stagger-3 { animation-delay: 0.09s; }
+.stagger-4 { animation-delay: 0.12s; }
+.stagger-5 { animation-delay: 0.15s; }
+.stagger-6 { animation-delay: 0.18s; }
+.stagger-7 { animation-delay: 0.21s; }
+.stagger-8 { animation-delay: 0.24s; }
 
 .glass {
   background: rgba(255, 255, 255, 0.92);
@@ -121,10 +172,13 @@ input::placeholder {
 }
 
 .card-hover {
-  transition: background 0.12s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 .card-hover:hover {
   background: var(--bg-card-hover);
+}
+.card-hover:active {
+  transform: scale(0.995);
 }
 
 .rank-card {
@@ -191,7 +245,8 @@ input::placeholder {
   background: var(--accent-hover);
 }
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  transition-duration: 0.08s;
 }
 
 .btn-ghost {
@@ -246,4 +301,17 @@ input::placeholder {
   background: var(--fg);
   color: var(--bg);
   letter-spacing: 0.04em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
 }

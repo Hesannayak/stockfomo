@@ -60,7 +60,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
           <Link
             key={entry.user.id}
             href={`/profile/${entry.user.username}`}
-            className="grid items-center px-4 py-3.5 no-underline transition-colors card-hover"
+            className={`grid items-center px-4 py-3.5 no-underline transition-colors card-hover animate-in stagger-${Math.min(i + 1, 8)}`}
             style={{
               gridTemplateColumns: "48px 1fr 140px 80px",
               borderBottom: "1px solid var(--border)",

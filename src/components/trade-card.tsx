@@ -25,8 +25,12 @@ export function TradeCard({ item }: { item: FeedItem }) {
 
   const isPositive = (pnl ?? 0) >= 0;
 
-  function react(key: keyof typeof localReactions) {
+  function react(key: keyof typeof localReactions, e: React.MouseEvent<HTMLButtonElement>) {
     setLocalReactions((prev) => ({ ...prev, [key]: prev[key] + 1 }));
+    const btn = e.currentTarget;
+    btn.classList.remove("animate-pop");
+    void btn.offsetWidth;
+    btn.classList.add("animate-pop");
   }
 
   return (
@@ -111,7 +115,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             ].map(({ key, icon: Icon }) => (
               <button
                 key={key}
-                onClick={() => react(key)}
+                onClick={(e) => react(key, e)}
                 className="flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all cursor-pointer hover:bg-[var(--bg-elevated)]"
                 style={{ color: "var(--fg-dim)" }}
               >

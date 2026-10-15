@@ -36,7 +36,7 @@ export function TopNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] transition-all no-underline"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] transition-all no-underline hover:bg-[var(--bg-elevated)]"
               style={{
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
                 fontWeight: isActive ? 600 : 400,

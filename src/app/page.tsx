@@ -35,7 +35,7 @@ export default function FeedPage() {
           <Link
             key={entry.user.id}
             href={`/profile/${entry.user.username}`}
-            className="flex items-center gap-2.5 px-4 py-2 no-underline transition-colors card-hover"
+            className={`flex items-center gap-2.5 px-4 py-2 no-underline transition-colors card-hover animate-slide stagger-${Math.min(i + 1, 8)}`}
             style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
           >
             <div
@@ -147,8 +147,10 @@ export default function FeedPage() {
 
         {/* Feed */}
         <div>
-          {mockFeed.map((item) => (
-            <TradeCard key={item.id} item={item} />
+          {mockFeed.map((item, i) => (
+            <div key={item.id} className={`animate-in stagger-${Math.min(i + 1, 8)}`}>
+              <TradeCard item={item} />
+            </div>
           ))}
         </div>
       </div>

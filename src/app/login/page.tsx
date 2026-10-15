@@ -28,7 +28,7 @@ export default function EarlyAccessPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden" style={{ background: "var(--bg)" }}>
-      <div className="relative z-10 w-full max-w-[380px] px-6 py-16">
+      <div className="relative z-10 w-full max-w-[380px] px-6 py-16 animate-in">
         {/* Logo */}
         <div className="flex items-center justify-center gap-2 mb-1.5">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "var(--fg)" }}>

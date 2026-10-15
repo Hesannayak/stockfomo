@@ -11,7 +11,7 @@ export function ProfileContent({ username }: { username: string }) {
   const userPositions = mockPositions.filter((p) => p.userId === user.id);
 
   return (
-    <div>
+    <div className="animate-in">
       {/* Profile Header */}
       <div className="p-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-start gap-4">

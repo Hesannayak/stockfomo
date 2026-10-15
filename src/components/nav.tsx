@@ -32,7 +32,7 @@ export function BottomNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex flex-col items-center gap-1 py-2 px-3 transition-all relative"
+              className="flex flex-col items-center gap-1 py-2 px-3 transition-all relative active:scale-90"
               style={{ color: isActive ? "var(--fg)" : "var(--fg-dim)" }}
             >
               {isActive && (
