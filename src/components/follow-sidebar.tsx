@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { mockUsers, mockTrades } from "@/lib/mock-data";
+import { useAuth } from "@/lib/auth-context";
 import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 export function FollowSidebar() {
   const suggestedUsers = mockUsers.filter((u) => u.isVerified || (u.followerCount ?? 0) > 10);
   const [following, setFollowing] = useState<Set<string>>(new Set());
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
 
   return (
     <div className="h-full overflow-y-auto" style={{ borderLeft: "1px solid var(--border)" }}>
@@ -41,11 +45,17 @@ export function FollowSidebar() {
             </div>
           </div>
           <button
-            onClick={() => setFollowing((prev) => {
-              const next = new Set(prev);
-              next.has(user.id) ? next.delete(user.id) : next.add(user.id);
-              return next;
-            })}
+            onClick={() => {
+              if (!isLoggedIn) {
+                router.push("/login");
+                return;
+              }
+              setFollowing((prev) => {
+                const next = new Set(prev);
+                next.has(user.id) ? next.delete(user.id) : next.add(user.id);
+                return next;
+              });
+            }}
             className="px-2.5 py-1 rounded-md text-[13px] font-medium cursor-pointer shrink-0 transition-all active:scale-90"
             style={{
               background: following.has(user.id) ? "var(--bg-elevated)" : "var(--fg)",
