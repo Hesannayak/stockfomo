@@ -36,7 +36,7 @@ export default function EarlyAccessPage() {
           </div>
           <h1 className="text-xl font-bold tracking-tight">StockFomo</h1>
         </div>
-        <p className="text-center text-[13px] mb-10" style={{ color: "var(--fg-dim)" }}>
+        <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
           The social paper trading platform
         </p>
 
@@ -49,7 +49,7 @@ export default function EarlyAccessPage() {
           ].map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-base font-bold font-mono">{s.value}</div>
-              <div className="text-[10px] uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
+              <div className="text-[11px] uppercase tracking-wider font-medium" style={{ color: "var(--fg-dim)" }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function EarlyAccessPage() {
                 ].map((feature) => (
                   <div key={feature} className="flex items-center gap-2">
                     <Check size={12} style={{ color: "var(--green)" }} />
-                    <span className="text-xs" style={{ color: "var(--fg-muted)" }}>{feature}</span>
+                    <span className="text-[13px]" style={{ color: "var(--fg-muted)" }}>{feature}</span>
                   </div>
                 ))}
               </div>
@@ -122,7 +122,7 @@ export default function EarlyAccessPage() {
           )}
         </div>
 
-        <p className="text-center text-[11px] mt-6 font-mono" style={{ color: "var(--fg-dim)" }}>
+        <p className="text-center text-xs mt-6 font-mono" style={{ color: "var(--fg-dim)" }}>
           Paper trading only · No real money · No broker needed
         </p>
       </div>

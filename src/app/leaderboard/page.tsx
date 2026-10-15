@@ -31,7 +31,7 @@ export default function LeaderboardPage() {
         <div className="px-4 py-4" style={{ borderTop: "1px solid var(--border)" }}>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-semibold">Trending Stocks</h2>
-            <Link href="/trade" className="text-xs font-medium no-underline hover:underline" style={{ color: "var(--fg-muted)" }}>
+            <Link href="/trade" className="text-[13px] font-medium no-underline hover:underline" style={{ color: "var(--fg-muted)" }}>
               View All
             </Link>
           </div>
@@ -55,7 +55,7 @@ export default function LeaderboardPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       <span className="text-sm font-bold">{t.ticker}</span>
-                      <span className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                      <span className="text-[13px]" style={{ color: "var(--fg-dim)" }}>
                         {t.name.split(" ")[0]}
                       </span>
                     </div>
@@ -64,7 +64,7 @@ export default function LeaderboardPage() {
                         ${quote?.price.toFixed(2)}
                       </span>
                       <span
-                        className="text-xs font-mono font-semibold"
+                        className="text-[13px] font-mono font-semibold"
                         style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                       >
                         {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%

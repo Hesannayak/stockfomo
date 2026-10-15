@@ -74,7 +74,7 @@ export default function ProfilePage() {
                 <h1 className="text-base font-bold">{displayUser.displayName}</h1>
                 {displayUser.isVerified && <Shield size={14} style={{ color: "var(--blue)" }} />}
               </div>
-              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
+              <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
             </div>
           </div>
           <div className="flex gap-1">
@@ -180,7 +180,7 @@ export default function ProfilePage() {
                       style={{
                         background: isUp ? "var(--green-muted)" : "var(--red-muted)",
                         color: isUp ? "var(--green)" : "var(--red)",
-                        fontSize: "10px",
+                        fontSize: "11px",
                       }}
                     >
                       {isUp ? "+" : ""}{formatPercent(pos.unrealizedPnlPercent ?? 0)}
@@ -254,7 +254,7 @@ export default function ProfilePage() {
                       style={{
                         background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                         color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
-                        fontSize: "10px",
+                        fontSize: "11px",
                       }}
                     >
                       {trade.status}
@@ -287,7 +287,7 @@ export default function ProfilePage() {
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
         <div className="px-4 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
           <h2 className="section-header flex items-center gap-1.5">
-            <Trophy size={11} /> Leaderboard
+            <Trophy size={12} /> Leaderboard
           </h2>
         </div>
         {mockLeaderboard.map((entry, i) => (
@@ -298,7 +298,7 @@ export default function ProfilePage() {
             style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
           >
             <div
-              className="w-6 text-right text-[12px] font-mono shrink-0"
+              className="w-6 text-right text-[13px] font-mono shrink-0"
               style={{
                 color: i < 3 ? rankColors[i] : "var(--fg-dim)",
                 fontStyle: "italic",
@@ -315,17 +315,17 @@ export default function ProfilePage() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1">
-                <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
+                <span className="text-[13px] font-semibold truncate">{entry.user.displayName}</span>
                 {entry.user.isVerified && (
                   <span className="pro-badge">PRO</span>
                 )}
               </div>
-              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
                 {entry.tradeCount} trades · {entry.winRate}%
               </div>
             </div>
             <div
-              className="text-xs font-bold font-mono shrink-0"
+              className="text-[13px] font-bold font-mono shrink-0"
               style={{ color: entry.totalReturn >= 0 ? "var(--green)" : "var(--red)" }}
             >
               {formatPercent(entry.totalReturn)}
@@ -346,20 +346,20 @@ export default function ProfilePage() {
                 style={{ color: "var(--fg)" }}
               >
                 <div>
-                  <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-xs ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-[13px] font-bold">{t.ticker}</span>
+                  <span className="text-[13px] ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
+                  <span className="text-[13px] font-mono">${quote?.price.toFixed(2)}</span>
                   <span
                     className="stat-pill"
                     style={{
                       color: isUp ? "var(--green)" : "var(--red)",
                       background: isUp ? "var(--green-muted)" : "var(--red-muted)",
-                      fontSize: "10px",
+                      fontSize: "11px",
                     }}
                   >
-                    {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
+                    {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
                     {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%
                   </span>
                 </div>

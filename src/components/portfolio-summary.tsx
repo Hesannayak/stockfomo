@@ -39,7 +39,7 @@ export function PortfolioSummary({
           <span className="font-mono">{formatCurrency(totalPnl)}</span>
           <span className="font-mono" style={{ opacity: 0.7 }}>({formatPercent(totalPnlPercent)})</span>
         </div>
-        <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+        <span className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
           today
         </span>
       </div>

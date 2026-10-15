@@ -89,7 +89,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               { label: "Vol", value: stock.volume },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="section-header" style={{ fontSize: "10px" }}>{s.label}</div>
+                <div className="section-header" style={{ fontSize: "11px" }}>{s.label}</div>
                 <div className="font-mono font-semibold">{s.value}</div>
               </div>
             ))}
@@ -155,8 +155,8 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               { label: "Avg Volume", value: stock.avgVolume },
             ].map((s) => (
               <div key={s.label} className="flex justify-between items-center py-1">
-                <span className="text-xs" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
-                <span className="text-xs font-semibold font-mono">{s.value}</span>
+                <span className="text-[13px]" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
+                <span className="text-[13px] font-semibold font-mono">{s.value}</span>
               </div>
             ))}
           </div>
@@ -189,7 +189,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold">{trade.user?.displayName}</span>
-                      <span className="stat-pill" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "10px" }}>{trade.direction}</span>
+                      <span className="stat-pill" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "11px" }}>{trade.direction}</span>
                     </div>
                     <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>{trade.quantity} shares @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}</div>
                   </div>
@@ -262,7 +262,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
         {/* About section on right panel */}
         <div className="px-4 py-3" style={{ borderTop: "1px solid var(--border)" }}>
           <h2 className="section-header mb-2">About {stock.ticker}</h2>
-          <p className="text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
+          <p className="text-[13px] leading-relaxed" style={{ color: "var(--fg-muted)" }}>{stock.about}</p>
 
           <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 mt-3">
             {[
@@ -274,8 +274,8 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               { label: "Avg Vol", value: stock.avgVolume },
             ].map((s) => (
               <div key={s.label} className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
-                <span className="text-xs font-mono font-semibold">{s.value}</span>
+                <span className="text-[13px]" style={{ color: "var(--fg-dim)" }}>{s.label}</span>
+                <span className="text-[13px] font-mono font-semibold">{s.value}</span>
               </div>
             ))}
           </div>
@@ -291,14 +291,14 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               const isBuy = trade.direction === "BUY";
               return (
                 <div key={trade.id} className="flex items-center gap-2 px-4 py-2" style={{ borderBottom: "1px solid var(--border)" }}>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}>
                     {trade.user ? getInitials(trade.user.displayName) : "?"}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-xs font-semibold">{trade.user?.displayName}</span>
-                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
+                    <span className="text-[13px] font-semibold">{trade.user?.displayName}</span>
+                    <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
                   </div>
-                  <span className="stat-pill shrink-0" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "10px", padding: "1px 6px" }}>
+                  <span className="stat-pill shrink-0" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "11px", padding: "1px 6px" }}>
                     {trade.direction}
                   </span>
                 </div>

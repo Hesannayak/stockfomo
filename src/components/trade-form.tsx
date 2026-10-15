@@ -64,17 +64,17 @@ export function TradeForm() {
                   style={{ borderBottom: "1px solid var(--border)", background: "transparent" }}
                 >
                   <div className="text-left">
-                    <div className="text-sm font-bold">{ticker}</div>
-                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-[15px] font-bold">{ticker}</div>
+                    <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
                       {info?.name ?? ticker}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-mono font-semibold">
+                    <div className="text-[15px] font-mono font-semibold">
                       {formatCurrency(q.price)}
                     </div>
                     <div
-                      className="text-xs font-mono"
+                      className="text-[13px] font-mono"
                       style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                     >
                       {isUp ? "+" : ""}
@@ -134,8 +134,8 @@ export function TradeForm() {
                   { label: "Vol", value: `${(quote.volume / 1_000_000).toFixed(1)}M` },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
-                    <div className="section-header" style={{ fontSize: "10px" }}>{item.label}</div>
-                    <div className="text-xs font-mono font-semibold mt-0.5">
+                    <div className="section-header" style={{ fontSize: "11px" }}>{item.label}</div>
+                    <div className="text-[13px] font-mono font-semibold mt-0.5">
                       {typeof item.value === "number" ? formatCurrency(item.value) : item.value}
                     </div>
                   </div>
@@ -213,7 +213,7 @@ export function TradeForm() {
           </button>
 
           <p
-            className="text-xs text-center mt-3 font-mono"
+            className="text-[13px] text-center mt-3 font-mono"
             style={{ color: "var(--fg-dim)" }}
           >
             Paper trade only · No real money involved

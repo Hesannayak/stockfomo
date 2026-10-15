@@ -24,30 +24,30 @@ export function FeedSidebar() {
             style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
           >
             <div
-              className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5"
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 mt-0.5"
               style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
             >
               {getInitials(user.displayName)}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-xs font-semibold truncate">{user.displayName}</span>
+                <span className="text-[13px] font-semibold truncate">{user.displayName}</span>
                 <span
                   className="stat-pill"
                   style={{
                     background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                     color: isBuy ? "var(--green)" : "var(--red)",
-                    fontSize: "10px",
+                    fontSize: "11px",
                     padding: "1px 6px",
                   }}
                 >
                   {trade.direction}
                 </span>
-                <span className="text-xs ml-auto shrink-0 font-mono" style={{ color: "var(--fg-dim)" }}>
+                <span className="text-[13px] ml-auto shrink-0 font-mono" style={{ color: "var(--fg-dim)" }}>
                   {timeAgo(timestamp)}
                 </span>
               </div>
-              <div className="text-xs font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-[13px] font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
                 <span className="font-semibold" style={{ color: "var(--fg-muted)" }}>{trade.ticker}</span>
                 {" "}{formatCurrency(trade.entryPrice)} × {trade.quantity}
               </div>

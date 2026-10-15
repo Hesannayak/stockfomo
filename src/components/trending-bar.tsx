@@ -22,20 +22,20 @@ export function TrendingBar() {
               style={{ background: "var(--bg)", color: "var(--fg)", border: "1px solid var(--border)" }}
             >
               <div>
-                <div className="text-xs font-bold">{t.ticker}</div>
-                <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-[13px] font-bold">{t.ticker}</div>
+                <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
                   {t.name.length > 14 ? t.name.slice(0, 14) + "…" : t.name}
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-xs font-mono font-semibold">
+                <div className="text-[13px] font-mono font-semibold">
                   ${quote?.price.toFixed(2)}
                 </div>
                 <div
-                  className="text-xs font-mono font-semibold flex items-center gap-0.5"
+                  className="text-[13px] font-mono font-semibold flex items-center gap-0.5"
                   style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                 >
-                  {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
+                  {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
                   {isUp ? "+" : ""}
                   {quote?.changePercent.toFixed(2)}%
                 </div>

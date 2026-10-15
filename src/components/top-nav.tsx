@@ -26,7 +26,7 @@ export function TopNav() {
         <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
           <Zap size={13} color="#fff" fill="#fff" />
         </div>
-        <span className="text-sm font-bold tracking-tight">StockFomo</span>
+        <span className="text-[15px] font-bold tracking-tight">StockFomo</span>
       </Link>
 
       <nav className="flex items-center gap-0.5">
@@ -36,13 +36,13 @@ export function TopNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] transition-all no-underline hover:bg-[var(--bg-elevated)]"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm transition-all no-underline hover:bg-[var(--bg-elevated)]"
               style={{
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
                 fontWeight: isActive ? 600 : 400,
               }}
             >
-              <tab.icon size={14} strokeWidth={isActive ? 2 : 1.5} />
+              <tab.icon size={15} strokeWidth={isActive ? 2 : 1.5} />
               {tab.label}
             </Link>
           );
@@ -53,13 +53,13 @@ export function TopNav() {
 
       <div className="flex items-center gap-1.5">
         <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs cursor-pointer"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-md text-[13px] cursor-pointer"
           style={{ color: "var(--fg-dim)", border: "1px solid var(--border)" }}
         >
-          <Search size={12} />
+          <Search size={13} />
           <span>Search markets...</span>
           <kbd
-            className="text-[10px] px-1 py-px rounded font-mono"
+            className="text-[11px] px-1 py-px rounded font-mono"
             style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)" }}
           >
             /
@@ -72,7 +72,7 @@ export function TopNav() {
         {isLoggedIn && user ? (
           <Link
             href="/profile"
-            className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold no-underline"
+            className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold no-underline"
             style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
           >
             {getInitials(user.displayName)}
@@ -80,7 +80,7 @@ export function TopNav() {
         ) : (
           <Link
             href="/login"
-            className="px-3 py-1.5 rounded-md text-xs font-medium no-underline btn-primary"
+            className="px-3 py-1.5 rounded-md text-[13px] font-medium no-underline btn-primary"
           >
             Get Started
           </Link>

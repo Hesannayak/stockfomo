@@ -98,7 +98,7 @@ export function ProfileContent({ username }: { username: string }) {
                 >
                   <div>
                     <div className="font-bold text-sm">{pos.ticker}</div>
-                    <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
                       {pos.quantity} shares @ {formatCurrency(pos.avgEntryPrice)}
                     </div>
                   </div>
@@ -152,7 +152,7 @@ export function ProfileContent({ username }: { username: string }) {
                     style={{
                       background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                       color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
-                      fontSize: "10px",
+                      fontSize: "11px",
                     }}
                   >
                     {trade.status}

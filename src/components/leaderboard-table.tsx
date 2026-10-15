@@ -28,7 +28,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
           <button
             key={tf.key}
             onClick={() => setTimeframe(tf.key)}
-            className="px-3 py-1 text-[13px] rounded-md transition-all cursor-pointer"
+            className="px-3 py-1 text-sm rounded-md transition-all cursor-pointer"
             style={{
               background: timeframe === tf.key ? "var(--fg)" : "transparent",
               color: timeframe === tf.key ? "var(--bg)" : "var(--fg-dim)",
@@ -71,7 +71,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
             <div className="flex justify-center">
               {i < 3 ? (
                 <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-[13px] font-bold"
                   style={{ background: rankBg[i], color: "#fff" }}
                 >
                   {entry.rank}
@@ -101,14 +101,14 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
                     {entry.user.displayName}
                   </span>
                   {entry.user.isVerified && (
-                    <Shield size={13} style={{ color: "var(--blue)" }} />
+                    <Shield size={14} style={{ color: "var(--blue)" }} />
                   )}
                   {entry.streak > 0 && (
                     <span
-                      className="text-xs font-semibold flex items-center gap-0.5"
+                      className="text-[13px] font-semibold flex items-center gap-0.5"
                       style={{ color: "var(--yellow)" }}
                     >
-                      <Flame size={10} />
+                      <Flame size={11} />
                       {entry.streak} streak
                     </span>
                   )}
@@ -116,7 +116,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
                     <span className="pro-badge">PRO</span>
                   )}
                 </div>
-                <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
                   @{entry.user.username}
                 </div>
               </div>
@@ -127,7 +127,7 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
               <div className="text-sm" style={{ color: "var(--fg-muted)" }}>
                 {entry.tradeCount} trades
               </div>
-              <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-[13px]" style={{ color: "var(--fg-dim)" }}>
                 {entry.winRate}% win rate
               </div>
             </div>

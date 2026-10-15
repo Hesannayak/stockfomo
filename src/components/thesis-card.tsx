@@ -28,7 +28,7 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
       <div className="flex items-start gap-3">
         <Link
           href={`/profile/${user.username}`}
-          className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 no-underline"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0 no-underline"
           style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
         >
           {getInitials(user.displayName)}
@@ -36,16 +36,16 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <Link href={`/profile/${user.username}`} className="font-semibold text-sm no-underline hover:underline" style={{ color: "var(--fg)" }}>
+            <Link href={`/profile/${user.username}`} className="font-semibold text-[15px] no-underline hover:underline" style={{ color: "var(--fg)" }}>
               {user.displayName}
             </Link>
             {user.isVerified && (
               <span className="pro-badge">PRO</span>
             )}
-            <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </span>
-            <span className="text-xs font-mono ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-[13px] font-mono ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
               {timeAgo(timestamp)}
             </span>
           </div>
@@ -56,15 +56,15 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
               style={{
                 background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--green)" : "var(--red)",
-                fontSize: "11px",
+                fontSize: "12px",
               }}
             >
-              <FileText size={10} />
+              <FileText size={11} />
               {thesis.direction} THESIS
             </span>
             <Link
               href={`/stock/${thesis.ticker}`}
-              className="font-bold text-sm no-underline hover:underline"
+              className="font-bold text-[15px] no-underline hover:underline"
               style={{ color: "var(--fg)" }}
             >
               {thesis.ticker}
@@ -76,11 +76,11 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
             className="block mt-2 no-underline"
             style={{ color: "var(--fg)" }}
           >
-            <h3 className="text-sm font-bold leading-snug">
+            <h3 className="text-[15px] font-bold leading-snug">
               {thesis.title}
             </h3>
             <p
-              className="text-[13px] mt-1.5 leading-relaxed"
+              className="text-sm mt-1.5 leading-relaxed"
               style={{ color: "var(--fg-muted)" }}
             >
               {thesis.body.length > 200
@@ -98,20 +98,20 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
               <button
                 key={key}
                 onClick={(e) => react(key, e)}
-                className="flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all cursor-pointer hover:bg-[var(--bg-elevated)]"
+                className="flex items-center gap-1 px-2 py-1 rounded-md text-[13px] transition-all cursor-pointer hover:bg-[var(--bg-elevated)]"
                 style={{ color: "var(--fg-dim)" }}
               >
-                <Icon size={12} />
-                <span className="font-mono text-[11px]">{localReactions[key]}</span>
+                <Icon size={13} />
+                <span className="font-mono text-xs">{localReactions[key]}</span>
               </button>
             ))}
             <Link
               href={`/stock/${thesis.ticker}`}
-              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-all cursor-pointer ml-auto no-underline hover:bg-[var(--bg-elevated)]"
+              className="flex items-center gap-1 px-2 py-1 rounded-md text-[13px] transition-all cursor-pointer ml-auto no-underline hover:bg-[var(--bg-elevated)]"
               style={{ color: "var(--fg-dim)" }}
             >
-              <MessageCircle size={12} />
-              <span className="font-mono text-[11px]">{thesis.replyCount}</span>
+              <MessageCircle size={13} />
+              <span className="font-mono text-xs">{thesis.replyCount}</span>
             </Link>
           </div>
         </div>

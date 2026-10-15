@@ -22,21 +22,21 @@ export function FollowSidebar() {
         >
           <Link
             href={`/profile/${user.username}`}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 no-underline"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 no-underline"
             style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
           >
             {getInitials(user.displayName)}
           </Link>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1">
-              <Link href={`/profile/${user.username}`} className="text-[13px] font-medium truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
+              <Link href={`/profile/${user.username}`} className="text-sm font-medium truncate no-underline hover:underline" style={{ color: "var(--fg)" }}>
                 {user.displayName}
               </Link>
               {user.isVerified && (
                 <span className="pro-badge">PRO</span>
               )}
             </div>
-            <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </div>
           </div>
@@ -46,7 +46,7 @@ export function FollowSidebar() {
               next.has(user.id) ? next.delete(user.id) : next.add(user.id);
               return next;
             })}
-            className="px-2.5 py-1 rounded-md text-xs font-medium cursor-pointer shrink-0 transition-all active:scale-90"
+            className="px-2.5 py-1 rounded-md text-[13px] font-medium cursor-pointer shrink-0 transition-all active:scale-90"
             style={{
               background: following.has(user.id) ? "var(--bg-elevated)" : "var(--fg)",
               color: following.has(user.id) ? "var(--fg-muted)" : "#fff",
@@ -76,14 +76,14 @@ export function FollowSidebar() {
               style={{ background: isBuy ? "var(--green)" : "var(--red)" }}
             />
             <div className="flex-1 min-w-0">
-              <div className="text-xs">
+              <div className="text-[13px]">
                 <span className="font-semibold">{user?.displayName}</span>
                 {" "}
                 <span style={{ color: "var(--fg-muted)" }}>
                   {isBuy ? "bought" : "sold"} {trade.ticker} @ {formatCurrency(trade.entryPrice)}
                 </span>
               </div>
-              <div className="text-xs font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-[13px] font-mono mt-0.5" style={{ color: "var(--fg-dim)" }}>
                 {timeAgo(trade.createdAt)}
               </div>
             </div>

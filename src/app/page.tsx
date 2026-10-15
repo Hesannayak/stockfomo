@@ -29,7 +29,7 @@ export default function FeedPage() {
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
         <div className="px-4 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
           <h2 className="section-header flex items-center gap-1.5">
-            <Trophy size={10} /> Leaderboard
+            <Trophy size={11} /> Leaderboard
           </h2>
         </div>
         {mockLeaderboard.map((entry, i) => (
@@ -40,7 +40,7 @@ export default function FeedPage() {
             style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
           >
             <div
-              className="w-5 text-right text-[11px] font-mono shrink-0"
+              className="w-5 text-right text-xs font-mono shrink-0"
               style={{
                 color: i < 3 ? rankColors[i] : "var(--fg-dim)",
                 fontWeight: i < 3 ? 700 : 400,
@@ -49,24 +49,24 @@ export default function FeedPage() {
               {entry.rank}
             </div>
             <div
-              className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
+              className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
               style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)" }}
             >
               {getInitials(entry.user.displayName)}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-1">
-                <span className="text-xs font-medium truncate">{entry.user.displayName}</span>
+                <span className="text-[13px] font-medium truncate">{entry.user.displayName}</span>
                 {entry.user.isVerified && (
                   <span className="pro-badge">PRO</span>
                 )}
               </div>
-              <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
                 {entry.winRate}% win
               </div>
             </div>
             <div
-              className="text-xs font-semibold font-mono shrink-0"
+              className="text-[13px] font-semibold font-mono shrink-0"
               style={{ color: entry.totalReturn >= 0 ? "var(--green)" : "var(--red)" }}
             >
               {formatPercent(entry.totalReturn)}
@@ -87,11 +87,11 @@ export default function FeedPage() {
                 style={{ color: "var(--fg)" }}
               >
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-semibold">{t.ticker}</span>
-                  <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-[13px] font-semibold">{t.ticker}</span>
+                  <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <span
-                  className="text-[11px] font-mono font-medium"
+                  className="text-xs font-mono font-medium"
                   style={{ color: isUp ? "var(--green)" : "var(--red)" }}
                 >
                   {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%
@@ -114,7 +114,7 @@ export default function FeedPage() {
               <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
                 <Zap size={13} color="#fff" fill="#fff" />
               </div>
-              <h1 className="text-sm font-bold tracking-tight">StockFomo</h1>
+              <h1 className="text-[15px] font-bold tracking-tight">StockFomo</h1>
             </div>
             <button className="p-1.5 rounded-md cursor-pointer relative" style={{ color: "var(--fg-dim)" }}>
               <Bell size={18} />
@@ -129,7 +129,7 @@ export default function FeedPage() {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className="px-3 py-1 text-[13px] rounded-md transition-all cursor-pointer"
+              className="px-3 py-1 text-sm rounded-md transition-all cursor-pointer"
               style={{
                 background: filter === f.key ? "var(--fg)" : "transparent",
                 color: filter === f.key ? "var(--bg)" : "var(--fg-dim)",
