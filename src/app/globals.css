@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #06060a;
-  --bg-card: #111115;
-  --bg-card-hover: #19191f;
-  --bg-input: #1a1a21;
-  --bg-elevated: #16161c;
-  --border: #222229;
-  --border-light: #2e2e38;
-  --fg: #f4f4f5;
-  --fg-muted: #a0a0ab;
-  --fg-dim: #63637a;
-  --accent: #10b981;
-  --accent-hover: #059669;
-  --accent-muted: rgba(16, 185, 129, 0.12);
-  --accent-glow: rgba(16, 185, 129, 0.06);
-  --red: #f43f5e;
-  --red-muted: rgba(244, 63, 94, 0.12);
-  --yellow: #f59e0b;
-  --yellow-muted: rgba(245, 158, 11, 0.12);
-  --blue: #6366f1;
-  --blue-muted: rgba(99, 102, 241, 0.12);
+  --bg: #000000;
+  --bg-card: #0a0a0f;
+  --bg-card-hover: #12121a;
+  --bg-input: #13131b;
+  --bg-elevated: #0e0e16;
+  --border: #1a1a24;
+  --border-light: #252530;
+  --fg: #ffffff;
+  --fg-muted: #a1a1aa;
+  --fg-dim: #71717a;
+  --accent: #00FF6A;
+  --accent-hover: #00e05e;
+  --accent-muted: rgba(0, 255, 106, 0.10);
+  --accent-glow: rgba(0, 255, 106, 0.05);
+  --red: #ff3b5c;
+  --red-muted: rgba(255, 59, 92, 0.10);
+  --yellow: #ffca28;
+  --yellow-muted: rgba(255, 202, 40, 0.10);
+  --blue: #7c3aed;
+  --blue-muted: rgba(124, 58, 237, 0.10);
   --radius: 12px;
   --radius-sm: 8px;
   --radius-lg: 16px;
@@ -30,8 +30,8 @@
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--fg);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
@@ -103,7 +103,7 @@ input::placeholder {
 }
 
 .glass {
-  background: rgba(17, 17, 21, 0.75);
+  background: rgba(10, 10, 15, 0.80);
   backdrop-filter: blur(20px) saturate(1.3);
   -webkit-backdrop-filter: blur(20px) saturate(1.3);
 }
@@ -134,11 +134,11 @@ input::placeholder {
 }
 
 .glow-green {
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15), 0 0 60px rgba(16, 185, 129, 0.05);
+  box-shadow: 0 0 20px rgba(0, 255, 106, 0.15), 0 0 60px rgba(0, 255, 106, 0.05);
 }
 
 .glow-red {
-  box-shadow: 0 0 20px rgba(244, 63, 94, 0.15), 0 0 60px rgba(244, 63, 94, 0.05);
+  box-shadow: 0 0 20px rgba(255, 59, 92, 0.15), 0 0 60px rgba(255, 59, 92, 0.05);
 }
 
 .btn-primary {
@@ -151,7 +151,7 @@ input::placeholder {
 }
 .btn-primary:hover {
   background: var(--accent-hover);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 20px rgba(0, 255, 106, 0.25);
 }
 .btn-primary:active {
   transform: scale(0.98);
