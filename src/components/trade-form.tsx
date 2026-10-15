@@ -212,12 +212,6 @@ export function TradeForm() {
               : `${direction} ${qty > 0 ? qty : ""} ${selectedTicker}`}
           </button>
 
-          <p
-            className="text-[13px] text-center mt-3 font-mono"
-            style={{ color: "var(--fg-dim)" }}
-          >
-            Paper trade only · No real money involved
-          </p>
         </div>
       )}
     </div>

@@ -22,7 +22,7 @@ export default function LeaderboardPage() {
         <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
           <h1 className="text-base font-bold tracking-tight">Leaderboard</h1>
           <p className="text-xs mt-0.5" style={{ color: "var(--fg-dim)" }}>
-            Top paper traders ranked by total return across all portfolios.
+            Top traders ranked by total return across all portfolios.
           </p>
         </div>
         <LeaderboardTable entries={mockLeaderboard} />

@@ -16,9 +16,9 @@ export default function TradePage() {
       {/* Center — Trade Form */}
       <div className="lg:border-r" style={{ borderColor: "var(--border)" }}>
         <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
-          <h1 className="text-base font-bold tracking-tight">Paper Trade</h1>
+          <h1 className="text-base font-bold tracking-tight">Trade</h1>
           <p className="text-xs mt-0.5 font-mono" style={{ color: "var(--fg-dim)" }}>
-            Trade with $100K virtual cash · Real-time prices
+            $100K virtual cash · Real-time prices
           </p>
         </div>
         <TradeForm />

@@ -37,7 +37,7 @@ export default function EarlyAccessPage() {
           <h1 className="text-xl font-bold tracking-tight">StockFomo</h1>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
-          The social paper trading platform
+          The social stock trading platform
         </p>
 
         {/* Social proof */}
@@ -108,7 +108,7 @@ export default function EarlyAccessPage() {
 
               <div className="flex flex-col gap-2 mt-5 pt-4" style={{ borderTop: "1px solid var(--border)" }}>
                 {[
-                  "Paper trade with $100K virtual cash",
+                  "Start trading with $100K virtual cash",
                   "Follow top traders & copy their moves",
                   "Compete on the leaderboard",
                 ].map((feature) => (
@@ -122,9 +122,6 @@ export default function EarlyAccessPage() {
           )}
         </div>
 
-        <p className="text-center text-xs mt-6 font-mono" style={{ color: "var(--fg-dim)" }}>
-          Paper trading only · No real money · No broker needed
-        </p>
       </div>
     </div>
   );

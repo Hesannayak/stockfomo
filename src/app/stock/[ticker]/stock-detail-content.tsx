@@ -219,7 +219,6 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
           <button onClick={handleOrder} disabled={qty <= 0 || orderPlaced} className="w-full py-2.5 rounded-md text-sm font-medium cursor-pointer disabled:opacity-50 transition-all" style={{ background: orderPlaced ? "var(--bg-elevated)" : orderSide === "BUY" ? "var(--green)" : "var(--red)", color: orderPlaced ? "var(--green)" : "#fff" }}>
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker} · Market Order`}
           </button>
-          <p className="text-center text-xs font-mono mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money involved</p>
         </div>
       </div>
 
@@ -256,7 +255,6 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
             {orderPlaced ? "Order Placed!" : `${orderSide} ${ticker}`}
           </button>
 
-          <p className="text-center text-xs font-mono mt-2" style={{ color: "var(--fg-dim)" }}>Paper trade only · No real money</p>
         </div>
 
         {/* About section on right panel */}
