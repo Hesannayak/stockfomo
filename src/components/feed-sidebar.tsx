@@ -37,7 +37,7 @@ export function FeedSidebar() {
                   style={{
                     background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                     color: isBuy ? "var(--green)" : "var(--red)",
-                    fontSize: "11px",
+                    fontSize: "12px",
                     padding: "1px 6px",
                   }}
                 >

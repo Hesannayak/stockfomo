@@ -134,7 +134,7 @@ export function TradeForm() {
                   { label: "Vol", value: `${(quote.volume / 1_000_000).toFixed(1)}M` },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
-                    <div className="section-header" style={{ fontSize: "11px" }}>{item.label}</div>
+                    <div className="section-header" style={{ fontSize: "12px" }}>{item.label}</div>
                     <div className="text-[13px] font-mono font-semibold mt-0.5">
                       {typeof item.value === "number" ? formatCurrency(item.value) : item.value}
                     </div>

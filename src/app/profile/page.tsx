@@ -180,7 +180,7 @@ export default function ProfilePage() {
                       style={{
                         background: isUp ? "var(--green-muted)" : "var(--red-muted)",
                         color: isUp ? "var(--green)" : "var(--red)",
-                        fontSize: "11px",
+                        fontSize: "12px",
                       }}
                     >
                       {isUp ? "+" : ""}{formatPercent(pos.unrealizedPnlPercent ?? 0)}
@@ -254,7 +254,7 @@ export default function ProfilePage() {
                       style={{
                         background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                         color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
-                        fontSize: "11px",
+                        fontSize: "12px",
                       }}
                     >
                       {trade.status}
@@ -356,7 +356,7 @@ export default function ProfilePage() {
                     style={{
                       color: isUp ? "var(--green)" : "var(--red)",
                       background: isUp ? "var(--green-muted)" : "var(--red-muted)",
-                      fontSize: "11px",
+                      fontSize: "12px",
                     }}
                   >
                     {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}

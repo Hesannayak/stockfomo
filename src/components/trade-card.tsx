@@ -69,7 +69,7 @@ export function TradeCard({ item }: { item: FeedItem & { type: "trade" } }) {
               style={{
                 background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--green)" : "var(--red)",
-                fontSize: "12px",
+                fontSize: "13px",
               }}
             >
               {trade.direction}
@@ -99,7 +99,7 @@ export function TradeCard({ item }: { item: FeedItem & { type: "trade" } }) {
               {isOpen && (
                 <span
                   className="stat-pill uppercase"
-                  style={{ background: "var(--yellow-muted)", color: "var(--yellow)", fontSize: "11px" }}
+                  style={{ background: "var(--yellow-muted)", color: "var(--yellow)", fontSize: "12px" }}
                 >
                   Open
                 </span>

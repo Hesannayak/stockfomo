@@ -94,7 +94,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
               { label: "Vol", value: stock.volume },
             ].map((s) => (
               <div key={s.label} className="text-center">
-                <div className="section-header" style={{ fontSize: "11px" }}>{s.label}</div>
+                <div className="section-header" style={{ fontSize: "12px" }}>{s.label}</div>
                 <div className="font-mono font-semibold">{s.value}</div>
               </div>
             ))}
@@ -308,7 +308,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold">{trade.user?.displayName}</span>
-                      <span className="stat-pill" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "11px" }}>{trade.direction}</span>
+                      <span className="stat-pill" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "12px" }}>{trade.direction}</span>
                     </div>
                     <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>{trade.quantity} shares @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}</div>
                   </div>
@@ -415,7 +415,7 @@ export function StockDetailContent({ ticker }: { ticker: string }) {
                     <span className="text-[13px] font-semibold">{trade.user?.displayName}</span>
                     <div className="text-[13px] font-mono" style={{ color: "var(--fg-dim)" }}>{trade.quantity} @ {formatCurrency(trade.entryPrice)}</div>
                   </div>
-                  <span className="stat-pill shrink-0" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "11px", padding: "1px 6px" }}>
+                  <span className="stat-pill shrink-0" style={{ background: isBuy ? "var(--green-muted)" : "var(--red-muted)", color: isBuy ? "var(--green)" : "var(--red)", fontSize: "12px", padding: "1px 6px" }}>
                     {trade.direction}
                   </span>
                 </div>

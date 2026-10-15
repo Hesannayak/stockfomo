@@ -6,7 +6,7 @@ import { mockUsers, mockTrades } from "@/lib/mock-data";
 import { formatCurrency, timeAgo, getInitials } from "@/lib/utils";
 
 export function FollowSidebar() {
-  const suggestedUsers = mockUsers.filter((u) => u.isVerified || (u.followerCount ?? 0) > 1000);
+  const suggestedUsers = mockUsers.filter((u) => u.isVerified || (u.followerCount ?? 0) > 10);
   const [following, setFollowing] = useState<Set<string>>(new Set());
 
   return (

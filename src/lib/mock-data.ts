@@ -269,33 +269,33 @@ export function getStocksByType(type: StockInfo["type"]): StockInfo[] {
 export const mockUsers: User[] = [
   {
     id: "u1", username: "traderjake", displayName: "Jake Morrison",
-    avatarUrl: null, bio: "Swing trader. Tech & energy focus.", virtualBalance: 112450,
-    totalPnl: 12450, winRate: 68, tradeCount: 47, isVerified: false,
-    followerCount: 1243, followingCount: 89,
+    avatarUrl: null, bio: "Swing trader. Tech & energy focus.", virtualBalance: 101840,
+    totalPnl: 1840, winRate: 68, tradeCount: 47, isVerified: false,
+    followerCount: 14, followingCount: 18,
   },
   {
     id: "u2", username: "sarahq", displayName: "Sarah Quinn",
-    avatarUrl: null, bio: "Former hedge fund analyst. Sector rotation strategy.", virtualBalance: 134200,
-    totalPnl: 34200, winRate: 72, tradeCount: 63, isVerified: true,
-    followerCount: 5621, followingCount: 34,
+    avatarUrl: null, bio: "Former hedge fund analyst. Sector rotation strategy.", virtualBalance: 102950,
+    totalPnl: 2950, winRate: 72, tradeCount: 63, isVerified: true,
+    followerCount: 19, followingCount: 12,
   },
   {
     id: "u3", username: "mikedelta", displayName: "Mike Chen",
-    avatarUrl: null, bio: "Options-minded. Day trades SPY & QQQ.", virtualBalance: 95800,
-    totalPnl: -4200, winRate: 45, tradeCount: 112, isVerified: false,
-    followerCount: 342, followingCount: 156,
+    avatarUrl: null, bio: "Options-minded. Day trades SPY & QQQ.", virtualBalance: 98720,
+    totalPnl: -1280, winRate: 45, tradeCount: 112, isVerified: false,
+    followerCount: 11, followingCount: 16,
   },
   {
     id: "u4", username: "pennywise", displayName: "Alex Rivera",
-    avatarUrl: null, bio: "Small caps. High risk, high reward.", virtualBalance: 167300,
-    totalPnl: 67300, winRate: 58, tradeCount: 89, isVerified: true,
-    followerCount: 8904, followingCount: 12,
+    avatarUrl: null, bio: "Small caps. High risk, high reward.", virtualBalance: 103120,
+    totalPnl: 3120, winRate: 58, tradeCount: 89, isVerified: true,
+    followerCount: 17, followingCount: 13,
   },
   {
     id: "u5", username: "indexfund_izzy", displayName: "Isabella Park",
-    avatarUrl: null, bio: "Slow and steady. ETF & dividend focus.", virtualBalance: 108700,
-    totalPnl: 8700, winRate: 81, tradeCount: 23, isVerified: false,
-    followerCount: 712, followingCount: 45,
+    avatarUrl: null, bio: "Slow and steady. ETF & dividend focus.", virtualBalance: 101450,
+    totalPnl: 1450, winRate: 81, tradeCount: 23, isVerified: false,
+    followerCount: 12, followingCount: 15,
   },
 ];
 
@@ -428,11 +428,11 @@ export const mockFeed: FeedItem[] = [
 });
 
 export const mockLeaderboard: LeaderboardEntry[] = [
-  { rank: 1, user: mockUsers[3], totalReturn: 67.3, winRate: 58, tradeCount: 89, streak: 5 },
-  { rank: 2, user: mockUsers[1], totalReturn: 34.2, winRate: 72, tradeCount: 63, streak: 8 },
-  { rank: 3, user: mockUsers[0], totalReturn: 12.45, winRate: 68, tradeCount: 47, streak: 3 },
-  { rank: 4, user: mockUsers[4], totalReturn: 8.7, winRate: 81, tradeCount: 23, streak: 12 },
-  { rank: 5, user: mockUsers[2], totalReturn: -4.2, winRate: 45, tradeCount: 112, streak: 0 },
+  { rank: 1, user: mockUsers[3], totalReturn: 3.12, winRate: 58, tradeCount: 89, streak: 5 },
+  { rank: 2, user: mockUsers[1], totalReturn: 2.95, winRate: 72, tradeCount: 63, streak: 8 },
+  { rank: 3, user: mockUsers[0], totalReturn: 1.84, winRate: 68, tradeCount: 47, streak: 3 },
+  { rank: 4, user: mockUsers[4], totalReturn: 1.45, winRate: 81, tradeCount: 23, streak: 12 },
+  { rank: 5, user: mockUsers[2], totalReturn: -1.28, winRate: 45, tradeCount: 112, streak: 0 },
 ];
 
 export const mockPositions: Position[] = [

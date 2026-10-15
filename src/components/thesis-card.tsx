@@ -56,7 +56,7 @@ export function ThesisCard({ item }: { item: FeedItem & { type: "thesis" } }) {
               style={{
                 background: isBuy ? "var(--green-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--green)" : "var(--red)",
-                fontSize: "12px",
+                fontSize: "13px",
               }}
             >
               <FileText size={11} />

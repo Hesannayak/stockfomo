@@ -152,7 +152,7 @@ export function ProfileContent({ username }: { username: string }) {
                     style={{
                       background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                       color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
-                      fontSize: "11px",
+                      fontSize: "12px",
                     }}
                   >
                     {trade.status}
