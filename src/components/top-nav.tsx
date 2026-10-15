@@ -27,7 +27,7 @@ export function TopNav() {
         <div className="w-6 h-6 rounded-md flex items-center justify-center" style={{ background: "var(--fg)" }}>
           <Zap size={13} color="#fff" fill="#fff" />
         </div>
-        <span className="text-[15px] font-bold tracking-tight">Stockhome</span>
+        <span className="text-[15px] font-bold tracking-tight">StockFomo</span>
       </Link>
 
       <nav className="flex items-center gap-0.5">

@@ -20,7 +20,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stockhome",
+  title: "StockFomo",
   description: "Social stock trading — see what the best traders are buying.",
 };
 
