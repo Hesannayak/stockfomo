@@ -115,10 +115,21 @@ export default function FeedPage() {
               <img src="/logo.png" alt="StockFomo" className="w-6 h-6 rounded-md" />
               <h1 className="text-[15px] font-bold tracking-tight">StockFomo</h1>
             </div>
-            <button className="p-1.5 rounded-md cursor-pointer relative" style={{ color: "var(--fg-dim)" }}>
-              <Bell size={18} />
-              <div className="live-dot absolute top-1 right-1" />
-            </button>
+            <div className="flex items-center gap-1">
+              <a
+                href="https://x.com/stock_fomo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1.5 rounded-md"
+                style={{ color: "var(--fg-dim)" }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <button className="p-1.5 rounded-md cursor-pointer relative" style={{ color: "var(--fg-dim)" }}>
+                <Bell size={18} />
+                <div className="live-dot absolute top-1 right-1" />
+              </button>
+            </div>
           </div>
         </div>
 
