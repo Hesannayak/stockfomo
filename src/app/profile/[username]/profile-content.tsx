@@ -17,7 +17,7 @@ export function ProfileContent({ username }: { username: string }) {
         <div className="flex items-start gap-4">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold shrink-0"
-            style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
+            style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
           >
             {getInitials(user.displayName)}
           </div>
@@ -28,7 +28,7 @@ export function ProfileContent({ username }: { username: string }) {
                 <Shield size={16} style={{ color: "var(--accent)" }} />
               )}
             </div>
-            <div className="text-sm" style={{ color: "var(--fg-dim)" }}>
+            <div className="text-sm font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </div>
             {user.bio && (
@@ -65,15 +65,13 @@ export function ProfileContent({ username }: { username: string }) {
           { label: "Total P&L", value: formatCurrency(user.totalPnl), color: user.totalPnl >= 0 ? "var(--accent)" : "var(--red)" },
           { label: "Win Rate", value: `${user.winRate}%`, color: "var(--fg)" },
           { label: "Trades", value: user.tradeCount.toString(), color: "var(--fg)" },
-        ].map((stat) => (
+        ].map((stat, i) => (
           <div
             key={stat.label}
             className="text-center py-3"
-            style={{ borderRight: "1px solid var(--border)" }}
+            style={{ borderRight: i < 2 ? "1px solid var(--border)" : "none" }}
           >
-            <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
-              {stat.label}
-            </div>
+            <div className="section-header mb-0.5">{stat.label}</div>
             <div className="text-lg font-bold font-mono mt-0.5" style={{ color: stat.color }}>
               {stat.value}
             </div>
@@ -85,9 +83,7 @@ export function ProfileContent({ username }: { username: string }) {
       {userPositions.length > 0 && (
         <div>
           <div className="px-4 pt-4 pb-2">
-            <h2 className="text-sm font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-              Open Positions
-            </h2>
+            <h2 className="section-header">Open Positions</h2>
           </div>
           <PortfolioSummary balance={user.virtualBalance} positions={userPositions} />
           <div style={{ borderBottom: "1px solid var(--border)" }}>
@@ -102,7 +98,7 @@ export function ProfileContent({ username }: { username: string }) {
                 >
                   <div>
                     <div className="font-bold text-sm">{pos.ticker}</div>
-                    <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
                       {pos.quantity} shares @ {formatCurrency(pos.avgEntryPrice)}
                     </div>
                   </div>
@@ -127,9 +123,7 @@ export function ProfileContent({ username }: { username: string }) {
       {/* Trade History */}
       <div>
         <div className="px-4 pt-4 pb-2">
-          <h2 className="text-sm font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-            Recent Trades
-          </h2>
+          <h2 className="section-header">Recent Trades</h2>
         </div>
         {userTrades.map((trade) => {
           const isBuy = trade.direction === "BUY";
@@ -154,16 +148,17 @@ export function ProfileContent({ username }: { username: string }) {
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-sm">{trade.ticker}</span>
                   <span
-                    className="text-[11px] font-bold px-1.5 py-0.5 rounded"
+                    className="stat-pill"
                     style={{
-                      background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-input)",
+                      background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                       color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
+                      fontSize: "10px",
                     }}
                   >
                     {trade.status}
                   </span>
                 </div>
-                <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
                   {trade.quantity} @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
                 </div>
               </div>

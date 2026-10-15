@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Trophy, Flame, Shield } from "lucide-react";
+import { Trophy, Flame, Shield, TrendingUp } from "lucide-react";
 import type { LeaderboardEntry } from "@/lib/types";
 import { formatPercent, getInitials } from "@/lib/utils";
 
@@ -18,24 +18,22 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
     { key: "all", label: "All Time" },
   ];
 
-  const rankColors = ["var(--yellow)", "var(--fg-muted)", "#cd7f32"];
+  const borderClasses = ["rank-card-gold", "rank-card-silver", "rank-card-bronze"];
+  const rankColors = ["var(--gold)", "var(--silver)", "var(--bronze)"];
 
   return (
     <div>
       {/* Timeframe Tabs */}
-      <div
-        className="flex gap-1 p-1 mx-4 mt-4 rounded-lg"
-        style={{ background: "var(--bg-input)" }}
-      >
+      <div className="flex gap-1.5 p-4 pb-2">
         {timeframes.map((tf) => (
           <button
             key={tf.key}
             onClick={() => setTimeframe(tf.key)}
-            className="flex-1 py-2 text-[13px] font-semibold rounded-md transition-colors cursor-pointer"
+            className="px-3.5 py-1.5 text-[12px] font-semibold rounded-full transition-all cursor-pointer"
             style={{
-              background: timeframe === tf.key ? "var(--bg-elevated)" : "transparent",
-              boxShadow: timeframe === tf.key ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
-              color: timeframe === tf.key ? "var(--fg)" : "var(--fg-dim)",
+              background: timeframe === tf.key ? "var(--fg)" : "transparent",
+              color: timeframe === tf.key ? "var(--bg)" : "var(--fg-dim)",
+              border: timeframe === tf.key ? "1px solid transparent" : "1px solid var(--border)",
             }}
           >
             {tf.label}
@@ -44,29 +42,34 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
       </div>
 
       {/* Entries */}
-      <div className="mt-3">
+      <div className="px-4 pb-4 flex flex-col gap-2 mt-2">
         {entries.map((entry, i) => (
           <Link
             key={entry.user.id}
             href={`/profile/${entry.user.username}`}
-            className="flex items-center gap-3 px-4 py-3 transition-colors card-hover no-underline"
-            style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
+            className={`rank-card ${i < 3 ? borderClasses[i] : ""} flex items-center gap-3 px-4 py-3.5 no-underline`}
+            style={{ color: "var(--fg)" }}
           >
-            {/* Rank */}
+            {/* Rank Number */}
             <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+              className="text-lg font-mono shrink-0 w-8 text-right"
               style={{
                 color: i < 3 ? rankColors[i] : "var(--fg-dim)",
-                background: i < 3 ? "var(--bg-input)" : "transparent",
+                fontStyle: "italic",
+                fontWeight: i < 3 ? 700 : 400,
               }}
             >
-              {i < 3 ? <Trophy size={16} /> : entry.rank}
+              {String(entry.rank).padStart(2, "0")}
             </div>
 
             {/* Avatar */}
             <div
               className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-              style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
+              style={{
+                background: i < 3 ? `${rankColors[i]}15` : "var(--bg-input)",
+                color: i < 3 ? rankColors[i] : "var(--fg-muted)",
+                border: `1.5px solid ${i < 3 ? `${rankColors[i]}30` : "var(--border)"}`,
+              }}
             >
               {getInitials(entry.user.displayName)}
             </div>
@@ -78,33 +81,45 @@ export function LeaderboardTable({ entries }: { entries: LeaderboardEntry[] }) {
                   {entry.user.displayName}
                 </span>
                 {entry.user.isVerified && (
-                  <Shield size={12} style={{ color: "var(--accent)" }} />
+                  <span
+                    className="text-[9px] font-bold px-1.5 py-0.5 rounded"
+                    style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
+                  >
+                    PRO
+                  </span>
                 )}
               </div>
-              <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
-                {entry.tradeCount} trades · {entry.winRate}% win rate
+              <div className="flex items-center gap-3 mt-0.5">
+                <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                  {entry.tradeCount} trades
+                </span>
+                <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                  {entry.winRate}% win
+                </span>
+                {entry.streak > 0 && (
+                  <span
+                    className="text-[11px] font-semibold flex items-center gap-0.5"
+                    style={{ color: "var(--yellow)" }}
+                  >
+                    <Flame size={10} />
+                    {entry.streak}
+                  </span>
+                )}
               </div>
             </div>
 
             {/* Return */}
             <div className="text-right shrink-0">
               <div
-                className="text-sm font-bold font-mono"
+                className="stat-pill"
                 style={{
+                  background: entry.totalReturn >= 0 ? "var(--accent-muted)" : "var(--red-muted)",
                   color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)",
                 }}
               >
+                {entry.totalReturn >= 0 && <TrendingUp size={10} />}
                 {formatPercent(entry.totalReturn)}
               </div>
-              {entry.streak > 0 && (
-                <div
-                  className="flex items-center justify-end gap-0.5 text-[11px] font-semibold mt-0.5"
-                  style={{ color: "var(--yellow)" }}
-                >
-                  <Flame size={10} />
-                  {entry.streak} streak
-                </div>
-              )}
             </div>
           </Link>
         ))}

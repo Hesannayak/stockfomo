@@ -38,7 +38,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
         <Link
           href={`/profile/${user.username}`}
           className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 no-underline transition-transform hover:scale-105"
-          style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1.5px solid var(--border)" }}
         >
           {getInitials(user.displayName)}
         </Link>
@@ -50,23 +50,23 @@ export function TradeCard({ item }: { item: FeedItem }) {
             </Link>
             {user.isVerified && (
               <span
-                className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                className="text-[9px] font-bold px-1.5 py-0.5 rounded"
                 style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
               >
                 PRO
               </span>
             )}
-            <span className="text-xs" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
               @{user.username}
             </span>
-            <span className="text-xs ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
+            <span className="text-[11px] font-mono ml-auto shrink-0" style={{ color: "var(--fg-dim)" }}>
               {timeAgo(timestamp)}
             </span>
           </div>
 
           <div className="mt-2.5 flex items-center gap-2 flex-wrap">
             <span
-              className="text-[11px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
+              className="stat-pill uppercase tracking-wide"
               style={{
                 background: isBuy ? "var(--accent-muted)" : "var(--red-muted)",
                 color: isBuy ? "var(--accent)" : "var(--red)",
@@ -81,7 +81,7 @@ export function TradeCard({ item }: { item: FeedItem }) {
             >
               {trade.ticker}
             </Link>
-            <span className="text-sm" style={{ color: "var(--fg-muted)" }}>
+            <span className="text-sm font-mono" style={{ color: "var(--fg-muted)" }}>
               {trade.quantity} shares @ {formatCurrency(trade.entryPrice)}
             </span>
           </div>
@@ -98,8 +98,8 @@ export function TradeCard({ item }: { item: FeedItem }) {
               <span style={{ opacity: 0.6 }}>({formatPercent(pnlPct)})</span>
               {isOpen && (
                 <span
-                  className="text-[10px] font-bold px-1.5 py-0.5 rounded-full uppercase"
-                  style={{ background: "var(--yellow-muted)", color: "var(--yellow)" }}
+                  className="stat-pill uppercase"
+                  style={{ background: "var(--yellow-muted)", color: "var(--yellow)", fontSize: "10px" }}
                 >
                   Open
                 </span>
@@ -116,17 +116,17 @@ export function TradeCard({ item }: { item: FeedItem }) {
               <button
                 key={key}
                 onClick={() => react(key)}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs transition-all cursor-pointer"
-                style={{ background: "var(--bg-input)", color: "var(--fg-dim)", border: "1px solid transparent" }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = "var(--border-light)"}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = "transparent"}
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all cursor-pointer"
+                style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--border-light)"; e.currentTarget.style.color = "var(--fg-muted)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--fg-dim)"; }}
               >
                 <Icon size={12} />
-                <span className="font-mono text-xs">{localReactions[key]}</span>
+                <span className="font-mono text-[11px]">{localReactions[key]}</span>
               </button>
             ))}
             <button
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs transition-all cursor-pointer ml-auto"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-all cursor-pointer ml-auto"
               style={{ color: "var(--fg-dim)" }}
             >
               <MessageCircle size={12} />

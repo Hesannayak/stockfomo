@@ -38,8 +38,7 @@ export function TradeForm() {
       {!selectedTicker ? (
         <div>
           <div
-            className="flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all"
-            style={{ background: "var(--bg-input)", border: "1px solid var(--border)" }}
+            className="flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all input-field"
           >
             <Search size={16} style={{ color: "var(--fg-dim)" }} />
             <input
@@ -66,7 +65,7 @@ export function TradeForm() {
                 >
                   <div className="text-left">
                     <div className="text-sm font-bold">{ticker}</div>
-                    <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                    <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
                       {info?.name ?? ticker}
                     </div>
                   </div>
@@ -93,7 +92,7 @@ export function TradeForm() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <div className="text-2xl font-bold">{selectedTicker}</div>
-              <div className="text-sm" style={{ color: "var(--fg-muted)" }}>
+              <div className="text-sm font-mono" style={{ color: "var(--fg-muted)" }}>
                 {trendingTickers.find((t) => t.ticker === selectedTicker)?.name ?? selectedTicker}
               </div>
             </div>
@@ -102,24 +101,23 @@ export function TradeForm() {
                 setSelectedTicker(null);
                 setQuantity("");
               }}
-              className="p-2 rounded-lg cursor-pointer"
-              style={{ background: "var(--bg-input)" }}
+              className="p-2 rounded-lg cursor-pointer btn-ghost"
+              style={{ border: "1px solid var(--border)" }}
             >
-              <X size={16} style={{ color: "var(--fg-muted)" }} />
+              <X size={16} />
             </button>
           </div>
 
           {/* Price */}
           {quote && (
             <div
-              className="p-4 rounded-xl mb-4"
-              style={{ background: "var(--bg-input)", border: "1px solid var(--border)" }}
+              className="rank-card p-4 mb-4"
             >
               <div className="text-3xl font-bold font-mono">
                 {formatCurrency(quote.price)}
               </div>
               <div
-                className="text-sm font-semibold mt-1"
+                className="text-sm font-semibold font-mono mt-1"
                 style={{
                   color: quote.changePercent >= 0 ? "var(--accent)" : "var(--red)",
                 }}
@@ -136,9 +134,7 @@ export function TradeForm() {
                   { label: "Vol", value: `${(quote.volume / 1_000_000).toFixed(1)}M` },
                 ].map((item) => (
                   <div key={item.label} className="text-center">
-                    <div className="text-[11px] uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-                      {item.label}
-                    </div>
+                    <div className="section-header" style={{ fontSize: "10px" }}>{item.label}</div>
                     <div className="text-xs font-mono font-semibold mt-0.5">
                       {typeof item.value === "number" ? formatCurrency(item.value) : item.value}
                     </div>
@@ -151,11 +147,11 @@ export function TradeForm() {
           {/* Direction Toggle */}
           <div
             className="flex gap-1 p-1 rounded-lg mb-4"
-            style={{ background: "var(--bg-input)" }}
+            style={{ background: "var(--bg-elevated)" }}
           >
             <button
               onClick={() => setDirection("BUY")}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-md text-sm font-bold transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-md text-sm font-bold transition-all cursor-pointer"
               style={{
                 background: direction === "BUY" ? "var(--accent-muted)" : "transparent",
                 color: direction === "BUY" ? "var(--accent)" : "var(--fg-dim)",
@@ -166,7 +162,7 @@ export function TradeForm() {
             </button>
             <button
               onClick={() => setDirection("SELL")}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-md text-sm font-bold transition-colors cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-md text-sm font-bold transition-all cursor-pointer"
               style={{
                 background: direction === "SELL" ? "var(--red-muted)" : "transparent",
                 color: direction === "SELL" ? "var(--red)" : "var(--fg-dim)",
@@ -179,12 +175,7 @@ export function TradeForm() {
 
           {/* Quantity Input */}
           <div className="mb-4">
-            <label
-              className="text-xs font-semibold uppercase tracking-wider mb-2 block"
-              style={{ color: "var(--fg-dim)" }}
-            >
-              Number of Shares
-            </label>
+            <label className="section-header mb-2 block">Number of Shares</label>
             <input
               type="number"
               value={quantity}
@@ -199,7 +190,7 @@ export function TradeForm() {
           {qty > 0 && quote && (
             <div
               className="p-3 rounded-lg mb-4 flex justify-between text-sm"
-              style={{ background: "var(--bg-input)" }}
+              style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
             >
               <span style={{ color: "var(--fg-muted)" }}>Estimated Total</span>
               <span className="font-bold font-mono">{formatCurrency(total)}</span>
@@ -213,8 +204,7 @@ export function TradeForm() {
             className="w-full py-3.5 rounded-xl text-sm font-bold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
             style={{
               background: direction === "BUY" ? "var(--accent)" : "var(--red)",
-              color: "#000",
-              boxShadow: direction === "BUY" ? "0 0 20px rgba(16, 185, 129, 0.2)" : "0 0 20px rgba(244, 63, 94, 0.2)",
+              color: "var(--bg)",
             }}
           >
             {submitted
@@ -223,7 +213,7 @@ export function TradeForm() {
           </button>
 
           <p
-            className="text-xs text-center mt-3"
+            className="text-xs text-center mt-3 font-mono"
             style={{ color: "var(--fg-dim)" }}
           >
             Paper trade only · No real money involved

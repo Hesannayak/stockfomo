@@ -17,10 +17,10 @@ export default function TradePage() {
       <div className="lg:border-r" style={{ borderColor: "var(--border)" }}>
         <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border)" }}>
           <div className="flex items-center gap-2">
-            <ArrowLeftRight size={20} style={{ color: "var(--accent)" }} />
+            <ArrowLeftRight size={18} style={{ color: "var(--accent)" }} />
             <h1 className="text-lg font-bold tracking-tight">Paper Trade</h1>
           </div>
-          <p className="text-xs mt-1" style={{ color: "var(--fg-dim)" }}>
+          <p className="text-xs mt-1 font-mono" style={{ color: "var(--fg-dim)" }}>
             Trade with $100K virtual cash · Real-time prices
           </p>
         </div>

@@ -26,7 +26,7 @@ export function TopNav() {
           <Zap size={15} color="#000" fill="#000" />
         </div>
         <span className="text-sm font-black tracking-tight">StockFomo</span>
-        <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.2)" }}>Beta</span>
+        <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.15)" }}>Beta</span>
       </Link>
 
       <nav className="flex items-center gap-0.5">
@@ -38,7 +38,7 @@ export function TopNav() {
               href={tab.href}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all no-underline relative"
               style={{
-                background: isActive ? "var(--bg-input)" : "transparent",
+                background: isActive ? "var(--bg-elevated)" : "transparent",
                 color: isActive ? "var(--fg)" : "var(--fg-dim)",
               }}
             >
@@ -57,7 +57,7 @@ export function TopNav() {
       <div className="flex items-center gap-2">
         <div
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs cursor-pointer transition-colors"
-          style={{ background: "var(--bg-input)", color: "var(--fg-dim)" }}
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "1px solid var(--border)" }}
         >
           <Search size={13} />
           <span>Search stocks...</span>
@@ -70,10 +70,7 @@ export function TopNav() {
         </div>
         <button className="p-2 rounded-lg btn-ghost relative">
           <Bell size={15} />
-          <div
-            className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-            style={{ background: "var(--accent)", boxShadow: "0 0 6px rgba(0, 255, 106, 0.5)" }}
-          />
+          <div className="live-dot absolute top-1.5 right-1.5" />
         </button>
         {isLoggedIn && user ? (
           <Link

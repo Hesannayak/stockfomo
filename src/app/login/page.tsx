@@ -30,11 +30,11 @@ export default function EarlyAccessPage() {
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background glow effects */}
       <div
-        className="absolute top-[-30%] left-[-10%] w-[500px] h-[500px] rounded-full opacity-30 blur-[120px] pointer-events-none"
+        className="absolute top-[-30%] left-[-10%] w-[500px] h-[500px] rounded-full opacity-20 blur-[120px] pointer-events-none"
         style={{ background: "var(--accent)" }}
       />
       <div
-        className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-20 blur-[100px] pointer-events-none"
+        className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-15 blur-[100px] pointer-events-none"
         style={{ background: "var(--blue)" }}
       />
 
@@ -45,7 +45,7 @@ export default function EarlyAccessPage() {
             <Zap size={22} color="#000" fill="#000" />
           </div>
           <h1 className="text-2xl font-black tracking-tight">StockFomo</h1>
-          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.2)" }}>Beta</span>
+          <span className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)", border: "1px solid rgba(0, 255, 106, 0.15)" }}>Beta</span>
         </div>
         <p className="text-center text-sm mb-10" style={{ color: "var(--fg-dim)" }}>
           The social paper trading platform
@@ -66,7 +66,7 @@ export default function EarlyAccessPage() {
         </div>
 
         {/* Card */}
-        <div className="glass glass-border rounded-2xl p-6">
+        <div className="rank-card p-6">
           {submitted ? (
             <div className="flex flex-col items-center text-center py-4 fade-in">
               <div
@@ -83,10 +83,10 @@ export default function EarlyAccessPage() {
                 Early members get priority access + exclusive perks
               </p>
               <div
-                className="flex items-center gap-2 mt-5 px-4 py-2 rounded-lg text-xs font-medium"
+                className="stat-pill mt-5"
                 style={{ background: "var(--accent-muted)", color: "var(--accent)" }}
               >
-                <Sparkles size={13} />
+                <Sparkles size={12} />
                 Position #10,847 in line
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function EarlyAccessPage() {
           )}
         </div>
 
-        <p className="text-center text-xs mt-6" style={{ color: "var(--fg-dim)" }}>
+        <p className="text-center text-xs mt-6 font-mono" style={{ color: "var(--fg-dim)" }}>
           Paper trading only · No real money · No broker needed
         </p>
       </div>

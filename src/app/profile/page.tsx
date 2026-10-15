@@ -26,12 +26,14 @@ export default function ProfilePage() {
   const router = useRouter();
   const [showBalance, setShowBalance] = useState(true);
 
+  const rankColors = ["var(--gold)", "var(--silver)", "var(--bronze)"];
+
   if (!isLoggedIn || !user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center text-3xl mb-4"
-          style={{ background: "var(--bg-input)", color: "var(--fg-dim)" }}
+          style={{ background: "var(--bg-elevated)", color: "var(--fg-dim)", border: "2px solid var(--border)" }}
         >
           ?
         </div>
@@ -63,7 +65,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-3">
             <div
               className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold"
-              style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
+              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "2px solid var(--border)" }}
             >
               {getInitials(displayUser.displayName)}
             </div>
@@ -72,17 +74,16 @@ export default function ProfilePage() {
                 <h1 className="text-lg font-bold">{displayUser.displayName}</h1>
                 {displayUser.isVerified && <Shield size={14} style={{ color: "var(--accent)" }} />}
               </div>
-              <div className="text-xs" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
+              <div className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>@{displayUser.username}</div>
             </div>
           </div>
           <div className="flex gap-1">
-            <button className="p-2 rounded-lg cursor-pointer" style={{ color: "var(--fg-dim)" }}>
+            <button className="p-2 rounded-lg cursor-pointer btn-ghost">
               <Settings size={18} />
             </button>
             <button
               onClick={() => { logout(); router.push("/login"); }}
-              className="p-2 rounded-lg cursor-pointer"
-              style={{ color: "var(--fg-dim)" }}
+              className="p-2 rounded-lg cursor-pointer btn-ghost"
             >
               <LogOut size={18} />
             </button>
@@ -108,9 +109,7 @@ export default function ProfilePage() {
       {/* Portfolio Value */}
       <div className="px-4 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-xs uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
-            Portfolio Value
-          </span>
+          <span className="section-header">Portfolio Value</span>
           <button
             onClick={() => setShowBalance(!showBalance)}
             className="cursor-pointer"
@@ -146,12 +145,10 @@ export default function ProfilePage() {
           { label: "Invested", value: showBalance ? formatCurrency(invested) : "••••" },
           { label: "Win Rate", value: `${displayUser.winRate}%` },
           { label: "Trades", value: displayUser.tradeCount.toString() },
-        ].map((stat) => (
-          <div key={stat.label} className="text-center py-3" style={{ borderRight: "1px solid var(--border)" }}>
-            <div className="text-[11px] uppercase tracking-wider font-semibold" style={{ color: "var(--fg-dim)" }}>
-              {stat.label}
-            </div>
-            <div className="text-sm font-bold font-mono mt-0.5">{stat.value}</div>
+        ].map((stat, i) => (
+          <div key={stat.label} className="text-center py-3" style={{ borderRight: i < 3 ? "1px solid var(--border)" : "none" }}>
+            <div className="section-header mb-0.5">{stat.label}</div>
+            <div className="text-sm font-bold font-mono">{stat.value}</div>
           </div>
         ))}
       </div>
@@ -160,10 +157,8 @@ export default function ProfilePage() {
       {userPositions.length > 0 && (
         <div>
           <div className="px-4 pt-4 pb-2 flex items-center justify-between">
-            <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-              Open Positions
-            </h2>
-            <span className="text-xs font-mono" style={{ color: "var(--fg-dim)" }}>
+            <h2 className="section-header">Open Positions</h2>
+            <span className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
               {userPositions.length} positions
             </span>
           </div>
@@ -181,16 +176,17 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">{pos.ticker}</span>
                     <span
-                      className="text-[11px] font-bold px-1.5 py-0.5 rounded"
+                      className="stat-pill"
                       style={{
                         background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
                         color: isUp ? "var(--accent)" : "var(--red)",
+                        fontSize: "10px",
                       }}
                     >
                       {isUp ? "+" : ""}{formatPercent(pos.unrealizedPnlPercent ?? 0)}
                     </span>
                   </div>
-                  <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                  <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
                     {pos.quantity} shares · avg {formatCurrency(pos.avgEntryPrice)}
                   </div>
                 </div>
@@ -217,9 +213,7 @@ export default function ProfilePage() {
       {/* Trade History */}
       <div>
         <div className="px-4 pt-4 pb-2">
-          <h2 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "var(--fg-dim)" }}>
-            Trade History
-          </h2>
+          <h2 className="section-header">Trade History</h2>
         </div>
         {userTrades.length === 0 ? (
           <div className="px-4 py-8 text-center">
@@ -256,16 +250,17 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">{trade.ticker}</span>
                     <span
-                      className="text-[11px] font-bold px-1.5 py-0.5 rounded"
+                      className="stat-pill"
                       style={{
-                        background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-input)",
+                        background: trade.status === "OPEN" ? "var(--yellow-muted)" : "var(--bg-elevated)",
                         color: trade.status === "OPEN" ? "var(--yellow)" : "var(--fg-dim)",
+                        fontSize: "10px",
                       }}
                     >
                       {trade.status}
                     </span>
                   </div>
-                  <div className="text-xs" style={{ color: "var(--fg-dim)" }}>
+                  <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
                     {trade.quantity} @ {formatCurrency(trade.entryPrice)} · {timeAgo(trade.createdAt)}
                   </div>
                 </div>
@@ -290,60 +285,56 @@ export default function ProfilePage() {
     <div className="lg:grid lg:grid-cols-[260px_1fr_280px]">
       {/* Left Sidebar — Leaderboard (desktop) */}
       <div className="desktop-sidebar" style={{ borderRight: "1px solid var(--border)" }}>
-        <div className="px-3 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-[13px] font-bold uppercase tracking-wider flex items-center gap-1.5" style={{ color: "var(--fg-dim)" }}>
-            <Trophy size={12} /> Leaderboard
+        <div className="px-4 py-3 sticky top-0 z-10" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
+          <h2 className="section-header flex items-center gap-1.5">
+            <Trophy size={11} /> Leaderboard
           </h2>
         </div>
-        {mockLeaderboard.map((entry, i) => {
-          const rankColors = ["var(--yellow)", "var(--fg-muted)", "#cd7f32"];
-          return (
-            <Link
-              key={entry.user.id}
-              href={`/profile/${entry.user.username}`}
-              className="flex items-center gap-2 px-3 py-2.5 no-underline transition-colors card-hover"
-              style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
+        {mockLeaderboard.map((entry, i) => (
+          <Link
+            key={entry.user.id}
+            href={`/profile/${entry.user.username}`}
+            className="flex items-center gap-2.5 px-4 py-2.5 no-underline transition-colors card-hover"
+            style={{ borderBottom: "1px solid var(--border)", color: "var(--fg)" }}
+          >
+            <div
+              className="w-6 text-right text-[12px] font-mono shrink-0"
+              style={{
+                color: i < 3 ? rankColors[i] : "var(--fg-dim)",
+                fontStyle: "italic",
+                fontWeight: i < 3 ? 700 : 400,
+              }}
             >
-              <div
-                className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
-                style={{
-                  color: i < 3 ? rankColors[i] : "var(--fg-dim)",
-                  background: i < 3 ? "var(--bg-input)" : "transparent",
-                }}
-              >
-                {i < 3 ? <Trophy size={11} /> : entry.rank}
+              {String(entry.rank).padStart(2, "0")}
+            </div>
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
+              style={{ background: "var(--bg-elevated)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
+            >
+              {getInitials(entry.user.displayName)}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1">
+                <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
+                {entry.user.isVerified && (
+                  <span className="text-[9px] font-bold px-1 py-px rounded" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
+                )}
               </div>
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
-                style={{ background: "var(--bg-input)", color: "var(--fg-muted)", border: "1px solid var(--border)" }}
-              >
-                {getInitials(entry.user.displayName)}
+              <div className="text-[11px] font-mono" style={{ color: "var(--fg-dim)" }}>
+                {entry.tradeCount} trades · {entry.winRate}%
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1">
-                  <span className="text-xs font-semibold truncate">{entry.user.displayName}</span>
-                  {entry.user.isVerified && (
-                    <span className="text-[10px] font-bold px-1 py-px rounded-full" style={{ background: "var(--accent-muted)", color: "var(--accent)" }}>PRO</span>
-                  )}
-                </div>
-                <div className="text-[11px]" style={{ color: "var(--fg-dim)" }}>
-                  {entry.tradeCount} trades · {entry.winRate}%
-                </div>
-              </div>
-              <div
-                className="text-xs font-bold font-mono shrink-0"
-                style={{ color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)" }}
-              >
-                {formatPercent(entry.totalReturn)}
-              </div>
-            </Link>
-          );
-        })}
+            </div>
+            <div
+              className="text-xs font-bold font-mono shrink-0"
+              style={{ color: entry.totalReturn >= 0 ? "var(--accent)" : "var(--red)" }}
+            >
+              {formatPercent(entry.totalReturn)}
+            </div>
+          </Link>
+        ))}
 
-        <div className="px-3 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
-          <h2 className="text-[13px] font-bold uppercase tracking-wider mb-3" style={{ color: "var(--fg-dim)" }}>
-            Trending
-          </h2>
+        <div className="px-4 py-3" style={{ borderBottom: "1px solid var(--border)" }}>
+          <h2 className="section-header mb-3">Trending</h2>
           {trendingTickers.map((t) => {
             const quote = mockQuotes[t.ticker];
             const isUp = quote?.changePercent >= 0;
@@ -356,13 +347,17 @@ export default function ProfilePage() {
               >
                 <div>
                   <span className="text-xs font-bold">{t.ticker}</span>
-                  <span className="text-[11px] ml-1.5" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
+                  <span className="text-[11px] ml-1.5 font-mono" style={{ color: "var(--fg-dim)" }}>{t.name.split(" ")[0]}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs font-mono">${quote?.price.toFixed(2)}</span>
                   <span
-                    className="text-[11px] font-mono font-semibold flex items-center gap-0.5 px-1.5 py-0.5 rounded"
-                    style={{ color: isUp ? "var(--accent)" : "var(--red)", background: isUp ? "var(--accent-muted)" : "var(--red-muted)" }}
+                    className="stat-pill"
+                    style={{
+                      color: isUp ? "var(--accent)" : "var(--red)",
+                      background: isUp ? "var(--accent-muted)" : "var(--red-muted)",
+                      fontSize: "10px",
+                    }}
                   >
                     {isUp ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
                     {isUp ? "+" : ""}{quote?.changePercent.toFixed(2)}%

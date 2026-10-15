@@ -22,7 +22,7 @@ export function BottomNav() {
   return (
     <nav
       className="fixed bottom-0 left-0 right-0 z-50 lg:hidden glass"
-      style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      style={{ borderTop: "1px solid var(--border)" }}
     >
       <div className="flex items-center justify-around max-w-lg mx-auto h-16 px-4">
         {tabs.map((tab) => {
@@ -38,11 +38,11 @@ export function BottomNav() {
               {isActive && (
                 <div
                   className="absolute -top-px left-3 right-3 h-0.5 rounded-full"
-                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(0, 255, 106, 0.4)" }}
+                  style={{ background: "var(--accent)", boxShadow: "0 0 8px rgba(0, 255, 106, 0.3)" }}
                 />
               )}
               <tab.icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span className="text-[11px] font-semibold tracking-wide uppercase">
+              <span className="text-[10px] font-semibold tracking-wide uppercase">
                 {tab.label}
               </span>
             </Link>
